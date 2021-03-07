@@ -1,0 +1,101 @@
+.form-wrapper{
+    background-color: white;
+    .office-info, .person-info, .salary-info, .person-subform{
+        padding: 20px 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow: 1px 2px 2px lightgrey;
+        border: 2px solid lightgray;
+
+        .row{
+            text-align: center;
+        }
+
+        p{
+            border-bottom: 3px solid #043458;
+            padding-bottom: 10px;
+            color: #043458;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        mat-label{
+            color: black;
+        }
+        mat-form-field{
+            width: 80%;
+            height: 60px;
+            .form-control{
+                border:none!important;
+            }   
+    }
+        ::ng-deep.mat-form-field-underline {
+            background-color: black;
+          }
+          .title-holder{
+              display: flex;
+              justify-content: space-between;
+              border-bottom: 3px solid #043458;
+              p{
+                  padding: unset;
+                  border-bottom: unset;
+              }
+              span{
+                  color: #043458;
+                  padding: 0 2px;
+                  font-weight: 600;
+                  cursor: pointer;
+                  i{
+                      color: #043458;
+                      font-size: 14px;
+                  }
+              }
+          }
+          .del-block{
+              width: 100%;
+              margin-right: 30px;
+              text-align: right;
+              position: absolute;
+              top: 50%;
+              right: 0%;
+              span{
+                    padding: 0 2px;
+                    font-weight: 600;
+                  i{
+                    font-size: 20px;
+                    color: white;
+                    background-color: #f64e60;
+                    width: 40px;
+                    height: 40px;
+                    text-align: center;
+                    padding: 10px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    &:hover{
+                        color: #f64e60;
+                        background-color: white;
+                    }
+                  }
+              }
+          }
+    }
+    .person-subform{
+        padding: 20px 30px;
+        position: relative;
+    }
+}
+::ng-deep.mat-form-field-appearance-fill {
+    .mat-form-field-infix {
+      padding: 0px!important;
+    }
+    .mat-form-field-flex{
+        border-bottom: 1px solid;
+    }
+}
+
+.btn-bottom-holder{
+    display: flex;
+    justify-content: flex-end;
+    .btn-gray{
+        background-color: lightgray;
+    }
+}

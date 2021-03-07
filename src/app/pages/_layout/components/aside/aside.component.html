@@ -1,0 +1,723 @@
+<!--begin::Brand-->
+<div class="brand flex-column-auto" id="kt_brand" [ngClass]="brandClasses">
+  <!--begin::Logo-->
+  <a routerLink="/" class="brand-logo">
+    <img alt="Logo" [attr.src]="headerLogo" />
+  </a>
+  <!--end::Logo-->
+
+  <ng-container *ngIf="asideSelfMinimizeToggle">
+    <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+      <span [inlineSVG]="
+          './assets/media/svg/icons/Navigation/Angle-double-left.svg'
+        " cacheSVG="true" class="svg-icon svg-icon-xl"></span>
+    </button>
+  </ng-container>
+</div>
+<!--end::Brand-->
+
+<!--begin::Aside Menu-->
+<div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+  <ng-container *ngIf="disableAsideSelfDisplay">
+    <!--begin::Header Logo-->
+    <a routerLink="/">
+      <img alt="Logo" [attr.src]="headerLogo" />
+    </a>
+    <!--end::Header Logo-->
+  </ng-container>
+  <!--begin::Menu Container-->
+  <div id="kt_aside_menu" class="aside-menu" [ngClass]="asideMenuCSSClasses" data-menu-vertical="1"
+    [attr.data-menu-scroll]="asideMenuScroll" [attr.data-menu-dropdown]="asideMenuDropdown"
+    data-menu-dropdown-timeout="500">
+    <!-- begin::Menu Nav -->
+    <ul class="menu-nav" [ngClass]="ulCSSClasses">
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/dashboard" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text" translate="MENU.DASHBOARD"></span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+      <!-- Sales -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Sales</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Sales</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Leads</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Design and Drawing</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">BOQ / Estimation</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/carousel" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Sales Order</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/collapse" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Service Call</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End of saled -->
+      <!-- Begin Planning / Schedule -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Planning / Schedule</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Planning / Schedule</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Calender</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Design Engineering</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">MRF / BOM</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/carousel" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Work Schedule</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Planing / Schedule -->
+
+      <!-- Begin Production -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Production</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Production</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Calender</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Work Allocation</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Job Sheet</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/carousel" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Return / Request</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Production -->
+
+      <!-- Begin Store -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Store</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Store</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Purchase Request</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Inward</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Outward</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/carousel" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Return</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Store -->
+
+
+      <!-- Begin Purchase -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Purchase</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Purchase</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Vendors & Price List</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Purchase Order</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Sub Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Purchase -->
+
+      <!-- Begin Dispatch -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Dispatch</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Dispatch</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Calender</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Bar Code</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Vendors & Pricelist</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Delivery note</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Dispatch -->
+
+      <!-- Begin Installation -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Installation</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Installation</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Calender</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Drawing & Cutlist</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Planning & Measurement</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">NOC / Completion</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Installation -->
+      <!-- Begin Accounts -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">Accounts</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">Accounts</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Accounts Payable</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Accounts Receivable</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Operational Cost</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Credit / Debit Note</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Invoicing</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Vendor Management</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Financial Statements</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <!-- End Accounts -->
+
+      <!-- Begin HR -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" href="/ngbootstrap" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Shopping/Bitcoin.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">HR</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">HR</span>
+              </span>
+            </li>
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/accordion" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Employee Master</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/alert" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Attendance</span>
+              </a>
+            </li>
+            <!-- end::2 Level --
+          <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Work Sheet</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Statutary Compliance</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Appraisal Review</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Departments</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Employee Welfare</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Payroll</span>
+              </a>
+            </li>
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/ngbootstrap/buttons" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Documents / Settlement</span>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </li>
+      <!-- End Accounts -->
+
+      <!-- Applications -->
+      <!-- begin::section -->
+      <li class="menu-section">
+        <h4 class="menu-text">SETTINGS</h4>
+        <i class="menu-icon flaticon-more-v2"></i>
+      </li>
+      <!-- end:: section -->
+
+      <!-- User Management -->
+      <!-- begin::1 Level -->
+      <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"
+        routerLinkActive="menu-item-open">
+        <a class="menu-link menu-toggle" routerLinkActive="active" href="/user-management">
+          <span [inlineSVG]="'./assets/media/svg/icons/General/User.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">User Management</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="menu-submenu">
+          <i class="menu-arrow"></i>
+          <ul class="menu-subnav">
+            <li class="menu-item menu-item-parent" aria-haspopup="true">
+              <span class="menu-link">
+                <span class="menu-text">User Management</span>
+              </span>
+            </li>
+
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/user-management/users" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Users</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+            <!-- begin::2 Level -->
+            <li class="menu-item" routerLinkActive="menu-item-active" aria-haspopup="true" data-menu-toggle="hover">
+              <a class="menu-link" routerLink="/user-management/roles" routerLinkActive="active">
+                <i class="menu-bullet menu-bullet-dot">
+                  <span></span>
+                </i>
+                <span class="menu-text">Roles</span>
+              </a>
+            </li>
+            <!-- end::2 Level -->
+          </ul>
+        </div>
+      </li>
+      <!-- end::1 Level -->
+
+      <!-- begin::1 Level -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active">
+        <a class="menu-link" routerLink="/user-profile" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true"
+            class="svg-icon menu-icon"></span>
+          <span class="menu-text">User Profile</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+    </ul>
+    <!-- end::Menu Nav -->
+  </div>
+  <!--end::Menu Container-->
+</div>
+<!--end::Aside Menu-->

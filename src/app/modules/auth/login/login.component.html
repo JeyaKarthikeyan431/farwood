@@ -1,0 +1,88 @@
+<div class="login-form login-signin">
+  <form
+    class="form"
+    [formGroup]="loginForm"
+    novalidate="novalidate"
+    id="kt_login_signin_form"
+  >
+    <div class="pb-13 pt-lg-0 pt-5">
+      <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
+        Welcome to Farwood
+      </h3>
+    </div>
+    <ng-container *ngIf="!hasError">
+      <div class="mb-10 alert alert-custom alert-light-info alert-dismissible">
+        <div class="alert-text">
+          Use account <strong>demo@demo.com</strong> and password
+          <strong>Demo@12345</strong> to continue.
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="hasError">
+      <div
+        class="mb-10 alert alert-custom alert-light-danger alert-dismissible"
+      >
+        <div class="alert-text">The login details are incorrect</div>
+      </div>
+    </ng-container>
+    <div class="form-group">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email"  formControlName="email">
+        <mat-error *ngIf="l.email.hasError('email') && !l.email.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="l.email.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="l.email.hasError('minLength')">
+          Email should have at least 3 characters
+        </mat-error>
+        <mat-error *ngIf="l.email.hasError('maxLength')">
+          Email should have maximum 320 characters
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <div class="d-flex justify-content-between mt-n5">
+        <a
+          routerLink="/auth/forgot-password"
+          class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
+        >
+          Forgot Password ?
+        </a>
+      </div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password"  formControlName="password">
+          <mat-error *ngIf="l.password.hasError('password') && !l.email.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="l.password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="l.password.hasError('minLength')">
+            Password should have at least 3 characters
+          </mat-error>
+          <mat-error *ngIf="l.password.hasError('maxLength')">
+            Password should have  maximum 8 characters
+          </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="pb-lg-0 pb-5">
+      <button
+        type="submit"
+        class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+        [disabled]="loginForm.invalid"
+        (click)="login()"
+      >
+        Sign In
+      </button>
+      <button id="googleBtn">Google</button>
+      <ng-container *ngIf="isLoading$ | async">
+        <span class="spinner spinner-primary ml-5"></span>
+      </ng-container>
+    </div>
+  </form>
+</div>
+
