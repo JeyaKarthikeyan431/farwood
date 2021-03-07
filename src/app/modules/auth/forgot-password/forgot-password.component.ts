@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
-import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-enum ErrorStates {
-  NotSubmitted,
-  HasError,
-  NoError,
-}
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,24 +12,18 @@ enum ErrorStates {
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup;
-  errorState: ErrorStates = ErrorStates.NotSubmitted;
-  errorStates = ErrorStates;
-  isLoading$: Observable<boolean>;
 
-  // private fields
-  private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   constructor(
     private formGroup: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {
-    this.isLoading$ = this.authService.isLoading$;
   }
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  // convenience getter for easy access to form fields
   get f() {
     return this.forgotPasswordForm.controls;
   }
@@ -53,14 +42,26 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  submit() {
-    this.errorState = ErrorStates.NotSubmitted;
-    const forgotPasswordSubscr = this.authService
-      .forgotPassword(this.f.email.value)
-      .pipe(first())
-      .subscribe((result: boolean) => {
-        this.errorState = result ? ErrorStates.NoError : ErrorStates.HasError;
-      });
-    this.unsubscribe.push(forgotPasswordSubscr);
+  resetPassword() {
+    let param={
+      emailId:this.f.email.value
+    }
+    this.authService.forgotPassword(param)
+    .subscribe((result: any) => {
+      if (result.status==200) {
+        this.router.navigate(['auth/login']);
+      } else {
+      }
+    },(error:any)=>{
+      this.router.navigate(['auth/login']);
+      if(error.status==500){
+
+      }else if(error.status==204){
+        
+      }
+    });
+  }
+  redirectTo(){
+    this.router.navigate(['auth/login']);
   }
 }

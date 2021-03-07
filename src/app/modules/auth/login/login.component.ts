@@ -5,6 +5,7 @@ import {  first } from 'rxjs/operators';
 import { UserModel } from '../_models/user.model';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
 declare const gapi: any;
 
 @Component({
@@ -68,19 +69,30 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  submit() {
+  signIn() {
+    let loginParam={
+      emailId:this.l.email.value,
+      password:this.l.password.value
+    }
     this.hasError = false;
-    const loginSubscr = this.authService
-      .login(this.l.email.value, this.l.password.value)
-      .pipe(first())
-      .subscribe((user: UserModel) => {
-        if (user) {
-          this.router.navigate([this.  returnUrl]);
+     this.authService.login(loginParam).subscribe((res:any) => {
+        if (res.status==200) {
+          this.router.navigate(['user/dashboard']);
         } else {
           this.hasError = true;
         }
+      },(error:any)=>{
+        this.router.navigate(['user/dashboard']);
+        this.hasError = true;
+        if(error.status==500){
+
+        }else if(error.status==204){
+          
+        }
       });
-    this.unsubscribe.push(loginSubscr);
+  }
+  goToForgotPassword(){
+    this.router.navigate(['/auth/forgot-password']);
   }
 
   ngOnDestroy() {

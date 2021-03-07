@@ -10,10 +10,10 @@ import { AuthService } from '../../auth/_services/auth.service';
 })
 export class CreateUserComponent implements OnInit {
   userForm: FormGroup;
-  submitted:boolean=false;
-  designationList:any=[];
-  departmentList:any=[];
-  roleList:any=[];
+  submitted: boolean = false;
+  designationList: any = [];
+  departmentList: any = [];
+  roleList: any = [];
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -25,15 +25,33 @@ export class CreateUserComponent implements OnInit {
   initUserForm() {
     this.userForm = this.formBuilder.group({
       firstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      lastName: [null,Validators.compose([Validators.required,Validators.minLength(1),Validators.maxLength(50)])],
-      email: [null,Validators.compose([Validators.required,Validators.email,Validators.minLength(3),Validators.maxLength(320)])],
-      designation: [null,Validators.compose([Validators.required])],
-      department: [null,Validators.compose([Validators.required])],
+      lastName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      emailId: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      designation: [null, Validators.compose([Validators.required])],
+      department: [null, Validators.compose([Validators.required])],
       role: [null],
-      mobileNumber: [null,Validators.compose([Validators.required,Validators.minLength(8),Validators.maxLength(10)])],
+      mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
     });
   }
   get u() {
     return this.userForm.controls;
+  }
+  createUser() {
+    this.authService.createUser(this.userForm.value).subscribe((res: any) => {
+      if (res.status == 200) {
+        this.resetUser();
+      } else {
+      }
+    }, (error: any) => {
+      this.router.navigate(['user/dashboard']);
+      if (error.status == 500) {
+
+      } else if (error.status == 204) {
+
+      }
+    });
+  }
+  resetUser() {
+    this.userForm.reset();
   }
 }

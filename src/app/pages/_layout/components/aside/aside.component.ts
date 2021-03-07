@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LayoutService } from '../../../../_metronic/core';
 
 @Component({
@@ -20,7 +21,8 @@ export class AsideComponent implements OnInit {
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
 
-  constructor(private layout: LayoutService, private loc: Location) { }
+  constructor(private layout: LayoutService, private loc: Location,
+    private router: Router) { }
 
   ngOnInit(): void {
     // load view settings
@@ -48,5 +50,8 @@ export class AsideComponent implements OnInit {
     } else {
       return './assets/media/logos/logo-light.png';
     }
+  }
+  goToCreateUser(){
+    this.router.navigate(['user/user-management/create-user']);
   }
 }

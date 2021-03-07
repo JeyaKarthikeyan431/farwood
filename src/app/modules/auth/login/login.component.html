@@ -28,7 +28,7 @@
     <div class="form-group">
       <mat-form-field class="example-full-width">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Email"  formControlName="email">
+        <input matInput placeholder="Email" autocomplete="off" formControlName="email">
         <mat-error *ngIf="l.email.hasError('email') && !l.email.hasError('required')">
           Please enter a valid email address
         </mat-error>
@@ -45,16 +45,15 @@
     </div>
     <div class="form-group">
       <div class="d-flex justify-content-between mt-n5">
-        <a
-          routerLink="/auth/forgot-password"
+        <span (click)="goToForgotPassword()"
           class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
         >
           Forgot Password ?
-        </a>
+        </span>
       </div>
         <mat-form-field class="example-full-width">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Password"  formControlName="password">
+          <input matInput placeholder="Password"  autocomplete="off" formControlName="password">
           <mat-error *ngIf="l.password.hasError('password') && !l.email.hasError('required')">
             Please enter a valid email address
           </mat-error>
@@ -74,14 +73,11 @@
         type="submit"
         class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
         [disabled]="loginForm.invalid"
-        (click)="login()"
+        (click)="signIn()"
       >
         Sign In
       </button>
       <button id="googleBtn">Google</button>
-      <ng-container *ngIf="isLoading$ | async">
-        <span class="spinner spinner-primary ml-5"></span>
-      </ng-container>
     </div>
   </form>
 </div>

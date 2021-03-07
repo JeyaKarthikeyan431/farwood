@@ -14,12 +14,17 @@ export const routes: Routes = [
       import('./modules/errors/errors.module').then((m) => m.ErrorsModule),
   },
   {
-    path: '',
-    // canActivate: [AuthGuard],
+    path: 'user',
+     //canActivate: [AuthGuard],
     loadChildren: () =>
       import('./pages/layout.module').then((m) => m.LayoutModule),
   },
   { path: 'hr-management', loadChildren: () => import('./modules/hr-management/hr-management.module').then(m => m.HrManagementModule) },
+  {
+    path: '',
+    redirectTo:'/auth/login',
+    pathMatch: 'full',
+  },
   { path: '**', redirectTo: 'error/404' },
 ];
 

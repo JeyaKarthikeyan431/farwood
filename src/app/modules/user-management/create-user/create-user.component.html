@@ -22,18 +22,28 @@ Create User
     <div class="form-group">
         <mat-form-field class="example-full-width" >
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email" required >
-            <mat-error *ngIf="u.email.hasError('email') && !u.email.hasError('required')">
+            <input matInput placeholder="Email" formControlName="emailId" required >
+            <mat-error *ngIf="u.emailId.hasError('email') && !u.emailId.hasError('required')">
                 Please enter a valid email address
             </mat-error>
-            <mat-error *ngIf="u.email.hasError('required')">
+            <mat-error *ngIf="u.emailId.hasError('required')">
                 Email is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="u.email.hasError('minLength')">
+            <mat-error *ngIf="u.emailId.hasError('minLength')">
                 Email should have at least 3 characters
             </mat-error>
-            <mat-error *ngIf="u.email.hasError('maxLength')">
+            <mat-error *ngIf="u.emailId.hasError('maxLength')">
                 Email should have maximum 320 characters
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Mobile Number</mat-label>
+            <input matInput type="text" formControlName="mobileNo"
+                placeholder="Mobile Number" class="form-control" required />
+            <mat-error *ngIf="u.mobileNo.hasError('required')">
+                Mobile Number is required
             </mat-error>
         </mat-form-field>
     </div>
@@ -75,8 +85,16 @@ Create User
           type="submit"
           class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
           [disabled]="userForm.invalid"
+          (click)="createUser()"
         >
           Create
         </button>
+        <button
+        type="submit"
+        class="btn  font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+        (click)="resetUser()"
+      >
+        Clear
+      </button>
       </div>
 </form>
