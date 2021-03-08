@@ -47,8 +47,8 @@ const routes: Routes = [
         path: 'statements',
         component: StatementsComponent
       },
-      { path: '', redirectTo: 'profile-overview', pathMatch: 'full' },
-      { path: '**', redirectTo: 'profile-overview', pathMatch: 'full' },
+      { path: '', redirectTo: 'change-password', pathMatch: 'full' },
+      { path: '**', redirectTo: 'change-password', pathMatch: 'full' },
     ],
   },
 ];

@@ -1,87 +1,79 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { AuthService, UserModel, ConfirmPasswordValidator } from '../../auth';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService, ConfirmPasswordValidator } from '../../auth';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit, OnDestroy {
-  formGroup: FormGroup;
-  user: UserModel;
-  firstUserState: UserModel;
-  subscriptions: Subscription[] = [];
-  isLoading$: Observable<boolean>;
+export class ChangePasswordComponent implements OnInit {
+  changePasswordForm: FormGroup;
 
-  constructor(private userService: AuthService, private fb: FormBuilder) {
-    this.isLoading$ = this.userService.isLoadingSubject.asObservable();
+  constructor(private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,) {
   }
 
   ngOnInit(): void {
-    const sb = this.userService.currentUserSubject.asObservable().pipe(
-      first(user => !!user)
-    ).subscribe(user => {
-      this.user = Object.assign({}, user);
-      this.firstUserState = Object.assign({}, user);
-      this.loadForm();
-    });
-    this.subscriptions.push(sb);
+    this.loadForm();
   }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(sb => sb.unsubscribe());
+  get c() {
+    return this.changePasswordForm.controls;
   }
-
   loadForm() {
-    this.formGroup = this.fb.group({
-      currentPassword: [this.user.password, Validators.required],
-      password: ['', Validators.required],
-      cPassword: ['', Validators.required]
+    this.changePasswordForm = this.formBuilder.group({
+      currentPassword: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ]),
+      ],
+      newPassword: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ]),
+      ],
+      confirmNewPassword: [
+        null,
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ]),
+      ],
     }, {
       validator: ConfirmPasswordValidator.MatchPassword
     });
   }
 
-  save() {
-    this.formGroup.markAllAsTouched();
-    if (!this.formGroup.valid) {
-      return;
+  changePassword() {
+    let Param = {
+      oldPassword: this.authService.encrypt(this.c.currentPassword.value),
+      newPassword: this.authService.encrypt(this.c.newPassword.value)
     }
+    this.authService.changePassword(Param).subscribe((res: any) => {
+      if (res.status == 200) {
+        this.router.navigate(['auth/login']);
+      } else {
+      }
+    }, (error: any) => {
+      if (error.status == 500) {
 
-    this.user.password = this.formGroup.value.password;
-    this.userService.isLoadingSubject.next(true);
-    setTimeout(() => {
-      this.userService.currentUserSubject.next(Object.assign({}, this.user));
-      this.userService.isLoadingSubject.next(false);
-    }, 2000);
+      } else if (error.status == 204) {
+
+      }
+    });
   }
 
   cancel() {
-    this.user = Object.assign({}, this.firstUserState);
-    this.loadForm();
-  }
-
-  // helpers for View
-  isControlValid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.valid && (control.dirty || control.touched);
-  }
-
-  isControlInvalid(controlName: string): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.invalid && (control.dirty || control.touched);
-  }
-
-  controlHasError(validation, controlName): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.hasError(validation) && (control.dirty || control.touched);
-  }
-
-  isControlTouched(controlName): boolean {
-    const control = this.formGroup.controls[controlName];
-    return control.dirty || control.touched;
+    this.changePasswordForm.reset();
   }
 }
