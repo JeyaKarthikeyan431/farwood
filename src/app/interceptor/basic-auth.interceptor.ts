@@ -6,13 +6,27 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
 
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(request);
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = sessionStorage.getItem('token');
+    if (token != '' && token != null) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: token
+        }
+      });
+      return next.handle(request);
+    } else {
+      this.router.navigate(['auth/login']);
+    }
+
   }
 }

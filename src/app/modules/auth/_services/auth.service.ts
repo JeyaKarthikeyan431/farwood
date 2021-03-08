@@ -60,16 +60,32 @@ export class AuthService implements OnDestroy {
     return this.http.post('http://183.82.249.177:9015/api/login/changePassword',param);
   }
 
-  public encrypt(str) {
-    let ciphertext = CryptoJS.AES.encrypt(str, this.KEY);
-    return ciphertext.toString();
+  public encrypt(msg) {
+    let encrypted = CryptoJS.AES.encrypt(
+      msg,
+      CryptoJS.enc.Utf8.parse(this.KEY),
+      {
+        keySize: 16,
+        padding: CryptoJS.pad.Pkcs7,
+        mode: CryptoJS.mode.ECB,
+      }
+    );
+    let transitmessage = encrypted.toString();
+    return transitmessage;
   }
  
-  public decrypt(hash) {
-    let bytes = CryptoJS.AES.decrypt(hash.toString(), this.KEY);
-    let plaintext = bytes.toString(CryptoJS.enc.Utf8);
-    return plaintext;
-  }
+  public decrypt(transitmessage) {
+      let decrypted = CryptoJS.AES.decrypt(
+        transitmessage,
+        CryptoJS.enc.Utf8.parse(this.KEY),
+        {
+          keySize: 16,
+          padding: CryptoJS.pad.Pkcs7,
+          mode: CryptoJS.mode.ECB,
+        }
+      );
+      return decrypted.toString(CryptoJS.enc.Utf8);
+}
 
   logout() {
     localStorage.removeItem(this.authLocalStorageToken);
