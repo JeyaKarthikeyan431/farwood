@@ -7,11 +7,13 @@ import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
+  public KEY='af027f5884ec186b';
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
@@ -53,6 +55,20 @@ export class AuthService implements OnDestroy {
   }
   createUser(param){
     return this.http.post('http://183.82.249.177:9015/api/login/createUser',param);
+  }
+  changePassword(param){
+    return this.http.post('http://183.82.249.177:9015/api/login/changePassword',param);
+  }
+
+  public encrypt(str) {
+    let ciphertext = CryptoJS.AES.encrypt(str, this.KEY);
+    return ciphertext.toString();
+  }
+ 
+  public decrypt(hash) {
+    let bytes = CryptoJS.AES.decrypt(hash.toString(), this.KEY);
+    let plaintext = bytes.toString(CryptoJS.enc.Utf8);
+    return plaintext;
   }
 
   logout() {

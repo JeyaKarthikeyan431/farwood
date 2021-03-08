@@ -54,9 +54,6 @@
         <mat-form-field class="example-full-width">
           <mat-label>Password</mat-label>
           <input matInput placeholder="Password"  autocomplete="off" formControlName="password">
-          <mat-error *ngIf="l.password.hasError('password') && !l.email.hasError('required')">
-            Please enter a valid email address
-          </mat-error>
           <mat-error *ngIf="l.password.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>
@@ -64,7 +61,7 @@
             Password should have at least 3 characters
           </mat-error>
           <mat-error *ngIf="l.password.hasError('maxLength')">
-            Password should have  maximum 8 characters
+            Password should have  maximum 15 characters
           </mat-error>
         </mat-form-field>
     </div>

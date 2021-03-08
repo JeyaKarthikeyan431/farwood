@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         Validators.compose([
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(8),
+          Validators.maxLength(15),
         ]),
       ],
     });
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   signIn() {
     let loginParam={
       emailId:this.l.email.value,
-      password:this.l.password.value
+      password:this.authService.encrypt(this.l.password.value)
     }
     this.hasError = false;
      this.authService.login(loginParam).subscribe((res:any) => {
