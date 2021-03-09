@@ -53,7 +53,7 @@
       </div>
         <mat-form-field class="example-full-width">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Password"  autocomplete="off" formControlName="password">
+          <input matInput type="password" placeholder="Password"  autocomplete="off" formControlName="password">
           <mat-error *ngIf="l.password.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>

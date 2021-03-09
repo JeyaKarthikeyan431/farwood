@@ -40,10 +40,10 @@ export class CreateUserComponent implements OnInit {
     this.authService.createUser(this.userForm.value).subscribe((res: any) => {
       if (res.status == 200) {
         this.resetUser();
+        this.router.navigate(['user/dashboard']);
       } else {
       }
     }, (error: any) => {
-      this.router.navigate(['user/dashboard']);
       if (error.status == 500) {
 
       } else if (error.status == 204) {

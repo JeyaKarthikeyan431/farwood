@@ -83,7 +83,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.hasError = true;
       }
     }, (error: any) => {
-      this.router.navigate(['user/dashboard']);
       this.hasError = true;
       if (error.status == 500) {
 
