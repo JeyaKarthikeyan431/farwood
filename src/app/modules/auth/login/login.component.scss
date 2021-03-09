@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+
   @media (min-width: 992px) {
     .login-form {
       width: 100%;
@@ -10,4 +11,49 @@
       }
     }
   }
+}
+
+.login-signin {
+  padding: 20px 35px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 2px lightgrey;
+  border: 2px solid lightgray;
+  max-width: inherit;
+
+  form {
+    .font-title {
+      color: #043458;
+      border-bottom: 3px solid #043458;
+      padding-bottom: 5px;
+
+      strong {
+        color: #39a952;
+      }
+    }
+
+    mat-form-field {
+
+      mat-label {
+        color: black;
+      }
+    }
+
+  }
+  .bottom-button{
+    button{
+      background-color: #043458;
+    }
+  }
+  .alert-light-info{
+    background-color: #e2ffe9;
+    .alert-text{
+      color: #39a952;
+    }
+  }
+}
+
+
+::ng-deep.mat-form-field-underline {
+  background-color: black !important;
 }

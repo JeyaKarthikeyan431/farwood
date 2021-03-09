@@ -50,37 +50,48 @@
                   }
               }
           }
-          .del-block{
-              width: 100%;
-              margin-right: 30px;
-              text-align: right;
-              position: absolute;
-              top: 50%;
-              right: 0%;
-              span{
-                    padding: 0 2px;
-                    font-weight: 600;
-                  i{
-                    font-size: 20px;
-                    color: white;
-                    background-color: #f64e60;
-                    width: 40px;
-                    height: 40px;
-                    text-align: center;
-                    padding: 10px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    &:hover{
-                        color: #f64e60;
-                        background-color: white;
-                    }
-                  }
-              }
-          }
     }
     .person-subform{
         padding: 20px 30px;
-        position: relative;
+        .multiple-block{
+            position: relative;
+            padding: 20px 5px;
+            margin: 15px auto;
+            border-radius: 10px;
+            box-shadow: 1px 2px 2px lightgrey;
+            border: 2px solid lightgray;
+
+            mat-form-field{
+                width: 75%;
+            }
+            .del-block{
+                width: 100%;
+                margin-right: 10px;
+                text-align: right;
+                position: absolute;
+                top: 45%;
+                right: 0%;
+                span{
+                      padding: 0 2px;
+                      font-weight: 600;
+                    i{
+                      font-size: 18px;
+                      color: white;
+                      background-color: #f64e60;
+                      width: 35px;
+                      height: 35px;
+                      text-align: center;
+                      padding: 8px;
+                      border-radius: 20px;
+                      cursor: pointer;
+                      &:hover{
+                          color: #f64e60;
+                          background-color: white;
+                      }
+                    }
+                }
+            }
+        }
     }
 }
 ::ng-deep.mat-form-field-appearance-fill {
@@ -95,6 +106,10 @@
 .btn-bottom-holder{
     display: flex;
     justify-content: flex-end;
+    button{
+        background-color: #043458;
+        color: white;
+      }
     .btn-gray{
         background-color: lightgray;
     }

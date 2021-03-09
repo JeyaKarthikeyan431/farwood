@@ -103,3 +103,11 @@
   height: 3px;
   width: 100%;
 }
+
+mat-label {
+  color: black;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: black !important;
+}

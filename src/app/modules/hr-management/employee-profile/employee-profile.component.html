@@ -350,7 +350,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div formArrayName="family"
+                        <div class="multiple-block" formArrayName="family"
                             *ngFor="let familyMembers of personalInfoForm.get('family')['controls']; let i = index;">
                             <div class="row pt-4" [formGroupName]="i">
                                 <div class="col-lg-6">
@@ -430,7 +430,7 @@
                             </span>
                         </div>
                     </div>
-                        <div formArrayName="education"
+                        <div class="multiple-block" formArrayName="education"
                             *ngFor="let education of personalInfoForm.get('education')['controls']; let i = index;">
                             <div class="row pt-4" [formGroupName]="i">
                                 <div class="col-lg-6">
@@ -520,7 +520,7 @@
                             </span>
                         </div>
                     </div>
-                    <div formArrayName="company"
+                    <div class="multiple-block" formArrayName="company"
                         *ngFor="let familyMembers of personalInfoForm.get('company')['controls']; let i = index;">
                         <div class="row pt-4" [formGroupName]="i">
                             <div class="col-lg-6">

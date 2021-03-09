@@ -6,9 +6,9 @@
     id="kt_login_signin_form"
   >
     <div class="pb-13 pt-lg-0 pt-5">
-      <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
-        Welcome to Farwood
-      </h3>
+      <h2 class="font-weight-bolder font-title font-size-h4 font-size-h1-lg">
+        Welcome to <strong>Farwood</strong>
+      </h2>
     </div>
     <ng-container *ngIf="!hasError">
       <div class="mb-10 alert alert-custom alert-light-info alert-dismissible">
@@ -44,7 +44,7 @@
       </mat-form-field>
     </div>
     <div class="form-group">
-      <div class="d-flex justify-content-between mt-n5">
+      <div class="d-flex justify-content-end mt-n5">
         <span (click)="goToForgotPassword()"
           class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
         >
@@ -65,7 +65,7 @@
           </mat-error>
         </mat-form-field>
     </div>
-    <div class="pb-lg-0 pb-5">
+    <div class="pb-lg-0 pb-5 bottom-button">
       <button
         type="submit"
         class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
@@ -74,7 +74,9 @@
       >
         Sign In
       </button>
-      <button id="googleBtn">Google</button>
+      <button type="submit"
+      class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3" 
+      id="googleBtn">Google</button>
     </div>
   </form>
 </div>

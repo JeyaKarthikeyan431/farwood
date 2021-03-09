@@ -1,100 +1,131 @@
-Create User
-<form [formGroup]="userForm">
-    <div class="form-group">
-        <mat-form-field class="example-full-width" 
-             >
-            <mat-label>First Name</mat-label>
-            <input matInput type="text" formControlName="firstName" placeholder="First Name" class="form-control"  required/>
-            <mat-error *ngIf="u.firstName.hasError('required')">
-                First Name is required
-            </mat-error>
-        </mat-form-field>
+<div class="form-wrapper">
+    <div class="user-creation">
+        <p>Create User</p>
+        <form [formGroup]="userForm">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>First Name</mat-label>
+                                <input matInput type="text" formControlName="firstName" placeholder="First Name"
+                                    class="form-control" required />
+                                <mat-error *ngIf="u.firstName.hasError('required')">
+                                    First Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" required>
+                                <mat-label>Last Name</mat-label>
+                                <input matInput type="text" formControlName="lastName" placeholder="Last Name"
+                                    class="form-control" required />
+                                <mat-error *ngIf="u.lastName.hasError('required')">
+                                    Last Name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Email</mat-label>
+                                <input class="form-control" matInput placeholder="Email" formControlName="emailId"
+                                    required>
+                                <mat-error *ngIf="u.emailId.hasError('email') && !u.emailId.hasError('required')">
+                                    Please enter a valid email address
+                                </mat-error>
+                                <mat-error *ngIf="u.emailId.hasError('required')">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="u.emailId.hasError('minLength')">
+                                    Email should have at least 3 characters
+                                </mat-error>
+                                <mat-error *ngIf="u.emailId.hasError('maxLength')">
+                                    Email should have maximum 320 characters
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput type="text" formControlName="mobileNo" placeholder="Mobile Number"
+                                    class="form-control" required />
+                                <mat-error *ngIf="u.mobileNo.hasError('required')">
+                                    Mobile Number is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Designation</mat-label>
+                                <mat-select class="form-control" placeholder="Designation" formControlName="designation"
+                                    required>
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let designation of designationList" [value]="designation.value">
+                                        {{designation.label}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="u.designation.hasError('required')">Please choose an Designation
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Department</mat-label>
+                                <mat-select class="form-control" placeholder="Department" formControlName="department"
+                                    required>
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let department of departmentList" [value]="department.value">
+                                        {{department.label}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="u.department.hasError('required')">Please choose an Department
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Role</mat-label>
+                                <mat-select class="form-control" placeholder="Role" formControlName="role">
+                                    <mat-option>--</mat-option>
+                                    <mat-option *ngFor="let role of roleList" [value]="role.value">
+                                        {{role.label}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="u.role.hasError('required')">Please choose an Role</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6"></div>
+                </div>
+                <div class="pb-lg-0 pb-5 btn-bottom-holder">
+                    <button type="submit" class="btn btn-gray font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                        (click)="resetUser()">
+                        Clear
+                    </button>
+                    <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                        [disabled]="userForm.invalid" (click)="createUser()">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="form-group" >
-        <mat-form-field class="example-full-width"  required>
-            <mat-label>Last Name</mat-label>
-            <input matInput type="text" formControlName="lastName"  placeholder="Last Name" class="form-control" required />
-            <mat-error *ngIf="u.lastName.hasError('required')">
-                Last Name is required
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-full-width" >
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="emailId" required >
-            <mat-error *ngIf="u.emailId.hasError('email') && !u.emailId.hasError('required')">
-                Please enter a valid email address
-            </mat-error>
-            <mat-error *ngIf="u.emailId.hasError('required')">
-                Email is <strong>required</strong>
-            </mat-error>
-            <mat-error *ngIf="u.emailId.hasError('minLength')">
-                Email should have at least 3 characters
-            </mat-error>
-            <mat-error *ngIf="u.emailId.hasError('maxLength')">
-                Email should have maximum 320 characters
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field>
-            <mat-label>Mobile Number</mat-label>
-            <input matInput type="text" formControlName="mobileNo"
-                placeholder="Mobile Number" class="form-control" required />
-            <mat-error *ngIf="u.mobileNo.hasError('required')">
-                Mobile Number is required
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-full-width">
-            <mat-select placeholder="Designation" formControlName="designation" required>
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let designation of designationList" [value]="designation.value">
-                    {{designation.label}}
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="u.designation.hasError('required')">Please choose an Designation</mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-full-width">
-            <mat-select placeholder="Department" formControlName="department" required>
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let department of departmentList" [value]="department.value">
-                    {{department.label}}
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="u.department.hasError('required')">Please choose an Department</mat-error>
-        </mat-form-field>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-full-width">
-            <mat-select placeholder="Role" formControlName="role">
-                <mat-option>--</mat-option>
-                <mat-option *ngFor="let role of roleList" [value]="role.value">
-                    {{role.label}}
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="u.role.hasError('required')">Please choose an Role</mat-error>
-        </mat-form-field>
-    </div>
-    <div class="pb-lg-0 pb-5">
-        <button
-          type="submit"
-          class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-          [disabled]="userForm.invalid"
-          (click)="createUser()"
-        >
-          Create
-        </button>
-        <button
-        type="submit"
-        class="btn  font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-        (click)="resetUser()"
-      >
-        Clear
-      </button>
-      </div>
-</form>
+</div>
