@@ -1,4 +1,6 @@
 <!--begin::Topbar-->
+<div *ngIf="false">
+  
 <ng-container *ngIf="extraSearchDisplay">
   <ng-container *ngIf="extrasSearchLayout === 'offcanvas'">
     <!--begin::Search-->
@@ -200,5 +202,21 @@
     <!--end::User-->
   </ng-container>
 </ng-container>
-
+</div>
 <!--end::Topbar-->
+
+<div class="logout-holder">
+  <div class="user-view">
+    <p>Welcome <strong>Manoharan Raman</strong></p>
+    <i class="fa fa-user-circle" aria-hidden="true"></i>
+  </div>
+  <div class="log-out">
+    <div class="logout-icon" (click)="logoutViewer()">
+      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </div>
+    <div class="logout-drop" *ngIf="showLogout">
+      <p>Change Password</p>
+      <p>Logout</p>
+    </div>
+  </div>
+</div>

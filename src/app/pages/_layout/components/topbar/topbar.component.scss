@@ -1,0 +1,52 @@
+
+.logout-holder{
+    display: flex;
+    .user-view{
+        display: flex;
+        margin: 25px auto;
+        p{
+            strong{
+                padding: 0 15px;
+            }
+        }
+        i{
+            font-size: 18px;
+        }
+    }
+    .log-out{
+        display: flex;
+        position: relative;
+        .logout-icon{
+            margin: 23px auto;
+            padding-left: 15px;
+            cursor: pointer;
+            i{
+                font-size: 16px;
+                width: 30px;
+                height: 30px;
+                border-radius: 25px;
+                padding: 7px 12px;
+                margin-top: -5px;
+                &:hover{
+                    background-color: #d4ffde;
+                }
+            }
+        }
+    }
+    .logout-drop{
+        position: absolute;
+        width: max-content;
+        background-color: #fefefe;
+        right: -25px;
+        top: 65px;
+        box-shadow: 1px 2px 3px;
+        p{
+            padding: 10px 15px;
+            margin: 0;
+            cursor: pointer;
+            &:hover{
+                background-color: #f5f2f2;
+            }
+        }
+    }
+}

@@ -32,6 +32,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   extrasLanguagesDisplay: boolean;
   extrasUserDisplay: boolean;
   extrasUserLayout: 'offcanvas' | 'dropdown';
+  showLogout: boolean = false;
 
   constructor(private layout: LayoutService, private auth: AuthService) {
     this.user$ = this.auth.currentUserSubject.asObservable();
@@ -107,5 +108,9 @@ export class TopbarComponent implements OnInit, AfterViewInit {
       // Init Header Topbar For Mobile Mode
       KTLayoutHeaderTopbar.init('kt_header_mobile_topbar_toggle');
     });
+  }
+
+  logoutViewer(){
+    this.showLogout = !this.showLogout;
   }
 }
