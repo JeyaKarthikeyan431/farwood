@@ -53,6 +53,11 @@
   }
 }
 
+.cursor-pointer{
+  span{
+    cursor: pointer;
+  }
+}
 
 ::ng-deep.mat-form-field-underline {
   background-color: black !important;
