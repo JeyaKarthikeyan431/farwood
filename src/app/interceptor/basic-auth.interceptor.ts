@@ -17,12 +17,14 @@ export class BasicAuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = sessionStorage.getItem('token');
-    if (token != '' && token != null) {
+    if ((token != '' && token != null)) {
       request = request.clone({
         setHeaders: {
           Authorization: token
         }
       });
+      return next.handle(request);
+    }else if(request.url.indexOf('signIn')>-1){
       return next.handle(request);
     } else {
       this.router.navigate(['auth/login']);

@@ -17,6 +17,7 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 // #fake-start#
 import { FakeAPIService } from './_fake/fake-api.service';
 import { BasicAuthInterceptor } from './interceptor/basic-auth.interceptor';
+import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
 // #fake-end#
 
 
@@ -59,6 +60,11 @@ function appInitializer(authService: AuthService) {
     {
       provide:HTTP_INTERCEPTORS,
       useClass:BasicAuthInterceptor,
+      multi:true
+    },
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:HttpErrorInterceptor,
       multi:true
     },
     {

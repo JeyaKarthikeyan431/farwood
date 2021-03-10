@@ -15,7 +15,7 @@ import * as CryptoJS from 'crypto-js';
 export class AuthService implements OnDestroy {
   public KEY='af027f5884ec186b';
   // private fields
-  private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  private unsubscribe: Subscription[] = []; // Read more: => https:/Y/brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   // public fields
@@ -59,6 +59,9 @@ export class AuthService implements OnDestroy {
   changePassword(param){
     return this.http.post('http://183.82.249.177:9015/api/login/changePassword',param);
   }
+  logout():Observable<any>{
+    return this.http.post('http://183.82.249.177:9015/api/login/signOut',null);
+  }
 
   public encrypt(msg) {
     let encrypted = CryptoJS.AES.encrypt(
@@ -86,13 +89,6 @@ export class AuthService implements OnDestroy {
       );
       return decrypted.toString(CryptoJS.enc.Utf8);
 }
-
-  logout() {
-    localStorage.removeItem(this.authLocalStorageToken);
-    this.router.navigate(['/auth/login'], {
-      queryParams: {},
-    });
-  }
 
   getUserByToken(): Observable<UserModel> {
     const auth = this.getAuthFromLocalStorage();
