@@ -24,7 +24,7 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         }
       });
       return next.handle(request);
-    }else if(request.url.indexOf('signIn')>-1){
+    }else if(request.url.indexOf('signIn')>-1 || request.url.indexOf('config.json')>-1){
       return next.handle(request);
     } else {
       this.router.navigate(['auth/login']);

@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
-import { UserModel } from '../_models/user.model';
 import { AuthService } from '../_services/auth.service';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { error } from '@angular/compiler/src/util';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 declare const gapi: any;
 
 @Component({
@@ -26,6 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private toastrService : CommonToastrService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -77,6 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     this.authService.login(loginParam).subscribe((res: any) => {
       if (res.status == 200) {
+        this.toastrService.showSuccess('Successfully logged in','Success');
         this.setUserInfo(res.data);
         this.redirectTo(res.data);
       } else {
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
     }, (error: any) => {
       this.hasError = false;
-      this.router.navigate(['user/dashboard']);
+       this.toastrService.showError('Error while login','Error');
       if (error.status == 500) {
 
       } else if (error.status == 204) {

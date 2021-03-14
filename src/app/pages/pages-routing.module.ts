@@ -33,6 +33,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'sales-management',
+        loadChildren: () =>
+          import('../modules/sales-management/sales-management.module').then(
+            (m) => m.SalesManagementModule
+          ),
+      },
+      {
         path: 'user-profile',
         loadChildren: () =>
           import('../modules/user-profile/user-profile.module').then(

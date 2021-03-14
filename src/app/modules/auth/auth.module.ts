@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -9,49 +7,15 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LogoutComponent } from './logout/logout.component';
 import { AuthComponent } from './auth.component';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
-import { MatInputModule } from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatTreeModule } from '@angular/material/tree';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import {
-  MatBottomSheetModule,
   MatBottomSheetRef,
   MAT_BOTTOM_SHEET_DATA,
 } from '@angular/material/bottom-sheet';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {
-  MatRippleModule,
-  MatNativeDateModule,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module';
+import { MatIconRegistry, } from '@angular/material/icon';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -64,45 +28,7 @@ import { GeneralModule } from 'src/app/_metronic/partials/content/general/genera
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatAutocompleteModule,
-    MatListModule,
-    MatSliderModule,
-    MatCardModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatIconModule,
-    MatNativeDateModule,
-    MatSlideToggleModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatTabsModule,
-    MatTooltipModule,
-    MatSidenavModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatBottomSheetModule,
-    MatExpansionModule,
-    MatDividerModule,
-    MatSortModule,
-    MatStepperModule,
-    MatChipsModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatRippleModule,
-    MatRadioModule,
-    MatTreeModule,
-    MatButtonToggleModule,
-    GeneralModule,
+    SharedModule,
   ],
   providers: [
     MatIconRegistry,

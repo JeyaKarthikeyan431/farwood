@@ -46,6 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { GeneralModule } from 'src/app/_metronic/partials/content/general/general.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonToastrService } from './toater/common-toastr.service';
 
 
 
@@ -92,6 +94,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTreeModule,
     MatButtonToggleModule,
     GeneralModule,
+    ToastrModule.forRoot()
   ],
 
   exports: [

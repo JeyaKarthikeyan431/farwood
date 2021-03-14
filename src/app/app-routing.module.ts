@@ -25,6 +25,7 @@ export const routes: Routes = [
     redirectTo:'/auth/login',
     pathMatch: 'full',
   },
+  { path: 'sales-management', loadChildren: () => import('./modules/sales-management/sales-management.module').then(m => m.SalesManagementModule) },
   { path: '**', redirectTo: 'error/404' },
 ];
 

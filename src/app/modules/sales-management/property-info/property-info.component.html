@@ -1,0 +1,141 @@
+<form [formGroup]="propertyInfoForm">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>What are you looking for?</mat-label>
+                    <mat-select class="form-control" placeholder="What are you looking for" formControlName="lookingFor"
+                        required>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let looking of lookingForList" [value]="looking.value">
+                            {{looking.label}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="p.lookingFor.hasError('required')">Please choose What are you looking for?
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Whats the type of your property?</mat-label>
+                    <mat-select class="form-control" placeholder="Whats the type of your property"
+                        formControlName="typeOfProperty" required>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let property of propertyList" [value]="property.value">
+                            {{property.label}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="p.typeOfProperty.hasError('required')">Please choose Whats the type of your
+                        property?
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>Property Name</mat-label>
+                <input matInput type="text" formControlName="propertyName" placeholder="Property Name"
+                    class="form-control" required />
+                <mat-error *ngIf="p.propertyName.hasError('required')">
+                    Property Name is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Builder Name</mat-label>
+                    <input matInput type="text" formControlName="builderName" placeholder="Builder Name"
+                        class="form-control" required />
+                    <mat-error *ngIf="p.builderName.hasError('required')">
+                        Builder Name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+                <mat-label>Is this building in a condition to be completed?</mat-label>
+                <mat-radio-group aria-label="Select an option" formControlName="buildingState">
+                    <mat-radio-button value="1">Yes</mat-radio-button>
+                    <mat-radio-button value="2">No</mat-radio-button>
+                </mat-radio-group>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Expected date to complete this building?</mat-label>
+                    <input matInput [matDatepicker]="expectedDatePicker" class="form-control"
+                        formControlName="expectedDate">
+                    <mat-datepicker-toggle matSuffix [for]="expectedDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #expectedDatePicker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <p>Property Address</p>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>Flat/ Door No</mat-label>
+                <input matInput type="text" formControlName="flat" placeholder="Flat/ Door No" class="form-control"
+                    required />
+                <mat-error *ngIf="p.flat.hasError('required')">
+                    Flat/ Door No is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Street Name</mat-label>
+                    <input matInput type="text" formControlName="streetName" placeholder="Street Name"
+                        class="form-control" required />
+                    <mat-error *ngIf="p.streetName.hasError('required')">
+                        Street Name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>City</mat-label>
+                <input matInput type="text" formControlName="city" placeholder="City" class="form-control" required />
+                <mat-error *ngIf="p.city.hasError('required')">
+                    City is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Pin Code</mat-label>
+                    <input matInput type="text" formControlName="pinCode" placeholder="Pin Code" class="form-control"
+                        required />
+                    <mat-error *ngIf="p.pinCode.hasError('required')">
+                        Pin Code is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>Location</mat-label>
+                <input matInput type="text" formControlName="location" placeholder="Location" class="form-control"
+                    required />
+                <mat-error *ngIf="p.location.hasError('required')">
+                    Location is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</form>

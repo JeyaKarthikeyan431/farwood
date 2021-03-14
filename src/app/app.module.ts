@@ -18,6 +18,9 @@ import { SplashScreenModule } from './_metronic/partials/layout/splash-screen/sp
 import { FakeAPIService } from './_fake/fake-api.service';
 import { BasicAuthInterceptor } from './interceptor/basic-auth.interceptor';
 import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
+import { SharedModule } from './shared/shared.module';
+import { CommonToastrService } from './shared/toater/common-toastr.service';
+import { ConfigService } from './shared/config/config.service';
 // #fake-end#
 
 
@@ -27,6 +30,9 @@ function appInitializer(authService: AuthService) {
       authService.getUserByToken().subscribe().add(resolve);
     });
   };
+}
+export function apiConfigProvider(configService: ConfigService) {
+  return () => configService.loadConfig();
 }
 
 
@@ -40,6 +46,7 @@ function appInitializer(authService: AuthService) {
     HttpClientModule,
     HighlightModule,
     ClipboardModule,
+    SharedModule,
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
         passThruUnknownUrl: true,
@@ -51,21 +58,29 @@ function appInitializer(authService: AuthService) {
     NgbModule,
   ],
   providers: [
+    CommonToastrService,
+    ConfigService,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: appInitializer,
+    //   multi: true,
+    //   deps: [AuthService],
+    // },
     {
       provide: APP_INITIALIZER,
-      useFactory: appInitializer,
+      useFactory: apiConfigProvider,
       multi: true,
-      deps: [AuthService],
+      deps: [ConfigService]
     },
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:BasicAuthInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthInterceptor,
+      multi: true
     },
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:HttpErrorInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
     },
     {
       provide: HIGHLIGHT_OPTIONS,
