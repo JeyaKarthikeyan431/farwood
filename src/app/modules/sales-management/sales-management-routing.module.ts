@@ -7,9 +7,6 @@ import { PropertyInfoComponent } from './property-info/property-info.component';
 import { SalesManagementComponent } from './sales-management.component';
 
 const routes: Routes = [{ path: 'leads', component: SalesManagementComponent },
-{ path: 'add', component: PersonalInfoComponent },
-{ path: 'basic', component: BasicRequirementComponent },
-{path:'property',component:PropertyInfoComponent},
 { path: '', redirectTo: 'leads', pathMatch: 'full' },
 { path: '**', redirectTo: 'leads', pathMatch: 'full' },];
 
