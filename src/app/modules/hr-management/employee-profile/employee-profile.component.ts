@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-employee-profile',
@@ -28,7 +30,9 @@ export class EmployeeProfileComponent implements OnInit {
   public qualificationList:any=[];
   public yearList:any=[];
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder,
+    private toastrService : CommonToastrService,
+    private userService: UserService,) { }
 
   ngOnInit(): void {
     this.initofficialInfoForm();
@@ -148,5 +152,25 @@ export class EmployeeProfileComponent implements OnInit {
   }
   removeCompany(index):void{
     this.company.removeAt(index);
+  }
+  getMasterData() {
+    let options = ['USER_DESIGNATION', 'USER_DEPT','MARITAl_STATUS','NATIONALITY','COMMUTE_MODE',''];
+    let param={
+      multipleOptionType:options
+    }
+    this.userService.getMasterData(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['USER_DESIGNATION'] != null && masterData['USER_DESIGNATION'].length > 0
+          && masterData['USER_DEPT'] != null && masterData['USER_DEPT'].length > 0) {
+          this.designationList = masterData['USER_DESIGNATION'];
+          this.departmentList = masterData['USER_DEPT'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Master data','Error');
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Master data','Error');
+    });
   }
 }

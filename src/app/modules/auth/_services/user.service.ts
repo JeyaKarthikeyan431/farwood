@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from 'src/app/shared/config/config.service';
 
@@ -13,6 +13,6 @@ export class UserService {
     this.apiConstant=this.configService.getConfig();
    }
    getMasterData(param) {
-    return this.http.post(this.apiConstant.API_ENDPOINT + 'login/signIn',param);
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/options/listAll',param);
   }
 }

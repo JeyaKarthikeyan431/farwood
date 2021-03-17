@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { AuthService } from '../../auth/_services/auth.service';
+import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -17,10 +19,13 @@ export class CreateUserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router,) { }
+    private router: Router,
+    private userService: UserService,
+    private toastrService : CommonToastrService,) { }
 
   ngOnInit(): void {
     this.initUserForm();
+    this.getMasterData();
   }
   initUserForm() {
     this.userForm = this.formBuilder.group({
@@ -53,5 +58,26 @@ export class CreateUserComponent implements OnInit {
   }
   resetUser() {
     this.userForm.reset();
+  }
+  getMasterData() {
+    let options = ['USER_DESIGNATION','USER_DEPT'];
+    let param={
+      multipleOptionType:options
+    }
+    this.userService.getMasterData(options).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['USER_DESIGNATION'] != null && masterData['USER_DESIGNATION'].length > 0
+          && masterData['USER_DEPT'] != null && masterData['USER_DEPT'].length > 0) {
+          this.designationList = masterData['USER_DESIGNATION'];
+          this.departmentList = masterData['USER_DEPT'];
+          this.roleList=masterData['USER_DEPT'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Master data','Error');
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Master data','Error');
+    });
   }
 }
