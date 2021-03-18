@@ -8,6 +8,7 @@ import { SplashScreenService } from './_metronic/partials/layout/splash-screen/s
 import { Router, NavigationEnd, NavigationError } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TableExtendedService } from './_metronic/shared/crud-table';
+import { SpinnerService } from './spinner/spinner.service';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'body[root]',
@@ -17,11 +18,13 @@ import { TableExtendedService } from './_metronic/shared/crud-table';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
+  private showSpinner: boolean;
 
   constructor(
     private splashScreenService: SplashScreenService,
     private router: Router,
-    private tableService: TableExtendedService
+    private tableService: TableExtendedService,
+    public spinnerService: SpinnerService,
   ) {
   }
 

@@ -21,6 +21,7 @@ import { HttpErrorInterceptor } from './interceptor/http-error.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { CommonToastrService } from './shared/toater/common-toastr.service';
 import { ConfigService } from './shared/config/config.service';
+import { SpinnerComponent } from './spinner/spinner.component';
 // #fake-end#
 
 
@@ -37,7 +38,7 @@ export function apiConfigProvider(configService: ConfigService) {
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SpinnerComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
