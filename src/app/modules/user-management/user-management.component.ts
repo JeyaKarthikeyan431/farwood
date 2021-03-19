@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { UserService } from '../auth/_services/user.service';
 
 interface User {
-  name: string;
-  doj: string;
+  userName: string;
+  createdDate: string;
   role: string;
-  location: string;
+  emailId: string;
   status: string,
 }
 
@@ -20,23 +22,19 @@ export class UserManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['name', 'doj', 'role', 'location', 'status'];
+  displayedColumns: string[] = ['userName', 'createdDate', 'role', 'emailId', 'status'];
   dataSource: MatTableDataSource<User>;
-  sample: User[] = [{
-    'name': 'mano',
-    'doj': '05/06/2021',
-    'role': 'Engineer',
-    'location': 'Erode',
-    'status': 'Active',
-  }]
 
   isUserFormVisible: boolean = false;
   form: string;
-  constructor() { }
+  APICONSTANT:any;
 
-  ngOnInit(): void { 
-    this.isUserFormVisible = false;
-    this.dataSource = new MatTableDataSource(this.sample);
+  constructor(public userService: UserService, private toastrService : CommonToastrService,) { }
+
+  ngOnInit(): void {
+    this.initObservable();
+    this.getUsers();
+    this.APICONSTANT=this.userService.getConfig();
   }
 
   fnUserFormVisible(option) {
@@ -44,6 +42,7 @@ export class UserManagementComponent implements OnInit {
       case 'GO_TO_DASHBOARD': {
         this.isUserFormVisible = false;
         this.form = 'DASHBOARD';
+        this.getUsers();
         break;
       }
       case 'GO_TO_USER': {
@@ -52,5 +51,27 @@ export class UserManagementComponent implements OnInit {
         break;
       }
     }
+  }
+
+  initObservable() {
+    this.userService.visibility.subscribe(val => {
+      if (val) {
+        this.fnUserFormVisible('GO_TO_USER');
+      } else {
+        this.fnUserFormVisible('GO_TO_DASHBOARD');
+      }
+    })
+  }
+  getUsers() {
+    this.userService.getUsers().subscribe((res: any) => {
+      if (res.status == 200 && res.data!=null) {
+        let userData = res.data;
+        this.dataSource = new MatTableDataSource(userData);
+      } else {
+        this.toastrService.showError('No Users Found',this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting Users',this.APICONSTANT.TITLE);
+    });
   }
 }

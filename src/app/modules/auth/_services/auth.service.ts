@@ -53,9 +53,6 @@ export class AuthService implements OnDestroy {
   forgotPassword(param): Observable<any> {
     return this.http.post('http://183.82.249.177:9015/api/login/forgotpassword',param);
   }
-  createUser(param){
-    return this.http.post('http://183.82.249.177:9015/api/login/createUser',param);
-  }
   changePassword(param){
     return this.http.post('http://183.82.249.177:9015/api/login/changePassword',param);
   }

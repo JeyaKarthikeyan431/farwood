@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
-import { AuthService } from '../../auth/_services/auth.service';
 import { UserService } from '../../auth/_services/user.service';
 
 @Component({
@@ -16,9 +15,8 @@ export class CreateUserComponent implements OnInit {
   designationList: any = [];
   departmentList: any = [];
   roleList: any = [];
+  APICONSTANT:any;
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private toastrService : CommonToastrService,) { }
@@ -26,6 +24,7 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     this.initUserForm();
     this.getMasterData();
+    this.APICONSTANT=this.userService.getConfig();
   }
   initUserForm() {
     this.userForm = this.formBuilder.group({
@@ -42,17 +41,20 @@ export class CreateUserComponent implements OnInit {
     return this.userForm.controls;
   }
   createUser() {
-    this.authService.createUser(this.userForm.value).subscribe((res: any) => {
+    this.userService.createUser(this.userForm.value).subscribe((res: any) => {
       if (res.status == 200) {
+        this.userService.hideForm();
+        this.toastrService.showSuccess(res.message,this.APICONSTANT.TITLE);
         this.resetUser();
-        this.router.navigate(['user/dashboard']);
       } else {
       }
     }, (error: any) => {
       if (error.status == 500) {
-
+        this.toastrService.showError(error.message,this.APICONSTANT.TITLE);
       } else if (error.status == 204) {
-
+        this.toastrService.showError(error.message,this.APICONSTANT.TITLE);
+      }else{
+        this.toastrService.showError('Error While Creating User',this.APICONSTANT.TITLE);
       }
     });
   }
@@ -64,20 +66,20 @@ export class CreateUserComponent implements OnInit {
     let param={
       multipleOptionType:options
     }
-    this.userService.getMasterData(options).subscribe((res: any) => {
+    this.userService.getMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
-        if (masterData['USER_DESIGNATION'] != null && masterData['USER_DESIGNATION'].length > 0
-          && masterData['USER_DEPT'] != null && masterData['USER_DEPT'].length > 0) {
-          this.designationList = masterData['USER_DESIGNATION'];
-          this.departmentList = masterData['USER_DEPT'];
-          this.roleList=masterData['USER_DEPT'];
+        if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0
+          && masterData['userDepartment'] != null && masterData['userDepartment'].length > 0) {
+          this.designationList = masterData['userDesignation'];
+          this.departmentList = masterData['userDepartment'];
+          this.roleList=masterData['userDepartment'];
         }
       } else {
-        this.toastrService.showError('Error while getting Master data','Error');
+        this.toastrService.showError('Error while getting Master data',this.APICONSTANT.TITLE);
       }
     }, (error: any) => {
-      this.toastrService.showError('Error while getting Master data','Error');
+      this.toastrService.showError('Error while getting Master data',this.APICONSTANT.TITLE);
     });
   }
 }
