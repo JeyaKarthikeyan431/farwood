@@ -7,10 +7,11 @@ import { UserService } from '../auth/_services/user.service';
 
 interface User {
   userName: string;
-  createdDate: string;
-  role: string;
+  departmentDesc:string;
+  roleDesc: string;
   emailId: string;
-  status: string,
+  createdDate: string;
+  action:string;
 }
 
 @Component({
@@ -22,7 +23,7 @@ export class UserManagementComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['userName', 'createdDate', 'role', 'emailId', 'status'];
+  displayedColumns: string[] = ['userName','departmentDesc','roleDesc','emailId','createdDate','action'];
   dataSource: MatTableDataSource<User>;
 
   isUserFormVisible: boolean = false;
@@ -33,7 +34,6 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.initObservable();
-    this.getUsers();
     this.APICONSTANT=this.userService.getConfig();
   }
 
@@ -48,6 +48,7 @@ export class UserManagementComponent implements OnInit {
       case 'GO_TO_USER': {
         this.isUserFormVisible = true;
         this.form = 'USER';
+        this.userService.getUserInfo(null);
         break;
       }
     }
@@ -73,5 +74,9 @@ export class UserManagementComponent implements OnInit {
     }, (error: any) => {
       this.toastrService.showError('Error While Getting Users',this.APICONSTANT.TITLE);
     });
+  }
+  editUser(row){
+    this.fnUserFormVisible('GO_TO_USER');
+    this.userService.getUserInfo(row);
   }
 }

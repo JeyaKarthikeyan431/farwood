@@ -8,7 +8,8 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Employee Id</mat-label>
-                                <input matInput type="text" formControlName="offEmpId" class="form-control" required />
+                                <input matInput type="text" placeholder="Employee Id" formControlName="offEmpId"
+                                    class="form-control" required />
                                 <mat-error *ngIf="o.offEmpId.hasError('required')">
                                     Employee Id is required
                                 </mat-error>
@@ -18,15 +19,14 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <mat-form-field>
-                                <mat-label>Designation</mat-label>
-                                <mat-select placeholder="tetetetet" class="form-control"
-                                    formControlName="offEmpDesignation" required>
-                                    <mat-option value="A">test</mat-option>
-                                    <mat-option *ngFor="let designation of designationList" [value]="designation.value">
-                                        {{designation.label}}
+                                <mat-label>Department</mat-label>
+                                <mat-select placeholder="Department" class="form-control"
+                                    formControlName="offEmpDepartment" required>
+                                    <mat-option *ngFor="let department of departmentList" [value]="department.value">
+                                        {{department.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="o.offEmpDesignation.hasError('required')">Please choose an Designation
+                                <mat-error *ngIf="o.offEmpDepartment.hasError('required')">Please Choose Department
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -36,15 +36,14 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <mat-form-field>
-                                <mat-label>Department</mat-label>
-                                <mat-select placeholder="Department" class="form-control"
-                                    formControlName="offEmpDepartment" required>
-                                    <mat-option>--</mat-option>
-                                    <mat-option *ngFor="let department of departmentList" [value]="department.value">
-                                        {{department.label}}
+                                <mat-label>Designation</mat-label>
+                                <mat-select placeholder="Designation" class="form-control"
+                                    formControlName="offEmpDesignation" required>
+                                    <mat-option *ngFor="let designation of designationList" [value]="designation.value">
+                                        {{designation.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="o.offEmpDepartment.hasError('required')">Please choose an Department
+                                <mat-error *ngIf="o.offEmpDesignation.hasError('required')">Please Choose Designation
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -53,10 +52,13 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Work Location</mat-label>
-                                <input matInput type="text" formControlName="offEmpWorkLocation"
-                                    placeholder="Work Location" class="form-control" required />
-                                <mat-error *ngIf="o.offEmpWorkLocation.hasError('required')">
-                                    Work Location is required
+                                <mat-select placeholder="Work Location" class="form-control"
+                                    formControlName="offEmpWorkLocation" required>
+                                    <mat-option *ngFor="let location of workLocationList" [value]="location.value">
+                                        {{location.label}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="o.offEmpWorkLocation.hasError('required')">Please Choose Work Location
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -65,7 +67,24 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            Emp Pic
+                            <mat-form-field>
+                                <mat-label>Official Email</mat-label>
+                                <input matInput placeholder="Official Email" class="form-control"
+                                    formControlName="offEmpOfficialEmail" required>
+                                <mat-error
+                                    *ngIf="o.offEmpOfficialEmail.hasError('email') && !o.offEmpOfficialEmail.hasError('required')">
+                                    Please enter a valid email address
+                                </mat-error>
+                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('required')">
+                                    Official Email is required
+                                </mat-error>
+                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('minLength')">
+                                    Email should have at least 3 characters
+                                </mat-error>
+                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('maxLength')">
+                                    Email should have maximum 320 characters
+                                </mat-error>
+                            </mat-form-field>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -81,32 +100,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <mat-form-field>
-                                <mat-label>Officical Email</mat-label>
-                                <input matInput placeholder="Officical Email" formControlName="offEmpOfficialEmail"
-                                    required>
-                                <mat-error
-                                    *ngIf="o.offEmpOfficialEmail.hasError('email') && !o.offEmpOfficialEmail.hasError('required')">
-                                    Please enter a valid email address
-                                </mat-error>
-                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('required')">
-                                    Officical Email is <strong>required</strong>
-                                </mat-error>
-                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('minLength')">
-                                    Email should have at least 3 characters
-                                </mat-error>
-                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('maxLength')">
-                                    Email should have maximum 320 characters
-                                </mat-error>
-                            </mat-form-field>
+                            Emp Pic
                         </div>
                     </div>
                     <div class="col-lg-6">
                     </div>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
@@ -149,6 +151,9 @@
                                     formControlName="perEmpDob">
                                 <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #dobPicker></mat-datepicker>
+                                <mat-error *ngIf="p.perEmpDob.hasError('required')">Date of Birth
+                                    required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -158,12 +163,11 @@
                                 <mat-label>Gender</mat-label>
                                 <mat-select placeholder="Gender" class="form-control" formControlName="perEmpGender"
                                     required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let gender of genderList" [value]="gender.value">
                                         {{gender.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpGender.hasError('required')">Please choose an Gender
+                                <mat-error *ngIf="p.perEmpGender.hasError('required')">Please Choose Gender
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -176,12 +180,11 @@
                                 <mat-label>Marital Status</mat-label>
                                 <mat-select placeholder="Marital Status" class="form-control"
                                     formControlName="perEmpMaritalStatus" required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let marital of maritalStatusList" [value]="marital.value">
                                         {{marital.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpMaritalStatus.hasError('required')">Please choose an Marital
+                                <mat-error *ngIf="p.perEmpMaritalStatus.hasError('required')">Please Choose Marital
                                     Status
                                 </mat-error>
                             </mat-form-field>
@@ -193,12 +196,11 @@
                                 <mat-label>Nationality</mat-label>
                                 <mat-select placeholder="Nationality" class="form-control"
                                     formControlName="perEmpNationality" required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let nationality of nationalityList" [value]="nationality.value">
                                         {{nationality.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpNationality.hasError('required')">Please choose an Nationality
+                                <mat-error *ngIf="p.perEmpNationality.hasError('required')">Please Choose Nationality
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -228,7 +230,7 @@
                                     Please enter a valid email address
                                 </mat-error>
                                 <mat-error *ngIf="p.perEmpPersonalEmail.hasError('required')">
-                                    Personal Email is <strong>required</strong>
+                                    Personal Email is required
                                 </mat-error>
                                 <mat-error *ngIf="p.perEmpPersonalEmail.hasError('minLength')">
                                     Email should have at least 3 characters
@@ -241,14 +243,23 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Current Residence</mat-label>
-                                <textarea matInput cols="5" rows="5" placeholder="Current Residence"
-                                    formControlName="perEmpResidence" required></textarea>
+                                <textarea matInput cols="5" rows="5" class="form-control"
+                                    placeholder="Current Residence" formControlName="perEmpResidence"
+                                    required></textarea>
+                                <mat-error *ngIf="p.perEmpResidence.hasError('required')">
+                                    Current Residence is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-checkbox color="primary" formControlName="perEmpSameAsPermanentResidence"
+                            (change)="setSameAsPermanent($event.checked)" class="form-control">Same As
+                            Permanent Residence</mat-checkbox>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -256,6 +267,9 @@
                                 <mat-label>Permanent Residence</mat-label>
                                 <textarea matInput cols="5" rows="5" placeholder="Permanent Residence"
                                     formControlName="perEmpPermanentResidence" required></textarea>
+                                <mat-error *ngIf="p.perEmpPermanentResidence.hasError('required')">
+                                    Permanent Residence is required
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -279,13 +293,12 @@
                                 <mat-label>Physically Challenged</mat-label>
                                 <mat-select placeholder="Physically Challenged" class="form-control"
                                     formControlName="perEmpPhysicallyChallenged" required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let physicallyChallenged of physicallyChallengedList"
                                         [value]="physicallyChallenged.value">
                                         {{physicallyChallenged.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpPhysicallyChallenged.hasError('required')">Please choose an
+                                <mat-error *ngIf="p.perEmpPhysicallyChallenged.hasError('required')">Please Choose
                                     Physically
                                     Challenged</mat-error>
                             </mat-form-field>
@@ -299,12 +312,11 @@
                                 <mat-label>Mode Of Transport</mat-label>
                                 <mat-select placeholder="Mode Of Transport" class="form-control"
                                     formControlName="perEmpModeOfTransport" required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let transport of modeOfTransportList" [value]="transport.value">
                                         {{transport.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpModeOfTransport.hasError('required')">Please choose an Mode of
+                                <mat-error *ngIf="p.perEmpModeOfTransport.hasError('required')">Please Choose Mode of
                                     Transport
                                 </mat-error>
                             </mat-form-field>
@@ -316,12 +328,11 @@
                                 <mat-label>Medical History</mat-label>
                                 <mat-select placeholder="Medical History" class="form-control"
                                     formControlName="perEmpMedicalHistory" required>
-                                    <mat-option>--</mat-option>
                                     <mat-option *ngFor="let history of medicalHistoryList" [value]="history.value">
                                         {{history.label}}
                                     </mat-option>
                                 </mat-select>
-                                <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please choose an Medical
+                                <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please Choose Medical
                                     History
                                 </mat-error>
                             </mat-form-field>
@@ -329,12 +340,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" *ngIf="p.perEmpMedicalHistory.value=='Y'">
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Medical Description</mat-label>
                                 <textarea matInput cols="5" rows="5" placeholder="Medical Description"
                                     formControlName="perEmpMedicalHistoryDesc" required></textarea>
+                                    <mat-error *ngIf="p.perEmpMedicalHistoryDesc.hasError('required')">Medical
+                                        Description required
+                                    </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -359,9 +373,9 @@
                                             <mat-label>Family Member Name</mat-label>
                                             <input matInput type="text" formControlName="name" placeholder="Name"
                                                 class="form-control" required />
-                                            <!-- <mat-error *ngIf="p.name.hasError('required')">
-            Employee First Name required
-        </mat-error> -->
+                                                <mat-error *ngIf="f(i)['name'].hasError('required')">Family Member Name
+                                                     required
+                                                </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -371,14 +385,14 @@
                                             <mat-label>Relationship</mat-label>
                                             <mat-select placeholder="Relationship" class="form-control"
                                                 formControlName="relationship" required>
-                                                <mat-option>--</mat-option>
                                                 <mat-option *ngFor="let relationship of relationshipList"
                                                     [value]="relationship.value">
                                                     {{relationship.label}}
                                                 </mat-option>
                                             </mat-select>
-                                            <!-- <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please choose an Medical History
-                    </mat-error> -->
+                                            <mat-error *ngIf="f(i)['relationship'].hasError('required')">Please Choose
+                                                Relationship
+                                           </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -388,9 +402,9 @@
                                             <mat-label>Age</mat-label>
                                             <input matInput type="text" formControlName="age" placeholder="Age"
                                                 class="form-control" required />
-                                            <!-- <mat-error *ngIf="p.name.hasError('required')">
-            Employee First Name required
-        </mat-error> -->
+                                                <mat-error *ngIf="f(i)['age'].hasError('required')">Age
+                                                    required
+                                               </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -400,14 +414,14 @@
                                             <mat-label>Occupation</mat-label>
                                             <mat-select placeholder="Occupation" class="form-control"
                                                 formControlName="occupation" required>
-                                                <mat-option>--</mat-option>
                                                 <mat-option *ngFor="let occupation of occupationList"
                                                     [value]="occupation.value">
                                                     {{occupation.label}}
                                                 </mat-option>
                                             </mat-select>
-                                            <!-- <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please choose an Medical History
-                    </mat-error> -->
+                                            <mat-error *ngIf="f(i)['occupation'].hasError('required')">Please Choose
+                                                Occupation
+                                           </mat-error>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -430,85 +444,82 @@
                             </span>
                         </div>
                     </div>
-                        <div class="multiple-block" formArrayName="education"
-                            *ngFor="let education of personalInfoForm.get('education')['controls']; let i = index;">
-                            <div class="row pt-4" [formGroupName]="i">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <mat-form-field>
-                                            <mat-label>Qualification</mat-label>
-                                            <mat-select placeholder="Qualification" class="form-control"
-                                                formControlName="qualification" required>
-                                                <mat-option>--</mat-option>
-                                                <mat-option *ngFor="let qualification of qualificationList"
-                                                    [value]="qualification.value">
-                                                    {{qualification.label}}
-                                                </mat-option>
-                                            </mat-select>
-                                            <!-- <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please choose an Medical History
-                            </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <mat-form-field>
-                                            <mat-label>Institute</mat-label>
-                                            <input matInput type="text" formControlName="institute"
-                                                placeholder="Institute" class="form-control" required />
-                                            <!-- <mat-error *ngIf="p.name.hasError('required')">
-        Employee First Name required
-    </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <mat-form-field>
-                                            <mat-label>Year Of Passed</mat-label>
-                                            <mat-select placeholder="Year Of Passed" class="form-control"
-                                                formControlName="yearOfPassedOut" required>
-                                                <mat-option>--</mat-option>
-                                                <mat-option *ngFor="let year of yearList" [value]="year.value">
-                                                    {{year.label}}
-                                                </mat-option>
-                                            </mat-select>
-                                            <!-- <mat-error *ngIf="p.perEmpMedicalHistory.hasError('required')">Please choose an Medical History
-                            </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <mat-form-field>
-                                            <mat-label>Grade</mat-label>
-                                            <input matInput type="text" formControlName="grade" placeholder="Grade"
-                                                class="form-control" required />
-                                            <!-- <mat-error *ngIf="p.name.hasError('required')">
-            Employee First Name required
-        </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <mat-form-field>
-                                            <mat-label>Certificate</mat-label>
-                                            <input matInput type="text" formControlName="certificate"
-                                                placeholder="Certificate" class="form-control" required />
-                                            <!-- <mat-error *ngIf="p.name.hasError('required')">
-            Employee First Name required
-        </mat-error> -->
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="pb-lg-0 pb-5 del-block">
-                                    <span (click)="removeEducation(i)">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </span>
+                    <div class="multiple-block" formArrayName="education"
+                        *ngFor="let education of personalInfoForm.get('education')['controls']; let i = index;">
+                        <div class="row pt-4" [formGroupName]="i">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Qualification</mat-label>
+                                        <mat-select placeholder="Qualification" class="form-control"
+                                            formControlName="qualification" required>
+                                            <mat-option *ngFor="let qualification of qualificationList"
+                                                [value]="qualification.value">
+                                                {{qualification.label}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="e(i)['qualification'].hasError('required')">Please Choose
+                                            Qualification
+                                       </mat-error>
+                                    </mat-form-field>
                                 </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Institute</mat-label>
+                                        <input matInput type="text" formControlName="institute" placeholder="Institute"
+                                            class="form-control" required />
+                                            <mat-error *ngIf="e(i)['institute'].hasError('required')">Institute
+                                                required
+                                           </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Year Of Passed</mat-label>
+                                        <mat-select placeholder="Year Of Passed" class="form-control"
+                                            formControlName="yearOfPassedOut" required>
+                                            <mat-option *ngFor="let year of yearList" [value]="year.value">
+                                                {{year.label}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="e(i)['yearOfPassedOut'].hasError('required')">Please Choose
+                                            Year Of Passed
+                                       </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Grade</mat-label>
+                                        <input matInput type="text" formControlName="grade" placeholder="Grade"
+                                            class="form-control" required />
+                                            <mat-error *ngIf="e(i)['grade'].hasError('required')">Grade
+                                               required
+                                           </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-6">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label>Certificate</mat-label>
+                                        <input matInput type="text" formControlName="certificate"
+                                            placeholder="Certificate" class="form-control" required />
+                                    </mat-form-field>
+                                </div>
+                            </div> -->
+                            <div class="pb-lg-0 pb-5 del-block">
+                                <span (click)="removeEducation(i)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </span>
+                            </div>
                         </div>
+                    </div>
                 </div>
                 <div class="person-subform">
                     <div class="title-holder">
@@ -521,7 +532,7 @@
                         </div>
                     </div>
                     <div class="multiple-block" formArrayName="company"
-                        *ngFor="let familyMembers of personalInfoForm.get('company')['controls']; let i = index;">
+                        *ngFor="let company of personalInfoForm.get('company')['controls']; let i = index;">
                         <div class="row pt-4" [formGroupName]="i">
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -529,9 +540,9 @@
                                         <mat-label>Company Name</mat-label>
                                         <input matInput type="text" formControlName="companyName"
                                             placeholder="Company Name" class="form-control" required />
-                                        <!-- <mat-error *ngIf="p.name.hasError('required')">
-Employee First Name required
-</mat-error> -->
+                                            <mat-error *ngIf="c(i)['companyName'].hasError('required')">Company Name
+                                                required
+                                            </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -543,6 +554,9 @@ Employee First Name required
                                             formControlName="fromYear">
                                         <mat-datepicker-toggle matSuffix [for]="prevDojPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #prevDojPicker></mat-datepicker>
+                                        <mat-error *ngIf="c(i)['fromYear'].hasError('required')">From Year
+                                            required
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -554,6 +568,9 @@ Employee First Name required
                                             formControlName="toYear">
                                         <mat-datepicker-toggle matSuffix [for]="prevToPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #prevToPicker></mat-datepicker>
+                                        <mat-error *ngIf="c(i)['toYear'].hasError('required')">To Year
+                                            required
+                                        </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -563,41 +580,38 @@ Employee First Name required
                                         <mat-label>Designation</mat-label>
                                         <input matInput type="text" formControlName="designation"
                                             placeholder="Designation" class="form-control" required />
-                                        <!-- <mat-error *ngIf="p.name.hasError('required')">
-Employee First Name required
-</mat-error> -->
+                                            <mat-error *ngIf="c(i)['designation'].hasError('required')">Please Choose
+                                                Designation
+                                            </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Reason For Leaving</mat-label>
                                         <input matInput type="text" formControlName="reasonForLeaving"
                                             placeholder="Reason For Leaving" class="form-control" required />
-                                        <!-- <mat-error *ngIf="p.name.hasError('required')">
-Employee First Name required
-</mat-error> -->
                                     </mat-form-field>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Reference</mat-label>
                                         <input matInput type="text" formControlName="reference" placeholder="Reference"
                                             class="form-control" required />
-                                        <!-- <mat-error *ngIf="p.name.hasError('required')">
-Employee First Name required
-</mat-error> -->
+                                            <mat-error *ngIf="c(i)['reference'].hasError('required')">Reference
+                                                required
+                                            </mat-error>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <!-- <div class="col-lg-6">
                                 <div class="form-group">
                                     Releaving Letter
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="pb-lg-0 pb-5 del-block">
                                 <span (click)="removeCompany(i)">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
@@ -774,7 +788,7 @@ Employee First Name required
 <div class="pb-lg-0 pb-5 btn-bottom-holder">
     <button type="submit" class="btn btn-gray font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
         Cancel
-    </button>  <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
-        Create
+    </button> <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+        Submit
     </button>
 </div>

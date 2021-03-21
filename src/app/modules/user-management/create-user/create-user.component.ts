@@ -12,26 +12,26 @@ import { UserService } from '../../auth/_services/user.service';
 export class CreateUserComponent implements OnInit {
   userForm: FormGroup;
   submitted: boolean = false;
-  designationList: any = [];
   departmentList: any = [];
   roleList: any = [];
-  APICONSTANT:any;
+  APICONSTANT: any;
+  saveOrUpdate: string = 'Create';
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private toastrService : CommonToastrService,) { }
+    private toastrService: CommonToastrService,) { }
 
   ngOnInit(): void {
     this.initUserForm();
     this.getMasterData();
-    this.APICONSTANT=this.userService.getConfig();
+    this.initObservable();
+    this.APICONSTANT = this.userService.getConfig();
   }
   initUserForm() {
     this.userForm = this.formBuilder.group({
       firstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       lastName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       emailId: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
-      designation: [null, Validators.compose([Validators.required])],
       department: [null, Validators.compose([Validators.required])],
       role: [null],
       mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
@@ -40,46 +40,64 @@ export class CreateUserComponent implements OnInit {
   get u() {
     return this.userForm.controls;
   }
-  createUser() {
-    this.userService.createUser(this.userForm.value).subscribe((res: any) => {
+  saveOrUpdateUser() {
+    let service;
+    if (this.saveOrUpdate == 'Create') {
+      service = 'createUser';
+    } else {
+      service = 'updateUser';
+    }
+    this.userService[service](this.userForm.value).subscribe((res: any) => {
       if (res.status == 200) {
         this.userService.hideForm();
-        this.toastrService.showSuccess(res.message,this.APICONSTANT.TITLE);
+        this.toastrService.showSuccess(res.message, this.APICONSTANT.TITLE);
         this.resetUser();
       } else {
+        this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
       }
     }, (error: any) => {
       if (error.status == 500) {
-        this.toastrService.showError(error.message,this.APICONSTANT.TITLE);
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
       } else if (error.status == 204) {
-        this.toastrService.showError(error.message,this.APICONSTANT.TITLE);
-      }else{
-        this.toastrService.showError('Error While Creating User',this.APICONSTANT.TITLE);
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else {
+        this.toastrService.showError('Error While Creating User', this.APICONSTANT.TITLE);
       }
     });
   }
   resetUser() {
+    this.saveOrUpdate='Create';
     this.userForm.reset();
   }
   getMasterData() {
-    let options = ['USER_DESIGNATION','USER_DEPT'];
-    let param={
-      multipleOptionType:options
+    let options = ['USER_DESIGNATION', 'USER_DEPT'];
+    let param = {
+      multipleOptionType: options
     }
     this.userService.getMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
         if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0
           && masterData['userDepartment'] != null && masterData['userDepartment'].length > 0) {
-          this.designationList = masterData['userDesignation'];
+          this.roleList = masterData['userDesignation'];
           this.departmentList = masterData['userDepartment'];
-          this.roleList=masterData['userDepartment'];
         }
       } else {
-        this.toastrService.showError('Error while getting Master data',this.APICONSTANT.TITLE);
+        this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
       }
     }, (error: any) => {
-      this.toastrService.showError('Error while getting Master data',this.APICONSTANT.TITLE);
+      this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
     });
+  }
+  initObservable() {
+    this.userService.userInfo.subscribe(data => {
+      if (data!=null) {
+        this.resetUser();
+        this.userForm.patchValue(data);
+        this.saveOrUpdate = 'Update';
+      } else {
+        this.resetUser();
+      }
+    })
   }
 }

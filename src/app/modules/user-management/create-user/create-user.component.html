@@ -68,22 +68,6 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <mat-form-field class="example-full-width">
-                                <mat-label>Designation</mat-label>
-                                <mat-select class="form-control" placeholder="Designation" formControlName="designation"
-                                    required>
-                                    <mat-option>--</mat-option>
-                                    <mat-option *ngFor="let designation of designationList" [value]="designation.value">
-                                        {{designation.label}}
-                                    </mat-option>
-                                </mat-select>
-                                <mat-error *ngIf="u.designation.hasError('required')">Please choose an Designation
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <mat-form-field class="example-full-width">
                                 <mat-label>Department</mat-label>
                                 <mat-select class="form-control" placeholder="Department" formControlName="department"
                                     required>
@@ -97,8 +81,6 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <mat-form-field class="example-full-width">
@@ -113,7 +95,6 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="col-lg-6"></div>
                 </div>
                 <div class="pb-lg-0 pb-5 btn-bottom-holder">
                     <button type="submit" class="btn btn-gray font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
@@ -121,8 +102,8 @@
                         Clear
                     </button>
                     <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-                        [disabled]="userForm.invalid" (click)="createUser()">
-                        Create
+                        [disabled]="userForm.invalid" (click)="saveOrUpdateUser()">
+                        {{saveOrUpdate}}
                     </button>
                 </div>
             </div>

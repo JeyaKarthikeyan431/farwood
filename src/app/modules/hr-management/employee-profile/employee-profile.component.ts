@@ -29,6 +29,7 @@ export class EmployeeProfileComponent implements OnInit {
   public occupationList:any=[];
   public qualificationList:any=[];
   public yearList:any=[];
+  public workLocationList:any=[];
 
   constructor(public formBuilder: FormBuilder,
     private toastrService : CommonToastrService,
@@ -38,6 +39,7 @@ export class EmployeeProfileComponent implements OnInit {
     this.initofficialInfoForm();
     this.initPersonalInfoForm();
     this.initSalaryInfoForm();
+    this.getMasterData();
   }
   get o() {
     return this.officialInfoForm.controls;
@@ -47,6 +49,18 @@ export class EmployeeProfileComponent implements OnInit {
   }
   get s(){
     return this.salaryInfoForm.controls;
+  }
+  f(index) {
+    let form= (<FormArray>this.personalInfoForm.get('family')).at(index);
+    return form['controls'];
+  }
+  e(index) {
+    let form= (<FormArray>this.personalInfoForm.get('education')).at(index);
+    return form['controls'];
+  }
+  c(index) {
+    let form= (<FormArray>this.personalInfoForm.get('company')).at(index);
+    return form['controls'];
   }
   initofficialInfoForm() {
     this.officialInfoForm = this.formBuilder.group({
@@ -74,6 +88,7 @@ export class EmployeeProfileComponent implements OnInit {
       perEmpSpouceName: [null,Validators.compose([Validators.required])],
       perEmpChildrenName: [null,Validators.compose([Validators.required])],
       perEmpResidence:[null,Validators.compose([Validators.required])],
+      perEmpSameAsPermanentResidence:[null,Validators.compose([Validators.required])],
       perEmpPermanentResidence:[null,Validators.compose([Validators.required])],
       perEmpNationality:[null,Validators.compose([Validators.required])],
       perEmpEmergencyContactNo:[null,Validators.compose([Validators.required])],
@@ -148,23 +163,43 @@ export class EmployeeProfileComponent implements OnInit {
   }
   addCompany():void{
     this.company = this.personalInfoForm.get('company') as FormArray;
-    this.company.push(this.createEducation());
+    this.company.push(this.createCompany());
   }
   removeCompany(index):void{
     this.company.removeAt(index);
   }
   getMasterData() {
-    let options = ['USER_DESIGNATION', 'USER_DEPT','MARITAl_STATUS','NATIONALITY','COMMUTE_MODE',''];
+    let options = ['USER_DESIGNATION', 'USER_DEPT','MARITAL_STATUS','GENDER','NATIONALITY','COMMUTE_MODE',
+    ,'WRK_LOC','EMP_QUALIFICATION','QUESTION_TYPE','RELATIONSHIP','YEAR'];
     let param={
       multipleOptionType:options
     }
     this.userService.getMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
-        if (masterData['USER_DESIGNATION'] != null && masterData['USER_DESIGNATION'].length > 0
-          && masterData['USER_DEPT'] != null && masterData['USER_DEPT'].length > 0) {
-          this.designationList = masterData['USER_DESIGNATION'];
-          this.departmentList = masterData['USER_DEPT'];
+        if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0
+          && masterData['userDepartment'] != null && masterData['userDepartment'].length > 0
+          && masterData['maritalStatus'] != null && masterData['maritalStatus'].length > 0
+          && masterData['gender'] != null && masterData['gender'].length > 0
+          && masterData['nationality'] != null && masterData['nationality'].length > 0
+          && masterData['commuteMode'] != null && masterData['commuteMode'].length > 0
+          && masterData['workLocation'] != null && masterData['workLocation'].length > 0
+          && masterData['employeeQualification'] != null && masterData['employeeQualification'].length > 0
+          && masterData['questionType'] != null && masterData['questionType'].length > 0
+          && masterData['year'] != null && masterData['year'].length > 0
+          && masterData['relationship'] != null && masterData['relationship'].length > 0) {
+          this.designationList = masterData['userDesignation'];
+          this.departmentList = masterData['userDepartment'];
+          this.maritalStatusList=masterData['maritalStatus'];
+          this.genderList=masterData['gender'];
+          this.nationalityList=masterData['nationality'];
+          this.modeOfTransportList=masterData['commuteMode'];
+          this.workLocationList=masterData['workLocation'];
+          this.qualificationList=masterData['employeeQualification'];
+          this.physicallyChallengedList=masterData['questionType'];
+          this.medicalHistoryList=masterData['questionType'];
+          this.yearList=masterData['year'];
+          this.relationshipList=masterData['relationship'];
         }
       } else {
         this.toastrService.showError('Error while getting Master data','Error');
@@ -172,5 +207,14 @@ export class EmployeeProfileComponent implements OnInit {
     }, (error: any) => {
       this.toastrService.showError('Error while getting Master data','Error');
     });
+  }
+  setSameAsPermanent(checked){
+    this.personalInfoForm.controls['perEmpPermanentResidence'].setValue('');
+    let perEmpResidence=this.personalInfoForm.controls['perEmpResidence'].value;
+    if(checked && perEmpResidence!=null && perEmpResidence!=''){
+      this.personalInfoForm.controls['perEmpPermanentResidence'].setValue(perEmpResidence);
+    }else{
+      this.personalInfoForm.controls['perEmpResidence'].markAsTouched();
+    }
   }
 }
