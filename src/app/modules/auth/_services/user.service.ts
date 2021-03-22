@@ -21,7 +21,7 @@ export class UserService {
   getConfig() {
     return this.apiConstant;
   }
-  getMasterData(param) {
+  getAllMasterData(param) {
     return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/options/listAll', param);
   }
   createUser(param) {
@@ -42,5 +42,8 @@ export class UserService {
   }
   getUserInfo(data) {
     this.userInfo.next(data);
+  }
+  getMasterData(param) {
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/options/list', param);
   }
 }

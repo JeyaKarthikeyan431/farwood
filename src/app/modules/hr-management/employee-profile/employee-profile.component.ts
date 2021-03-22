@@ -177,7 +177,7 @@ export class EmployeeProfileComponent implements OnInit {
     let param = {
       multipleOptionType: options
     }
-    this.userService.getMasterData(param).subscribe((res: any) => {
+    this.userService.getAllMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
         if (masterData['maritalStatus'] != null && masterData['maritalStatus'].length > 0

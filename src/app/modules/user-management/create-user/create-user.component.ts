@@ -74,7 +74,7 @@ export class CreateUserComponent implements OnInit {
     let param = {
       multipleOptionType: options
     }
-    this.userService.getMasterData(param).subscribe((res: any) => {
+    this.userService.getAllMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
         if (masterData['userDepartment'] != null && masterData['userDepartment'].length > 0) {
@@ -100,9 +100,9 @@ export class CreateUserComponent implements OnInit {
     })
   }
   getDesignation(department){
-    let options = ['USER_DESIGNATION'];
+    let option = 'USER_DESIGNATION';
     let param = {
-      multipleOptionType: options,
+      optionType: option,
       level1Value:department
     }
     this.userService.getMasterData(param).subscribe((res: any) => {
@@ -112,7 +112,7 @@ export class CreateUserComponent implements OnInit {
           this.roleList = masterData['userDesignation'];
         }
       } else {
-        this.toastrService.showError('Error while getting Designation', this.APICONSTANT.TITLE);
+        this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
       }
     }, (error: any) => {
       this.toastrService.showError('Error while getting Designation', this.APICONSTANT.TITLE);
