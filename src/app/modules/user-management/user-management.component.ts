@@ -20,11 +20,12 @@ interface User {
   styleUrls: ['./user-management.component.scss']
 })
 export class UserManagementComponent implements OnInit {
+  dataSource: MatTableDataSource<User>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['userName','departmentDesc','roleDesc','emailId','createdDate','action'];
-  dataSource: MatTableDataSource<User>;
 
   isUserFormVisible: boolean = false;
   form: string;
@@ -68,6 +69,8 @@ export class UserManagementComponent implements OnInit {
       if (res.status == 200 && res.data!=null) {
         let userData = res.data;
         this.dataSource = new MatTableDataSource(userData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       } else {
         this.toastrService.showError('No Users Found',this.APICONSTANT.TITLE);
       }
@@ -78,5 +81,10 @@ export class UserManagementComponent implements OnInit {
   editUser(row){
     this.fnUserFormVisible('GO_TO_USER');
     this.userService.getUserInfo(row);
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase(); 
+    this.dataSource.filter = filterValue;
   }
 }

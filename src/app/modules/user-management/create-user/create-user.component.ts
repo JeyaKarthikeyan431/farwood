@@ -34,7 +34,7 @@ export class CreateUserComponent implements OnInit {
       emailId: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
       department: [null, Validators.compose([Validators.required])],
       role: [null],
-      mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
+      mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(13)])],
     });
   }
   get u() {
@@ -70,16 +70,14 @@ export class CreateUserComponent implements OnInit {
     this.userForm.reset();
   }
   getMasterData() {
-    let options = ['USER_DESIGNATION', 'USER_DEPT'];
+    let options = ['USER_DEPT'];
     let param = {
       multipleOptionType: options
     }
     this.userService.getMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
-        if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0
-          && masterData['userDepartment'] != null && masterData['userDepartment'].length > 0) {
-          this.roleList = masterData['userDesignation'];
+        if (masterData['userDepartment'] != null && masterData['userDepartment'].length > 0) {
           this.departmentList = masterData['userDepartment'];
         }
       } else {
@@ -95,9 +93,29 @@ export class CreateUserComponent implements OnInit {
         this.resetUser();
         this.userForm.patchValue(data);
         this.saveOrUpdate = 'Update';
+        this.getDesignation(data.department);
       } else {
         this.resetUser();
       }
     })
+  }
+  getDesignation(department){
+    let options = ['USER_DESIGNATION'];
+    let param = {
+      multipleOptionType: options,
+      level1Value:department
+    }
+    this.userService.getMasterData(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0) {
+          this.roleList = masterData['userDesignation'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Designation', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Designation', this.APICONSTANT.TITLE);
+    });
   }
 }

@@ -57,6 +57,8 @@ export class HrManagementComponent implements OnInit {
       if (res.status == 200 && res.data!=null) {
         let userData = res.data;
         this.dataSource = new MatTableDataSource(userData);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       } else {
         this.toastrService.showError(res.message,this.APICONSTANT.TITLE);
       }
@@ -67,5 +69,10 @@ export class HrManagementComponent implements OnInit {
   editUser(row){
     this.fnProfileFormVisible('GO_TO_USER');
     this.userService.getUserInfo(row);
+  }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase(); 
+    this.dataSource.filter = filterValue;
   }
 }
