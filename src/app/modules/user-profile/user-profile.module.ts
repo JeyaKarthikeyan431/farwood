@@ -19,6 +19,7 @@ import {UserProfileRoutingModule} from './user-profile-routing.module';
 import {ProfileCardComponent} from './_components/profile-card/profile-card.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SavedCreditCardsComponent,
     TaxInformationComponent,
     StatementsComponent,
-    ProfileCardComponent
+    ProfileCardComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

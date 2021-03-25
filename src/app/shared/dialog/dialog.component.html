@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="popup-title">
+          <p>Please Fill the Below Mandatory Information</p>
+        </div>
+      </div>
+    </div>
+    <div class="row py-4 scroll-fix">
+      <div class="col-md-6" style="color: red;" *ngFor="let data of requireFields?.requiredData">
+        <ul>
+          <li>{{data}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-primary" (click)="onNoClick()" id="ok-btn">OK</button>
+      </div>
+    </div>
+  </div>
