@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Directive, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MaskDirective, NumberDirective } from 'src/app/shared/custom-validation/custom.directive';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-employee-profile',
   templateUrl: './employee-profile.component.html',
-  styleUrls: ['./employee-profile.component.scss']
+  styleUrls: ['./employee-profile.component.scss'],
+  providers: [MaskDirective],
 })
 export class EmployeeProfileComponent implements OnInit {
   public officialInfoForm: FormGroup;
@@ -32,10 +34,32 @@ export class EmployeeProfileComponent implements OnInit {
   public workLocationList: any = [];
 
   APICONSTANT: any;
+  maskConfig = {
+    mask: [
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+    ],
+    showMask: false,
+    guide: false,
+    placeholderChar: '_',
+    keepCharPositions: true,
+  };
+  mindate = new Date();
+  minDate = new Date(this.mindate.setDate(this.mindate.getDate()));
 
   constructor(public formBuilder: FormBuilder,
     private toastrService: CommonToastrService,
-    private userService: UserService,) { }
+    private userService: UserService,) { 
+
+    }
 
   ngOnInit(): void {
     this.initofficialInfoForm();
@@ -67,7 +91,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
   initofficialInfoForm() {
     this.officialInfoForm = this.formBuilder.group({
-      offEmpId: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      offEmpId: [null, Validators.compose([Validators.minLength(1), Validators.maxLength(50)])],
       offEmpDateOfJoining: [null, Validators.compose([Validators.required])],
       offEmpDesignation: [null, Validators.compose([Validators.required])],
       offEmpDepartment: [null, Validators.compose([Validators.required])],
@@ -81,8 +105,8 @@ export class EmployeeProfileComponent implements OnInit {
 
   initPersonalInfoForm() {
     this.personalInfoForm = this.formBuilder.group({
-      perEmpFirstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      perEmpLastName: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      perEmpFirstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      perEmpLastName: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(150)])],
       perEmpDob: [null, Validators.compose([Validators.required])],
       perEmpGender: [null, Validators.compose([Validators.required])],
       perEmpFatherName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
@@ -96,10 +120,10 @@ export class EmployeeProfileComponent implements OnInit {
       perEmpNationality: [null, Validators.compose([Validators.required])],
       perEmpEmergencyContactNo: [null, Validators.compose([Validators.required])],
       perEmpPhysicallyChallenged: [null, Validators.compose([Validators.required])],
-      perEmpPersonalContactNo: [null, Validators.compose([Validators.required])],
-      perEmpPersonalEmail: [null, Validators.compose([Validators.required])],
+      perEmpPersonalContactNo: [null],
+      perEmpPersonalEmail: [null],
       perEmpModeOfTransport: [null, Validators.compose([Validators.required])],
-      perEmpMedicalHistory: [null, Validators.compose([Validators.required])],
+      perEmpMedicalHistory: [null],
       perEmpMedicalHistoryDesc: [null, Validators.compose([Validators.required])],
       family: this.formBuilder.array([this.createFamily()]),
       education: this.formBuilder.array([this.createEducation()]),
@@ -108,18 +132,18 @@ export class EmployeeProfileComponent implements OnInit {
   }
   initSalaryInfoForm() {
     this.salaryInfoForm = this.formBuilder.group({
-      ctcPerMonth: [null, Validators.compose([Validators.required])],
-      ctcPerAnnum: [null, Validators.compose([Validators.required])],
-      basic: [null, Validators.compose([Validators.required])],
-      hra: [null, Validators.compose([Validators.required])],
-      conveyance: [null, Validators.compose([Validators.required])],
-      mobileReimbursement: [null, Validators.compose([Validators.required])],
-      specialAllowance: [null, Validators.compose([Validators.required])],
-      gross: [null, Validators.compose([Validators.required])],
-      employerEPF: [null, Validators.compose([Validators.required])],
-      employerESIC: [null, Validators.compose([Validators.required])],
-      variablePay: [null, Validators.compose([Validators.required])],
-      uan: [null, Validators.compose([Validators.required])],
+      ctcPerMonth: [null],
+      ctcPerAnnum: [null],
+      basic: [null],
+      hra: [null],
+      conveyance: [null],
+      mobileReimbursement: [null],
+      specialAllowance: [null],
+      gross: [null],
+      employerEPF: [null],
+      employerESIC: [null],
+      variablePay: [null],
+      uan: [null],
     })
   }
   createFamily(): FormGroup {
@@ -127,7 +151,7 @@ export class EmployeeProfileComponent implements OnInit {
       name: [null, Validators.compose([Validators.required])],
       relationship: [null, Validators.compose([Validators.required])],
       age: [null, Validators.compose([Validators.required])],
-      occupation: [null, Validators.compose([Validators.required])]
+      occupation: [null]
     });
   }
   createEducation() {
@@ -242,4 +266,19 @@ export class EmployeeProfileComponent implements OnInit {
       }
     });
   }
+onMakeDicimal(event, control){
+  if (event.target.value != '') {
+    let value = event.target.value;
+    let removeComma = value.toString().replace(/,/g, '');
+      let withoutDecimal = removeComma.split('.');
+      if (/^\d+$/.test(withoutDecimal[0])) {
+        let decimalValue = withoutDecimal[0] + '.00';
+        let commaSepNum = decimalValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      this.salaryInfoForm.controls[control].setValue(
+        commaSepNum
+      );
+    }
+}
+
+}
 }

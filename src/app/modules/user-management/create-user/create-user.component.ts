@@ -29,12 +29,12 @@ export class CreateUserComponent implements OnInit {
   }
   initUserForm() {
     this.userForm = this.formBuilder.group({
-      firstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      lastName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      firstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      lastName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
       emailId: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
       department: [null, Validators.compose([Validators.required])],
       role: [null],
-      mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(13)])],
+      mobileNo: [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
     });
   }
   get u() {

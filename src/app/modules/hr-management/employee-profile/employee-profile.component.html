@@ -8,8 +8,8 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Employee Id</mat-label>
-                                <input matInput type="text" placeholder="Employee Id" autocomplete="off" formControlName="offEmpId"
-                                    class="form-control" required />
+                                <input matInput type="text" placeholder="Enter Employee Id" autocomplete="off" formControlName="offEmpId"
+                                    class="form-control" numbersOnly/>
                                 <mat-error *ngIf="o.offEmpId.hasError('required')">
                                     Employee Id is required
                                 </mat-error>
@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Department</mat-label>
-                                <mat-select placeholder="Department" class="form-control"
+                                <mat-select placeholder="Choose Department" class="form-control"
                                     formControlName="offEmpDepartment" required>
                                     <mat-option *ngFor="let department of departmentList" [value]="department.value">
                                         {{department.label}}
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Designation</mat-label>
-                                <mat-select placeholder="Designation" class="form-control"
+                                <mat-select placeholder="Choose Designation" class="form-control"
                                     formControlName="offEmpDesignation" required>
                                     <mat-option *ngFor="let designation of designationList" [value]="designation.value">
                                         {{designation.label}}
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Work Location</mat-label>
-                                <mat-select placeholder="Work Location" class="form-control"
+                                <mat-select placeholder="Choose Work Location" class="form-control"
                                     formControlName="offEmpWorkLocation" required>
                                     <mat-option *ngFor="let location of workLocationList" [value]="location.value">
                                         {{location.label}}
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Official Email</mat-label>
-                                <input matInput placeholder="Official Email"  autocomplete="off" class="form-control"
+                                <input matInput placeholder="Enter Official Email"  autocomplete="off" class="form-control"
                                     formControlName="offEmpOfficialEmail" required>
                                 <mat-error
                                     *ngIf="o.offEmpOfficialEmail.hasError('email') && !o.offEmpOfficialEmail.hasError('required')">
@@ -92,7 +92,7 @@
                             <mat-form-field>
                                 <mat-label>Official Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="offEmpOffContactNo"
-                                    placeholder="Official Contact Number" class="form-control" required />
+                                    placeholder="Enter Official Contact Number" class="form-control" required maxlength="15"/>
                                 <mat-error *ngIf="o.offEmpOffContactNo.hasError('required')">
                                     Official Contact Number is required
                                 </mat-error>
@@ -122,7 +122,8 @@
                             <mat-form-field>
                                 <mat-label>Employee First Name</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpFirstName"
-                                    placeholder="Employee First Name" class="form-control" required />
+                                    placeholder="Enter Employee First Name" class="form-control" 
+                                     matTooltip="{{p.perEmpFirstName.value}}" [matTooltipPosition]="'above'" capitalizeFirst required maxlength="150" alphabet />
                                 <mat-error *ngIf="p.perEmpFirstName.hasError('required')">
                                     Employee First Name required
                                 </mat-error>
@@ -134,7 +135,8 @@
                             <mat-form-field>
                                 <mat-label>Employee Last Name</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpLastName"
-                                    placeholder="Employee Last Name" class="form-control" required />
+                                    placeholder="Enter Employee Last Name" class="form-control" 
+                                    matTooltip="{{p.perEmpLastName.value}}" [matTooltipPosition]="'above'" required capitalizeFirst maxlength="150" alphabet/>
                                 <mat-error *ngIf="p.perEmpLastName.hasError('required')">
                                     Employee Last Name is required
                                 </mat-error>
@@ -148,12 +150,16 @@
                             <mat-form-field appearance="fill">
                                 <mat-label>Date of Birth</mat-label>
                                 <input matInput [matDatepicker]="dobPicker" autocomplete="off" class="form-control"
-                                    formControlName="perEmpDob">
+                                    formControlName="perEmpDob" [dateMask]="maskConfig" [max]="mindate">
                                 <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
                                 <mat-datepicker #dobPicker></mat-datepicker>
                                 <mat-error *ngIf="p.perEmpDob.hasError('required')">Date of Birth
                                     required
                                 </mat-error>
+                                <mat-error *ngIf="p.perEmpDob.hasError('matDatepickerMax')">Date of Birth
+                                    should not less be than today's date
+                                </mat-error>
+                               
                             </mat-form-field>
                         </div>
                     </div>
@@ -161,7 +167,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Gender</mat-label>
-                                <mat-select placeholder="Gender" class="form-control" formControlName="perEmpGender"
+                                <mat-select placeholder="Choose Gender" class="form-control" formControlName="perEmpGender"
                                     required>
                                     <mat-option *ngFor="let gender of genderList" [value]="gender.value">
                                         {{gender.label}}
@@ -178,7 +184,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Marital Status</mat-label>
-                                <mat-select placeholder="Marital Status" class="form-control"
+                                <mat-select placeholder="Choose Marital Status" class="form-control"
                                     formControlName="perEmpMaritalStatus" required>
                                     <mat-option *ngFor="let marital of maritalStatusList" [value]="marital.value">
                                         {{marital.label}}
@@ -194,7 +200,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Nationality</mat-label>
-                                <mat-select placeholder="Nationality" class="form-control"
+                                <mat-select placeholder="Choose Nationality" class="form-control"
                                     formControlName="perEmpNationality" required>
                                     <mat-option *ngFor="let nationality of nationalityList" [value]="nationality.value">
                                         {{nationality.label}}
@@ -212,7 +218,7 @@
                             <mat-form-field>
                                 <mat-label>Personal Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpPersonalContactNo"
-                                    placeholder="Personal Contact Number" class="form-control" required />
+                                    placeholder="Enter Personal Contact Number" class="form-control" maxlength="15"/>
                                 <mat-error *ngIf="p.perEmpPersonalContactNo.hasError('required')">
                                     Personal Contact Number is required
                                 </mat-error>
@@ -223,8 +229,8 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Personal Email</mat-label>
-                                <input matInput placeholder="Personal Email" autocomplete="off" class="form-control"
-                                    formControlName="perEmpPersonalEmail" required>
+                                <input matInput placeholder="Enter Personal Email" autocomplete="off" class="form-control"
+                                    formControlName="perEmpPersonalEmail" >
                                 <mat-error
                                     *ngIf="p.perEmpPersonalEmail.hasError('perEmpPersonalEmail') && !p.perEmpPersonalEmail.hasError('required')">
                                     Please enter a valid email address
@@ -248,7 +254,7 @@
                             <mat-form-field>
                                 <mat-label>Current Residence</mat-label>
                                 <textarea matInput cols="5" rows="5" autocomplete="off" class="form-control"
-                                    placeholder="Current Residence" formControlName="perEmpResidence"
+                                    placeholder="Enter Current Residence" formControlName="perEmpResidence"
                                     required></textarea>
                                 <mat-error *ngIf="p.perEmpResidence.hasError('required')">
                                     Current Residence is required
@@ -265,7 +271,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Permanent Residence</mat-label>
-                                <textarea matInput cols="5" rows="5" autocomplete="off" placeholder="Permanent Residence"
+                                <textarea matInput cols="5" rows="5" autocomplete="off" placeholder="Enter Permanent Residence"
                                     formControlName="perEmpPermanentResidence" required></textarea>
                                 <mat-error *ngIf="p.perEmpPermanentResidence.hasError('required')">
                                     Permanent Residence is required
@@ -280,7 +286,7 @@
                             <mat-form-field>
                                 <mat-label>Emergency Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpEmergencyContactNo"
-                                    placeholder="Emergency Contact Number" class="form-control" required />
+                                    placeholder="Enter Emergency Contact Number" class="form-control" required maxlength="15"/>
                                 <mat-error *ngIf="p.perEmpEmergencyContactNo.hasError('required')">
                                     Emergency Contact Number required
                                 </mat-error>
@@ -291,7 +297,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Physically Challenged</mat-label>
-                                <mat-select placeholder="Physically Challenged" class="form-control"
+                                <mat-select placeholder="Choose Physically Challenged" class="form-control"
                                     formControlName="perEmpPhysicallyChallenged" required>
                                     <mat-option *ngFor="let physicallyChallenged of physicallyChallengedList"
                                         [value]="physicallyChallenged.value">
@@ -310,7 +316,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Mode Of Transport</mat-label>
-                                <mat-select placeholder="Mode Of Transport" class="form-control"
+                                <mat-select placeholder="Choose Mode Of Transport" class="form-control"
                                     formControlName="perEmpModeOfTransport" required>
                                     <mat-option *ngFor="let transport of modeOfTransportList" [value]="transport.value">
                                         {{transport.label}}
@@ -326,8 +332,8 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Medical History</mat-label>
-                                <mat-select placeholder="Medical History" class="form-control"
-                                    formControlName="perEmpMedicalHistory" required>
+                                <mat-select placeholder="Choose Medical History" class="form-control"
+                                    formControlName="perEmpMedicalHistory" >
                                     <mat-option *ngFor="let history of medicalHistoryList" [value]="history.value">
                                         {{history.label}}
                                     </mat-option>
@@ -344,7 +350,7 @@
                         <div class="form-group">
                             <mat-form-field>
                                 <mat-label>Medical Description</mat-label>
-                                <textarea matInput cols="5" rows="5" autocomplete="off" placeholder="Medical Description"
+                                <textarea matInput cols="5" rows="5" autocomplete="off" placeholder="Enter Medical Description"
                                     formControlName="perEmpMedicalHistoryDesc" required></textarea>
                                     <mat-error *ngIf="p.perEmpMedicalHistoryDesc.hasError('required')">Medical
                                         Description required
@@ -353,14 +359,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="person-subform">
+                <div class="person-subform" >
                     <div class="title-holder">
-                        <p>Family Information</p>
-                        <div class="pb-lg-0 pb-5">
-                            <span (click)="addFamily()">
+                        <p>Family Information</p> 
+                        <div class="pb-lg-0 pb-5" *ngIf="personalInfoForm.get('family').valid">
+                            <span (click)="addFamily()" >
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                Add Family
-                            </span>
+                                Add Family 
+                            </span> 
                         </div>
                     </div>
                     <div class="form-group">
@@ -371,8 +377,9 @@
                                     <div class="form-group">
                                         <mat-form-field>
                                             <mat-label>Family Member Name</mat-label>
-                                            <input matInput type="text" autocomplete="off" formControlName="name" placeholder="Name"
-                                                class="form-control" required />
+                                            <input matInput type="text" autocomplete="off" formControlName="name" placeholder="Enter Name"
+                                                class="form-control" required maxlength="150"  matTooltip="{{f(i)['name'].value}}" 
+                                                [matTooltipPosition]="'above'" capitalizeFirst/>
                                                 <mat-error *ngIf="f(i)['name'].hasError('required')">Family Member Name
                                                      required
                                                 </mat-error>
@@ -383,7 +390,7 @@
                                     <div class="form-group">
                                         <mat-form-field>
                                             <mat-label>Relationship</mat-label>
-                                            <mat-select placeholder="Relationship" class="form-control"
+                                            <mat-select placeholder="Choose Relationship" class="form-control"
                                                 formControlName="relationship" required>
                                                 <mat-option *ngFor="let relationship of relationshipList"
                                                     [value]="relationship.value">
@@ -400,8 +407,8 @@
                                     <div class="form-group">
                                         <mat-form-field>
                                             <mat-label>Age</mat-label>
-                                            <input matInput type="text" autocomplete="off" formControlName="age" placeholder="Age"
-                                                class="form-control" required />
+                                            <input matInput type="text" autocomplete="off" formControlName="age" placeholder="Enter Age"
+                                                class="form-control" required maxlength="3"numbersOnly/>
                                                 <mat-error *ngIf="f(i)['age'].hasError('required')">Age
                                                     required
                                                </mat-error>
@@ -412,8 +419,8 @@
                                     <div class="form-group">
                                         <mat-form-field>
                                             <mat-label>Occupation</mat-label>
-                                            <mat-select placeholder="Occupation" class="form-control"
-                                                formControlName="occupation" required>
+                                            <mat-select placeholder="Choose Occupation" class="form-control"
+                                                formControlName="occupation" >
                                                 <mat-option *ngFor="let occupation of occupationList"
                                                     [value]="occupation.value">
                                                     {{occupation.label}}
@@ -451,7 +458,7 @@
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Qualification</mat-label>
-                                        <mat-select placeholder="Qualification" class="form-control"
+                                        <mat-select placeholder="Choose Qualification" class="form-control"
                                             formControlName="qualification" required>
                                             <mat-option *ngFor="let qualification of qualificationList"
                                                 [value]="qualification.value">
@@ -468,8 +475,8 @@
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Institute</mat-label>
-                                        <input matInput type="text" autocomplete="off" formControlName="institute" placeholder="Institute"
-                                            class="form-control" required />
+                                        <input matInput type="text" autocomplete="off" formControlName="institute" placeholder="Enter Institute"
+                                            class="form-control" required maxlength="200" matTooltip="{{e(i)['institute'].value}}" [matTooltipPosition]="'above'" capitalizeFirst/>
                                             <mat-error *ngIf="e(i)['institute'].hasError('required')">Institute
                                                 required
                                            </mat-error>
@@ -480,7 +487,7 @@
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Year Of Passed</mat-label>
-                                        <mat-select placeholder="Year Of Passed" class="form-control"
+                                        <mat-select placeholder="Choose Year Of Passed" class="form-control"
                                             formControlName="yearOfPassedOut" required>
                                             <mat-option *ngFor="let year of yearList" [value]="year.value">
                                                 {{year.label}}
@@ -496,8 +503,8 @@
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Grade</mat-label>
-                                        <input matInput type="text" autocomplete="off" formControlName="grade" placeholder="Grade"
-                                            class="form-control" required />
+                                        <input matInput type="text" autocomplete="off" formControlName="grade" placeholder="Enter Grade"
+                                            class="form-control" required maxlength="8"/>
                                             <mat-error *ngIf="e(i)['grade'].hasError('required')">Grade
                                                required
                                            </mat-error>
@@ -539,7 +546,7 @@
                                     <mat-form-field>
                                         <mat-label>Company Name</mat-label>
                                         <input matInput type="text" autocomplete="off" formControlName="companyName"
-                                            placeholder="Company Name" class="form-control" required />
+                                            placeholder="Enter Company Name" class="form-control" matTooltip="{{c(i)['companyName'].value}}" [matTooltipPosition]="'above'" required capitalizeFirst/>
                                             <mat-error *ngIf="c(i)['companyName'].hasError('required')">Company Name
                                                 required
                                             </mat-error>
@@ -551,11 +558,14 @@
                                     <mat-form-field appearance="fill">
                                         <mat-label>From</mat-label>
                                         <input matInput [matDatepicker]="prevDojPicker"  autocomplete="off" class="form-control"
-                                            formControlName="fromYear">
+                                            formControlName="fromYear" [dateMask]="maskConfig" [max]="mindate">
                                         <mat-datepicker-toggle matSuffix [for]="prevDojPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #prevDojPicker></mat-datepicker>
                                         <mat-error *ngIf="c(i)['fromYear'].hasError('required')">From Year
                                             required
+                                        </mat-error>
+                                        <mat-error *ngIf="c(i)['fromYear'].hasError('matDatepickerMax')">From Year
+                                            should not less be than today's date
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -565,7 +575,7 @@
                                     <mat-form-field appearance="fill">
                                         <mat-label>To</mat-label>
                                         <input matInput [matDatepicker]="prevToPicker" autocomplete="off" class="form-control"
-                                            formControlName="toYear">
+                                            formControlName="toYear" [dateMask]="maskConfig">
                                         <mat-datepicker-toggle matSuffix [for]="prevToPicker"></mat-datepicker-toggle>
                                         <mat-datepicker #prevToPicker></mat-datepicker>
                                         <mat-error *ngIf="c(i)['toYear'].hasError('required')">To Year
@@ -579,7 +589,8 @@
                                     <mat-form-field>
                                         <mat-label>Designation</mat-label>
                                         <input matInput type="text" autocomplete="off" formControlName="designation"
-                                            placeholder="Designation" class="form-control" required />
+                                            placeholder="Enter Designation" class="form-control" required maxlength="50"
+                                            matTooltip="{{c(i)['designation'].value}}" [matTooltipPosition]="'above'" capitalizeFirst/>
                                             <mat-error *ngIf="c(i)['designation'].hasError('required')">Please Choose
                                                 Designation
                                             </mat-error>
@@ -599,8 +610,8 @@
                                 <div class="form-group">
                                     <mat-form-field>
                                         <mat-label>Reference</mat-label>
-                                        <input matInput type="text" autocomplete="off" formControlName="reference" placeholder="Reference"
-                                            class="form-control" required />
+                                        <input matInput type="text" autocomplete="off" formControlName="reference" placeholder="Enter Reference"
+                                            class="form-control" required maxlength="150"/>
                                             <mat-error *ngIf="c(i)['reference'].hasError('required')">Reference
                                                 required
                                             </mat-error>
@@ -631,8 +642,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>CTC Per Month</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="ctcPerMonth" placeholder="CTC Per Month"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="ctcPerMonth" placeholder="Enter CTC Per Month"
+                                class="form-control" (change)="onMakeDicimal($event, 'ctcPerMonth')" />
                             <mat-error *ngIf="s.ctcPerMonth.hasError('required')">
                                 CTC Per Month required
                             </mat-error>
@@ -643,8 +654,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>CTC Per Annum</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="ctcPerAnnum" placeholder="CTC Per Annum"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="ctcPerAnnum" placeholder="Enter CTC Per Annum"
+                                class="form-control"  (change)="onMakeDicimal($event, 'ctcPerAnnum')"/>
                             <mat-error *ngIf="s.ctcPerAnnum.hasError('required')">
                                 CTC Per Annum required
                             </mat-error>
@@ -657,8 +668,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Basic</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="basic" placeholder="Basic" class="form-control"
-                                required />
+                            <input matInput type="text" autocomplete="off" formControlName="basic" placeholder="Enter Basic" class="form-control"
+                            (change)="onMakeDicimal($event, 'basic')" />
                             <mat-error *ngIf="s.basic.hasError('required')">
                                 Basic required
                             </mat-error>
@@ -669,8 +680,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>HRA</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="hra" placeholder="HRA" class="form-control"
-                                required />
+                            <input matInput type="text" autocomplete="off" formControlName="hra" placeholder="Enter HRA" class="form-control"
+                            (change)="onMakeDicimal($event, 'hra')" />
                             <mat-error *ngIf="s.hra.hasError('required')">
                                 HRA required
                             </mat-error>
@@ -683,8 +694,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Conveyance</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="conveyance" placeholder="Conveyance"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="conveyance" placeholder="Enter Conveyance"
+                                class="form-control" (change)="onMakeDicimal($event, 'conveyance')"/>
                             <mat-error *ngIf="s.conveyance.hasError('required')">
                                 Conveyance required
                             </mat-error>
@@ -696,7 +707,7 @@
                         <mat-form-field>
                             <mat-label>Mobile Reimbursement</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="mobileReimbursement"
-                                placeholder="Mobile Reimbursement" class="form-control" required />
+                                placeholder="Enter Mobile Reimbursement" class="form-control" (change)="onMakeDicimal($event, 'mobileReimbursement')" />
                             <mat-error *ngIf="s.mobileReimbursement.hasError('required')">
                                 Mobile Reimbursement required
                             </mat-error>
@@ -710,7 +721,7 @@
                         <mat-form-field>
                             <mat-label>Special Allowance</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="specialAllowance"
-                                placeholder="Special Allowance" class="form-control" required />
+                                placeholder="Enter Special Allowance" class="form-control" (change)="onMakeDicimal($event, 'specialAllowance')" />
                             <mat-error *ngIf="s.specialAllowance.hasError('required')">
                                 Special Allowance required
                             </mat-error>
@@ -721,8 +732,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Gross</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="gross" placeholder="Gross" class="form-control"
-                                required />
+                            <input matInput type="text" autocomplete="off" formControlName="gross" placeholder="Enter Gross" class="form-control"
+                            (change)="onMakeDicimal($event, 'gross')" />
                             <mat-error *ngIf="s.gross.hasError('required')">
                                 Gross required
                             </mat-error>
@@ -735,8 +746,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Employer EPF</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="employerEPF" placeholder="Employer EPF"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="employerEPF" placeholder="Enter Employer EPF"
+                                class="form-control" (change)="onMakeDicimal($event, 'employerEPF')" />
                             <mat-error *ngIf="s.employerEPF.hasError('required')">
                                 Employer EPF required
                             </mat-error>
@@ -747,8 +758,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Employer ESIC</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="employerESIC" placeholder="Employer ESIC"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="employerESIC" placeholder="Enter Employer ESIC"
+                                class="form-control" (change)="onMakeDicimal($event, 'employerESIC')" />
                             <mat-error *ngIf="s.employerESIC.hasError('required')">
                                 Employer ESIC required
                             </mat-error>
@@ -761,8 +772,8 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Variable Pay</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="variablePay" placeholder="Variable Pay"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="variablePay" placeholder="Enter Variable Pay"
+                                class="form-control" (change)="onMakeDicimal($event, 'variablePay')" />
                             <mat-error *ngIf="s.variablePay.hasError('required')">
                                 Variable Pay required
                             </mat-error>
@@ -773,10 +784,17 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>UAN</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="uan" placeholder="UAN" class="form-control"
-                                required />
-                            <mat-error *ngIf="s.uan.hasError('required')">
+                            <input matInput type="text" autocomplete="off" formControlName="uan" minlength="15" maxlength="15" placeholder="Enter UAN" class="form-control"
+                                 />
+                            <mat-error *ngIf="s.uan.hasError('required') && !s.uan.hasError(
+                                'minlength'
+                              )">
                                 UAN required
+                            </mat-error>
+                            <mat-error *ngIf="s.uan.hasError(
+                                'minlength'
+                              )">
+                                UAN should be 15 digit number
                             </mat-error>
                         </mat-form-field>
                     </div>

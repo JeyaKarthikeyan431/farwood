@@ -59,6 +59,9 @@ export class AuthService implements OnDestroy {
   logout():Observable<any>{
     return this.http.post('http://183.82.249.177:9015/api/login/signOut',null);
   }
+  getPasswordGuideLine(){
+    return this.http.get('http://183.82.249.177:9015/api/login/getPasswordGuidelines');
+  }
 
   public encrypt(msg) {
     let encrypted = CryptoJS.AES.encrypt(
