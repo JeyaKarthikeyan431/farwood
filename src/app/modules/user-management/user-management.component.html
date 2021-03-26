@@ -1,30 +1,35 @@
 <ng-template [ngIf]="!isUserFormVisible">
-    <p>USERS</p>
-    <div class="pb-lg-0 pb-5 btn-bottom-holder">
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-            (click)="fnUserFormVisible('GO_TO_USER')">
-            Create
-        </button>
-    </div>
-    <div class="col-lg-6">
-        <div class="form-group">
-        <div class="example-header">
-            <mat-form-field>
-              <input matInput (keyup)="applyFilter($event.target.value)" autocomplete="off" placeholder="Filter">
-            </mat-form-field>
-          </div>
+    <p class="title-main">USERS</p>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class="example-header">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" autocomplete="off"
+                            placeholder="Filter">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+                <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                    (click)="fnUserFormVisible('GO_TO_USER')">
+                    Create
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="mat-elevation-z8">
         <mat-table [dataSource]="dataSource" matSort>
             <ng-container matColumnDef="userName">
-                <mat-header-cell  *matHeaderCellDef mat-sort-header> NAME </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header> NAME </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.userName}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="departmentDesc">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> DEPARTMENT </mat-header-cell>
-                <mat-cell  *matCellDef="let row"> {{row.departmentDesc}} </mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.departmentDesc}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="roleDesc">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> ROLE(S) </mat-header-cell>
