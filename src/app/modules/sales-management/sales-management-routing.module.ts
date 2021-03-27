@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MomManagementComponent } from './mom-management/mom-management.component';
 
 import { SalesManagementComponent } from './sales-management.component';
+import { ViewDetailsComponent } from './view-details/view-details.component';
 
 const routes: Routes = [{ path: 'leads', component: SalesManagementComponent },
 {path:'lead/mom',component:MomManagementComponent},
+{path:'lead/summary',component:ViewDetailsComponent},
 { path: '', redirectTo: 'leads', pathMatch: 'full' },
-{ path: '**', redirectTo: 'leads', pathMatch: 'full' },];
+{ path: '**', redirectTo: 'leads', pathMatch: 'full' }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

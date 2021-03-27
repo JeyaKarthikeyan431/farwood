@@ -12,40 +12,19 @@ th {
   width: 25%;
 }
 
+
+::ng-deep.mat-form-field-underline {
+  background-color: black !important;
+}
+
+.form-control {
+  border: none !important;
+}
+
 .mat-header-row {
   background-color: #e1f0ff;
 }
 
-.icon-holding {
-  .fa-pencil-alt {
-    padding: 5px;
-    color: #007bff;
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
-    font-size: 15px;
-    cursor: pointer;
-    &:hover {
-      color: #ffffff;
-      background-color: #007bff;
-    }
-  }
-
-  .fa-trash-alt {
-    color: #f44336;
-    padding: 6px;
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
-    font-size: 15px;
-    margin-left: 5px;
-    cursor: pointer;
-    &:hover {
-      color: #ffffff;
-      background-color: #f44336;
-    }
-  }
-}
 .status-look{
   font-weight: 700;
   .fa-circle{

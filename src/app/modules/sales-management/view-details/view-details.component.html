@@ -1,1 +1,295 @@
-<p>view-details works!</p>
+<div class="view-details-container form-highlighter">
+    <div class="top-view-holder">
+        <div class="container-fluid">
+            <div class="row py-5">
+                <div class="col-lg-4 text-center align-self-center">
+                    <img src="../../../../assets/media/users/300_20.jpg" alt="" class="img-rounder">
+                </div>
+                <div class="col-lg-4 text-center align-self-center">
+                    <h2>Mano Jagan</h2>
+                </div>
+                <div class="col-lg-4 text-center align-self-center">
+                    <p>,,ECR</p>
+                    <p>Chennai</p>
+                    <p>216846431351654</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row my-5">
+                <div class="col-lg-4 text-center align-self-center">
+                    <div class="secondary-view">
+                        <p>Lead Date</p>
+                        <span>17/Mar/2021, 11:26:33</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center align-self-center">
+                    <div class="secondary-view">
+                        <p>Lead By</p>
+                        <span>John</span>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center align-self-center">
+                    <div class="secondary-view">
+                        <p>Status</p>
+                        <span>Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5">
+        <div class="container-fluid">
+            <p class="title-main">Personal Information</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Type of Customers?</mat-label>
+                            <mat-select class="form-control" placeholder="Type Of Customers"
+                                formControlName="typeOfCustomer" required>
+                                <mat-option>
+                                    customer
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>Please choose Type Of Customers
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Lead Source</mat-label>
+                            <mat-select class="form-control" placeholder="Lead Source" formControlName="leadSource"
+                                required>
+                                <mat-option>
+                                    customer
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>Please choose Lead Source
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Referenced By</mat-label>
+                            <input matInput type="text" formControlName="referencedBy" placeholder="Referenced By"
+                                class="form-control" required />
+                            <mat-error>
+                                Referenced By is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <p class="title-main">Property Information</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>What are you looking for?</mat-label>
+                            <mat-select class="form-control" placeholder="What are you looking for"
+                                formControlName="lookingFor" required>
+                                <mat-option>
+                                    customer
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>Please choose What are you looking for?
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Whats the type of your property?</mat-label>
+                            <mat-select class="form-control" placeholder="Whats the type of your property"
+                                formControlName="typeOfProperty" required>
+                                <mat-option>
+                                    customer
+                                </mat-option>
+                            </mat-select>
+                            <mat-error>Please choose Whats the type of your
+                                property?
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Property Name</mat-label>
+                            <input matInput type="text" formControlName="propertyName" placeholder="Property Name"
+                                class="form-control" required />
+                            <mat-error>
+                                Property Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Builder Name</mat-label>
+                            <input matInput type="text" formControlName="builderName" placeholder="Builder Name"
+                                class="form-control" required />
+                            <mat-error>
+                                Builder Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <p class="title-main">Property Address</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Flat/ Door No</mat-label>
+                            <input matInput type="text" formControlName="flat" placeholder="Flat/ Door No"
+                                class="form-control" required />
+                            <mat-error>
+                                Flat/ Door No is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Street Name</mat-label>
+                            <input matInput type="text" formControlName="streetName" placeholder="Street Name"
+                                class="form-control" required />
+                            <mat-error>
+                                Street Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>City</mat-label>
+                            <input matInput type="text" formControlName="city" placeholder="City" class="form-control"
+                                required />
+                            <mat-error>
+                                City is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <p class="title-main">Design</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Architect Name</mat-label>
+                            <input matInput type="text" formControlName="architectName" placeholder="Architect Name"
+                                class="form-control" required />
+                            <mat-error>
+                                Architect Name is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Contact No</mat-label>
+                            <input matInput type="text" formControlName="contactNo" placeholder="Contact No"
+                                class="form-control" required />
+                            <mat-error>
+                                Contact No is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Email ID</mat-label>
+                            <input class="form-control" matInput placeholder="Enter Email" autocomplete="off"
+                                formControlName="emailId" required>
+                            <mat-error>
+                                Please enter a valid email address
+                            </mat-error>
+                            <mat-error>
+                                Email is required
+                            </mat-error>
+                            <mat-error>
+                                Email should have at least 3 characters
+                            </mat-error>
+                            <mat-error>
+                                Email should have maximum 320 characters
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>DESCRIPTION</mat-label>
+                            <input matInput type="text" formControlName="flat" placeholder="DESCRIPTION"
+                                class="form-control" required />
+                            <mat-error>
+                                DESCRIPTION
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>FILE NAME</mat-label>
+                            <input matInput type="text" formControlName="flat" placeholder="FILE NAME"
+                                class="form-control" required />
+                            <mat-error>
+                                FILE NAME
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>VIEW</mat-label>
+                            <input matInput type="text" formControlName="flat" placeholder="VIEW" class="form-control"
+                                required />
+                            <mat-error>
+                                VIEW
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="pb-lg-0 pb-5 btn-bottom-holder text-left">
+                        <button type="submit"
+                            class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                            Download <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+                        <button type="submit"
+                            class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                            <i class="fas fa-angle-double-left"></i> Back
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

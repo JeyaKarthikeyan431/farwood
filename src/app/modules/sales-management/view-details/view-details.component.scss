@@ -1,0 +1,39 @@
+.top-view-holder{
+    background-image: url('../../../../assets/media/logos/bg-6.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 30px 0;
+    .img-rounder{
+        width: 150px;
+        height: 150px;
+        border-radius: 100px;
+    }
+    h2{
+        color: white;
+        font-size: 35px;
+    }
+    p{
+        color: white;
+        text-align: right;
+    }
+    .secondary-view{
+        p{
+            text-align: center;
+            font-weight: 700;
+        }
+        span{
+            color: white;
+        }
+    }
+    hr{
+        border-top: 1px solid white;
+    }
+}
+
+::ng-deep.mat-form-field-underline {
+    background-color: black!important;
+}
+mat-select.form-control{
+    border:none!important;
+}
