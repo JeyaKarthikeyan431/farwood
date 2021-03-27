@@ -1,74 +1,83 @@
-<form [formGroup]="basicReqForm">
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>Area of the property (SQ.FT)</mat-label>
-                <input matInput type="text" formControlName="areaOfProperty" placeholder="Area of the property (SQ.FT)"
-                    class="form-control" required />
-                <mat-error *ngIf="b.areaOfProperty.hasError('required')">
-                    Area of the property (SQ.FT) is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>No of bedrooms?</mat-label>
-                    <input matInput type="text" formControlName="noOfBedrooms" placeholder="No of bedrooms?"
-                        class="form-control" required />
-                    <mat-error *ngIf="b.noOfBedrooms.hasError('required')">
-                        No of bedrooms? is required
-                    </mat-error>
-                </mat-form-field>
+<div class="form-highlighter">
+    <form [formGroup]="basicReqForm">
+        <div class="container-fluid">
+            <p class="title-main">Basic Infromation</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Area of the property (SQ.FT)</mat-label>
+                            <input matInput type="text" formControlName="areaOfProperty"
+                                placeholder="Area of the property (SQ.FT)" class="form-control" required />
+                            <mat-error *ngIf="b.areaOfProperty.hasError('required')">
+                                Area of the property (SQ.FT) is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>No of bedrooms?</mat-label>
+                            <input matInput type="text" formControlName="noOfBedrooms" placeholder="No of bedrooms?"
+                                class="form-control" required />
+                            <mat-error *ngIf="b.noOfBedrooms.hasError('required')">
+                                No of bedrooms? is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>No.of Kitchen?</mat-label>
+                            <input matInput type="text" formControlName="noOfKitchen" placeholder="No.of Kitchen?"
+                                class="form-control" required />
+                            <mat-error *ngIf="b.noOfKitchen.hasError('required')">
+                                No.of Kitchen? is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>No of Living Room?</mat-label>
+                            <input matInput type="text" formControlName="noOfLivingRoom" placeholder="No of Living Room?"
+                                class="form-control" required />
+                            <mat-error *ngIf="b.noOfLivingRoom.hasError('required')">
+                                No of Living Room? is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>No of common area?</mat-label>
+                            <input matInput type="text" formControlName="noCommonArea" placeholder="No of common area?"
+                                class="form-control" required />
+                            <mat-error *ngIf="b.noCommonArea.hasError('required')">
+                                No of common area? is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Expected completion date</mat-label>
+                            <input matInput type="text" formControlName="completionDate"
+                                placeholder="Expected completion date" class="form-control" required />
+                            <mat-error *ngIf="b.completionDate.hasError('required')">
+                                Expected completion date is required
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>No.of Kitchen?</mat-label>
-                <input matInput type="text" formControlName="noOfKitchen" placeholder="No.of Kitchen?"
-                    class="form-control" required />
-                <mat-error *ngIf="b.noOfKitchen.hasError('required')">
-                    No.of Kitchen? is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>No of Living Room?</mat-label>
-                    <input matInput type="text" formControlName="noOfLivingRoom" placeholder="No of Living Room?"
-                        class="form-control" required />
-                    <mat-error *ngIf="b.noOfLivingRoom.hasError('required')">
-                        No of Living Room? is required
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>No of common area?</mat-label>
-                <input matInput type="text" formControlName="noCommonArea" placeholder="No of common area?"
-                    class="form-control" required />
-                <mat-error *ngIf="b.noCommonArea.hasError('required')">
-                    No of common area? is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Expected completion date</mat-label>
-                    <input matInput type="text" formControlName="completionDate" placeholder="Expected completion date"
-                        class="form-control" required />
-                    <mat-error *ngIf="b.completionDate.hasError('required')">
-                        Expected completion date is required
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
