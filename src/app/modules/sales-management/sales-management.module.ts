@@ -9,10 +9,11 @@ import { BasicRequirementComponent } from './basic-requirement/basic-requirement
 import { PropertyInfoComponent } from './property-info/property-info.component';
 import { MomManagementComponent } from './mom-management/mom-management.component';
 import { CreateMomComponent } from './create-mom/create-mom.component';
+import { ViewDetailsComponent } from './view-details/view-details.component';
 
 
 @NgModule({
-  declarations: [SalesManagementComponent, PersonalInfoComponent, BasicRequirementComponent, PropertyInfoComponent, MomManagementComponent, CreateMomComponent],
+  declarations: [SalesManagementComponent, PersonalInfoComponent, BasicRequirementComponent, PropertyInfoComponent, MomManagementComponent, CreateMomComponent, ViewDetailsComponent],
   imports: [
     CommonModule,
     SalesManagementRoutingModule,
