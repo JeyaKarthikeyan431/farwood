@@ -1,59 +1,73 @@
-.form-wrapper{
+.form-wrapper {
     background-color: white;
-    .office-info, .person-info, .salary-info, .person-subform{
+
+    .office-info,
+    .person-info,
+    .salary-info,
+    .person-subform {
         padding: 20px 15px;
         margin-bottom: 15px;
         border-radius: 10px;
         box-shadow: 1px 2px 2px lightgrey;
         border: 2px solid lightgray;
 
-        .row{
+        .row {
             text-align: center;
         }
 
-        p{
+        p {
             border-bottom: 3px solid #043458;
             padding-bottom: 10px;
             color: #043458;
             font-size: 14px;
             font-weight: 700;
         }
-        mat-label{
+
+        mat-label {
             color: black;
         }
-        mat-form-field{
+
+        mat-form-field {
             width: 80%;
             height: 60px;
-            .form-control{
-                border:none!important;
-            }   
-    }
+
+            .form-control {
+                border: none !important;
+            }
+        }
+
         ::ng-deep.mat-form-field-underline {
             background-color: black;
-          }
-          .title-holder{
-              display: flex;
-              justify-content: space-between;
-              border-bottom: 3px solid #043458;
-              p{
-                  padding: unset;
-                  border-bottom: unset;
-              }
-              span{
-                  color: #043458;
-                  padding: 0 2px;
-                  font-weight: 600;
-                  cursor: pointer;
-                  i{
-                      color: #043458;
-                      font-size: 14px;
-                  }
-              }
-          }
+        }
+
+        .title-holder {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 3px solid #043458;
+
+            p {
+                padding: unset;
+                border-bottom: unset;
+            }
+
+            span {
+                color: #043458;
+                padding: 0 2px;
+                font-weight: 600;
+                cursor: pointer;
+
+                i {
+                    color: #043458;
+                    font-size: 14px;
+                }
+            }
+        }
     }
-    .person-subform{
+
+    .person-subform {
         padding: 20px 30px;
-        .multiple-block{
+
+        .multiple-block {
             position: relative;
             padding: 20px 5px;
             margin: 15px auto;
@@ -61,56 +75,74 @@
             box-shadow: 1px 2px 2px lightgrey;
             border: 2px solid lightgray;
 
-            mat-form-field{
+            mat-form-field {
                 width: 75%;
             }
-            .del-block{
+
+            .del-block {
                 width: 100%;
                 margin-right: 10px;
                 text-align: right;
                 position: absolute;
                 top: 45%;
                 right: 0%;
-                span{
-                      padding: 0 2px;
-                      font-weight: 600;
-                    i{
-                      font-size: 18px;
-                      color: white;
-                      background-color: #f64e60;
-                      width: 35px;
-                      height: 35px;
-                      text-align: center;
-                      padding: 8px;
-                      border-radius: 20px;
-                      cursor: pointer;
-                      &:hover{
-                          color: #f64e60;
-                          background-color: white;
-                      }
+
+                span {
+                    padding: 0 2px;
+                    font-weight: 600;
+
+                    i {
+                        font-size: 18px;
+                        color: white;
+                        background-color: #f64e60;
+                        width: 35px;
+                        height: 35px;
+                        text-align: center;
+                        padding: 8px;
+                        border-radius: 20px;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: #f64e60;
+                            background-color: white;
+                        }
                     }
                 }
             }
         }
     }
 }
+
 ::ng-deep.mat-form-field-appearance-fill {
     .mat-form-field-infix {
-      padding: 0px!important;
+        padding: 0px !important;
     }
-    .mat-form-field-flex{
+
+    .mat-form-field-flex {
         border-bottom: 1px solid;
     }
 }
 
-.btn-bottom-holder{
+.btn-bottom-holder {
     display: flex;
     justify-content: flex-end;
-    button{
+
+    button {
         background-color: #043458;
         color: white;
-      }
-    .btn-gray{
+    }
+
+    .btn-gray {
         background-color: lightgray;
+    }
+}
+
+.sameas-check {
+    position: relative;
+
+    .check-box-same {
+        position: absolute;
+        top: 0;
+        left: 20%;
     }
 }

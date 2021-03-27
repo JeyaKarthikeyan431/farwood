@@ -33,7 +33,11 @@
             </ng-container>
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
-                <mat-cell (click)="editUser(row)" *matCellDef="let row"> Edit </mat-cell>
+                <mat-cell (click)="editUser(row)" *matCellDef="let row"> 
+                    <div class="icon-holding">
+                        <i class="fas fa-pencil-alt"></i>
+                        <i class="fas fa-trash-alt"></i>
+                       </div> </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>

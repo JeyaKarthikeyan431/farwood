@@ -1,9 +1,9 @@
 <ng-template [ngIf]="!isMomFormVisible">
-    <p>MOM</p>
-    <div class="pb-lg-0 pb-5 btn-bottom-holder">
+    <p class="title-main">MOM</p>
+    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
         <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
         (click)="redirectToLeads()">
-        Back
+        <i class="fas fa-angle-double-left"></i>Back
       </button>
       <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
         (click)="fnMomFormVisible('GO_TO_MOM')">
@@ -34,7 +34,12 @@
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
-          <td mat-cell *matCellDef="let row"> {{row.action}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.action}} 
+            <div class="icon-holding">
+              <i class="fas fa-pencil-alt"></i>
+              <i class="fas fa-trash-alt"></i>
+             </div>
+          </td>
         </ng-container>
   
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -50,10 +55,10 @@
     </div>
   </ng-template>
   <ng-template [ngIf]="isMomFormVisible" >
-    <div class="pb-lg-0 pb-5 btn-bottom-holder">
+    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
         <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
             (click)="fnMomFormVisible('GO_TO_DASHBOARD')">
-            Back
+            <i class="fas fa-angle-double-left"></i>Back
         </button>
     </div>
     <app-create-mom></app-create-mom>

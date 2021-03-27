@@ -130,3 +130,34 @@ mat-label {
     box-shadow: 1px 2px 2px lightgrey;
     border: 2px solid lightgray;
 }
+
+.icon-holding {
+  .fa-pencil-alt {
+    padding: 5px;
+    color: #007bff;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    &:hover {
+      color: #ffffff;
+      background-color: #007bff;
+    }
+  }
+
+  .fa-trash-alt {
+    color: #f44336;
+    padding: 6px;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-left: 5px;
+    cursor: pointer;
+    &:hover {
+      color: #ffffff;
+      background-color: #f44336;
+    }
+  }
+}
