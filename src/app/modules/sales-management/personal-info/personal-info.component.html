@@ -1,191 +1,196 @@
-<p>Personal Information</p>
 <form [formGroup]="personalInfoForm">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Type of Customers?</mat-label>
-                    <mat-select class="form-control" placeholder="Type Of Customers" formControlName="typeOfCustomer"
-                        required>
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let customer of typeOfCustomerList" [value]="customer.value">
-                            {{customer.label}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="p.typeOfCustomer.hasError('required')">Please choose Type Of Customers
-                    </mat-error>
-                </mat-form-field>
+    <div class="container">
+        <p>Personal Information</p>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Type of Customers?</mat-label>
+                        <mat-select class="form-control" placeholder="Type Of Customers"
+                            formControlName="typeOfCustomer" required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let customer of typeOfCustomerList" [value]="customer.value">
+                                {{customer.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="p.typeOfCustomer.hasError('required')">Please choose Type Of Customers
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Lead Source</mat-label>
-                    <mat-select class="form-control" placeholder="Lead Source" formControlName="leadSource" required>
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let leadSource of leadSourceList" [value]="leadSource.value">
-                            {{leadSource.label}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="p.leadSource.hasError('required')">Please choose Lead Source
-                    </mat-error>
-                </mat-form-field>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Lead Source</mat-label>
+                        <mat-select class="form-control" placeholder="Lead Source" formControlName="leadSource"
+                            required>
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let leadSource of leadSourceList" [value]="leadSource.value">
+                                {{leadSource.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="p.leadSource.hasError('required')">Please choose Lead Source
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Referenced By</mat-label>
+                        <input matInput type="text" formControlName="referencedBy" placeholder="Referenced By"
+                            class="form-control" required />
+                        <mat-error *ngIf="p.referencedBy.hasError('required')">
+                            Referenced By is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Referenced By</mat-label>
-                    <input matInput type="text" formControlName="referencedBy" placeholder="Referenced By"
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" formControlName="firstName" placeholder="First Name"
                         class="form-control" required />
-                    <mat-error *ngIf="p.referencedBy.hasError('required')">
-                        Referenced By is required
+                    <mat-error *ngIf="p.firstName.hasError('required')">
+                        First Name is required
                     </mat-error>
                 </mat-form-field>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput type="text" formControlName="lastName" placeholder="Last Name"
+                            class="form-control" required />
+                        <mat-error *ngIf="p.lastName.hasError('required')">
+                            Last Name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>First Name</mat-label>
-                <input matInput type="text" formControlName="firstName" placeholder="First Name" class="form-control"
-                    required />
-                <mat-error *ngIf="p.firstName.hasError('required')">
-                    First Name is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput type="text" formControlName="lastName" placeholder="Last Name" class="form-control"
+                    <mat-label>Project Name</mat-label>
+                    <input matInput type="text" formControlName="projectName" placeholder="Project Name"
+                        class="form-control" required />
+                    <mat-error *ngIf="p.projectName.hasError('required')">
+                        Project Name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact No</mat-label>
+                        <input matInput type="text" formControlName="contactNo" placeholder="Contact Number"
+                            class="form-control" required />
+                        <mat-error *ngIf="p.contactNo.hasError('required')">
+                            Contact Number is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Alternative Contact Number</mat-label>
+                    <input matInput type="text" formControlName="alternativeContactNo"
+                        placeholder="Alternative Contact Number" class="form-control" required />
+                    <mat-error *ngIf="p.alternativeContactNo.hasError('required')">
+                        Alternative Contact Number is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Personal Email</mat-label>
+                        <input matInput placeholder="Personal Email" autocomplete="off"
+                            formControlName="personalEmailId">
+                        <mat-error
+                            *ngIf="p.personalEmailId.hasError('email') && !p.personalEmailId.hasError('required')">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="p.personalEmailId.hasError('required')">
+                            Personal Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="p.personalEmailId.hasError('minLength')">
+                            Email should have at least 3 characters
+                        </mat-error>
+                        <mat-error *ngIf="p.personalEmailId.hasError('maxLength')">
+                            Email should have maximum 320 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <p>Residential Address</p>
+        <div class="row">
+            <div class="col-lg-6">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Flat/ Door No</mat-label>
+                    <input matInput type="text" formControlName="flat" placeholder="Flat/ Door No" class="form-control"
                         required />
-                    <mat-error *ngIf="p.lastName.hasError('required')">
-                        Last Name is required
+                    <mat-error *ngIf="p.flat.hasError('required')">
+                        Flat/ Door No is required
                     </mat-error>
                 </mat-form-field>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Street Name</mat-label>
+                        <input matInput type="text" formControlName="streetName" placeholder="Street Name"
+                            class="form-control" required />
+                        <mat-error *ngIf="p.streetName.hasError('required')">
+                            Street Name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>Project Name</mat-label>
-                <input matInput type="text" formControlName="projectName" placeholder="Project Name"
-                    class="form-control" required />
-                <mat-error *ngIf="p.projectName.hasError('required')">
-                    Project Name is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Contact No</mat-label>
-                    <input matInput type="text" formControlName="contactNo" placeholder="Contact Number"
-                        class="form-control" required />
-                    <mat-error *ngIf="p.contactNo.hasError('required')">
-                        Contact Number is required
+                    <mat-label>City</mat-label>
+                    <input matInput type="text" formControlName="city" placeholder="City" class="form-control"
+                        required />
+                    <mat-error *ngIf="p.city.hasError('required')">
+                        City is required
                     </mat-error>
                 </mat-form-field>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Pin Code</mat-label>
+                        <input matInput type="text" formControlName="pinCode" placeholder="Pin Code"
+                            class="form-control" required />
+                        <mat-error *ngIf="p.pinCode.hasError('required')">
+                            Pin Code is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>Alternative Contact Number</mat-label>
-                <input matInput type="text" formControlName="alternativeContactNo"
-                    placeholder="Alternative Contact Number" class="form-control" required />
-                <mat-error *ngIf="p.alternativeContactNo.hasError('required')">
-                    Alternative Contact Number is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
+        <div class="row">
+            <div class="col-lg-6">
                 <mat-form-field class="example-full-width">
-                    <mat-label>Personal Email</mat-label>
-                    <input matInput placeholder="Personal Email" autocomplete="off" formControlName="personalEmailId">
-                    <mat-error *ngIf="p.personalEmailId.hasError('email') && !p.personalEmailId.hasError('required')">
-                        Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf="p.personalEmailId.hasError('required')">
-                        Personal Email is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="p.personalEmailId.hasError('minLength')">
-                        Email should have at least 3 characters
-                    </mat-error>
-                    <mat-error *ngIf="p.personalEmailId.hasError('maxLength')">
-                        Email should have maximum 320 characters
+                    <mat-label>Location</mat-label>
+                    <input matInput type="text" formControlName="location" placeholder="Location" class="form-control"
+                        required />
+                    <mat-error *ngIf="p.location.hasError('required')">
+                        Location is required
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-    </div>
-    <p>Residential Address</p>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>Flat/ Door No</mat-label>
-                <input matInput type="text" formControlName="flat" placeholder="Flat/ Door No"
-                    class="form-control" required />
-                <mat-error *ngIf="p.flat.hasError('required')">
-                    Flat/ Door No is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Street Name</mat-label>
-                    <input matInput type="text" formControlName="streetName" placeholder="Street Name"
-                        class="form-control" required />
-                    <mat-error *ngIf="p.streetName.hasError('required')">
-                        Street Name is required
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>City</mat-label>
-                <input matInput type="text" formControlName="city" placeholder="City"
-                    class="form-control" required />
-                <mat-error *ngIf="p.city.hasError('required')">
-                    City is required
-                </mat-error>
-            </mat-form-field>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group">
-                <mat-form-field class="example-full-width">
-                    <mat-label>Pin Code</mat-label>
-                    <input matInput type="text" formControlName="pinCode" placeholder="Pin Code"
-                        class="form-control" required />
-                    <mat-error *ngIf="p.pinCode.hasError('required')">
-                        Pin Code is required
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <mat-form-field class="example-full-width">
-                <mat-label>Location</mat-label>
-                <input matInput type="text" formControlName="location" placeholder="Location"
-                    class="form-control" required />
-                <mat-error *ngIf="p.location.hasError('required')">
-                    Location is required
-                </mat-error>
-            </mat-form-field>
         </div>
     </div>
 </form>
