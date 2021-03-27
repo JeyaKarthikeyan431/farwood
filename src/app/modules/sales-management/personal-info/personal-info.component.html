@@ -9,7 +9,6 @@
                             <mat-label>Type of Customers?</mat-label>
                             <mat-select class="form-control" placeholder="Type Of Customers" formControlName="typeOfCustomer"
                                 required>
-                                <mat-option>--</mat-option>
                                 <mat-option *ngFor="let customer of typeOfCustomerList" [value]="customer.value">
                                     {{customer.label}}
                                 </mat-option>
@@ -24,7 +23,6 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Lead Source</mat-label>
                             <mat-select class="form-control" placeholder="Lead Source" formControlName="leadSource" required>
-                                <mat-option>--</mat-option>
                                 <mat-option *ngFor="let leadSource of leadSourceList" [value]="leadSource.value">
                                     {{leadSource.label}}
                                 </mat-option>
@@ -198,5 +196,15 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
+        <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+            <button type="submit" *ngIf="isLead!='LEAD'" (click)="redirectToPropertyInfo()" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+              >
+              Next
+            </button>
+            <button type="submit" *ngIf="isLead=='LEAD'" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+              >
+              Submit
+            </button>
+          </div>
     </form>
 </div>

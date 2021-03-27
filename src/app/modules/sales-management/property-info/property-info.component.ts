@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-property-info',
@@ -11,11 +13,16 @@ export class PropertyInfoComponent implements OnInit {
 
   lookingForList:any=[];
   propertyList:any=[];
+  
+  APICONSTANT: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private userService: UserService,
+    private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
+    this.APICONSTANT = this.userService.getConfig();
     this.initPropertyInfoForm();
+    this.getMasterData();
   }
   initPropertyInfoForm() {
     this.propertyInfoForm = this.formBuilder.group({
@@ -35,5 +42,26 @@ export class PropertyInfoComponent implements OnInit {
   get p() {
     return this.propertyInfoForm.controls;
   }
+  redirectTo(form){
+    this.userService.salesFormNavigate(form);
+  }
 
+  getMasterData() {
+    let options = ['PROP_TYPE'];
+    let param = {
+      multipleOptionType: options
+    }
+    this.userService.getAllMasterData(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['propertyType'] != null && masterData['propertyType'].length > 0) {
+          this.propertyList = masterData['propertyType'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+    });
+  }
 }

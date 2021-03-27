@@ -10,6 +10,7 @@ export class UserService {
 
   visibility: BehaviorSubject<boolean>;
   userInfo: BehaviorSubject<any>;
+  salesNavigation$:BehaviorSubject<string>;
 
   apiConstant: any;
 
@@ -17,6 +18,7 @@ export class UserService {
     this.apiConstant = this.configService.getConfig();
     this.visibility = new BehaviorSubject(false);
     this.userInfo = new BehaviorSubject('');
+    this.salesNavigation$=new BehaviorSubject('');
   }
   getConfig() {
     return this.apiConstant;
@@ -45,5 +47,8 @@ export class UserService {
   }
   getMasterData(param) {
     return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/options/list', param);
+  }
+  salesFormNavigate(form){
+this.salesNavigation$.next(form);
   }
 }

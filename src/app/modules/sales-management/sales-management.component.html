@@ -1,100 +1,110 @@
 <div class="sales-container">
   <ng-template [ngIf]="!isleadFormVisible">
     <p class="title-main">Customers</p>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <mat-form-field class="example-full-width">
+          <mat-label>Status</mat-label>
+          <mat-select class="form-control" placeholder="Status" (selectionChange)="filterBasedOnStatus($event.value)">
+            <mat-option *ngFor="let status of statusList" [value]="status.value">
+              {{status.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
       <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-        (click)="fnLeadFormVisible('GO_TO_PROFILE')">
-        <i class="fas fa-plus"></i>Create
+        (click)="fnLeadFormVisible('GO_TO_CREATE_LEAD')">
+        Create Lead
       </button>
     </div>
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> CLIENT NAME </th>
-          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> CLIENT NAME </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> LOCATION </th>
-          <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> LOCATION </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="contactNo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> CONTACT NO </th>
-          <td mat-cell *matCellDef="let row"> {{row.contactNo}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> CONTACT NO </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.contactNo}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL ID </th>
-          <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL ID </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="orderedDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> O.DATE </th>
-          <td mat-cell *matCellDef="let row"> {{row.orderedDate}} </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> O.DATE </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.orderedDate}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </th>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.status}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </th>
-          <td mat-cell *matCellDef="let row">
-           <div class="icon-holding">
-            <i class="fas fa-pencil-alt"></i>
-            <i class="fas fa-trash-alt"></i>
-           </div>
-          </td>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div class="icon-holding">
+              <i class="fas fa-pencil-alt" (click)="editLead()"></i>
+              <i class="fas fa-trash-alt"></i>
+            </div>
+          </mat-cell>
         </ng-container>
-  
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No data matching the filter</td>
         </tr>
-      </table>
-  
+      </mat-table>
+
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
   </ng-template>
-  <ng-template [ngIf]="isleadFormVisible">
-    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-      <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-        (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
-        Leads
-      </button>
-    </div>
-    <div *ngIf="form=='PROFILE'">
-      <app-personal-info></app-personal-info>
+  <ng-template [ngIf]="iscreateLeadFormVisible">
+    <div *ngIf="form=='LEAD'">
       <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-        <button type="submit" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-          (click)="fnLeadFormVisible('GO_TO_PROPERTY')">
-          Next
+        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+          (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
+          Leads
         </button>
       </div>
+      <app-personal-info [isLead]="'LEAD'"></app-personal-info>
+    </div>
+  </ng-template>
+  <ng-template [ngIf]="isleadFormVisible">
+    <div *ngIf="form=='PROFILE'">
+      <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+          (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
+          Leads
+        </button>
+      </div>
+      <app-personal-info [isLead]="'Q-LEAD'"></app-personal-info>
     </div>
     <div *ngIf="form=='PROPERTY'">
       <app-property-info></app-property-info>
-      <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-        (click)="fnLeadFormVisible('GO_TO_PROFILE')">
-        <i class="fas fa-angle-double-left"></i>Back
-      </button>
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-          (click)="fnLeadFormVisible('GO_TO_BASIC')">
-          Next
-        </button>
-      </div>
     </div>
     <div *ngIf="form=='BASIC'">
       <app-basic-requirement></app-basic-requirement>
-      <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-        (click)="fnLeadFormVisible('GO_TO_PROPERTY')">
-        <i class="fas fa-angle-double-left"></i>Back
-      </button>
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-          (click)="fnLeadFormVisible('GO_TO_UPLOAD')">
-          Next
-        </button>
-      </div>
+    </div>
+    <div *ngIf="form=='UPLOAD'">
+     <app-design-requirement></app-design-requirement>
     </div>
   </ng-template>
 </div>

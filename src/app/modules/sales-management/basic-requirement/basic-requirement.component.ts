@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-basic-requirement',
@@ -8,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class BasicRequirementComponent implements OnInit {
   basicReqForm: FormGroup;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private userService: UserService,
+    private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
     this.initBasicForm();
@@ -28,4 +31,7 @@ export class BasicRequirementComponent implements OnInit {
     return this.basicReqForm.controls;
   }
 
+  redirectTo(form){
+    this.userService.salesFormNavigate(form);
+  }
 }

@@ -9,7 +9,6 @@
                             <mat-label>What are you looking for?</mat-label>
                             <mat-select class="form-control" placeholder="What are you looking for" formControlName="lookingFor"
                                 required>
-                                <mat-option>--</mat-option>
                                 <mat-option *ngFor="let looking of lookingForList" [value]="looking.value">
                                     {{looking.label}}
                                 </mat-option>
@@ -25,7 +24,6 @@
                             <mat-label>Whats the type of your property?</mat-label>
                             <mat-select class="form-control" placeholder="Whats the type of your property"
                                 formControlName="typeOfProperty" required>
-                                <mat-option>--</mat-option>
                                 <mat-option *ngFor="let property of propertyList" [value]="property.value">
                                     {{property.label}}
                                 </mat-option>
@@ -149,5 +147,15 @@
                 <div class="col-lg-4"></div>
             </div>
         </div>
+        <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            (click)="redirectTo('GO_TO_PROFILE')">
+            Back
+          </button>
+          <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            (click)="redirectTo('GO_TO_BASIC')">
+            Next
+          </button>
+          </div>
     </form>
 </div>
