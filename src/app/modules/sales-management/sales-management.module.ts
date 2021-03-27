@@ -7,10 +7,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { PersonalInfoComponent } from './personal-info/personal-info.component';
 import { BasicRequirementComponent } from './basic-requirement/basic-requirement.component';
 import { PropertyInfoComponent } from './property-info/property-info.component';
+import { MomManagementComponent } from './mom-management/mom-management.component';
+import { CreateMomComponent } from './create-mom/create-mom.component';
 
 
 @NgModule({
-  declarations: [SalesManagementComponent, PersonalInfoComponent, BasicRequirementComponent, PropertyInfoComponent],
+  declarations: [SalesManagementComponent, PersonalInfoComponent, BasicRequirementComponent, PropertyInfoComponent, MomManagementComponent, CreateMomComponent],
   imports: [
     CommonModule,
     SalesManagementRoutingModule,

@@ -1,0 +1,124 @@
+<div class="salary-info">
+    <p> MOM Information</p>
+    <form [formGroup]="momInfoForm">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Meeting Organiser</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="organiser" placeholder="Meeting Organiser"
+                            class="form-control" />
+                        <mat-error *ngIf="m.organiser.hasError('required')">
+                            Meeting Organiser required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Sales person</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="salesPerson" placeholder="Sales person"
+                            class="form-control" />
+                        <mat-error *ngIf="m.salesPerson.hasError('required')">
+                            Sales person required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Designer</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="architect" placeholder="Designer" class="form-control"
+                        />
+                        <mat-error *ngIf="m.architect.hasError('required')">
+                            Designer required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Architect</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="designer" placeholder="Architect" class="form-control"
+                         />
+                        <mat-error *ngIf="m.designer.hasError('required')">
+                            Architect required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Client</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="client" placeholder="Client"
+                            class="form-control" />
+                        <mat-error *ngIf="m.client.hasError('required')">
+                            Client required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>Coordinator</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="coordinator"
+                            placeholder="Coordinator" class="form-control" />
+                        <mat-error *ngIf="m.coordinator.hasError('required')">
+                            Coordinator required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="pb-lg-0 pb-5 btn-bottom-holder">
+            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+               >
+                Submit
+            </button>
+        </div>
+    </form>
+</div>
+Meeting Points
+<div class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="mid">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> MID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.mid}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="requirement">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> REQUIREMENT </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.requirement}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actionBy">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION BY </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.actionBy}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="dueDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> DUE DATE </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.dueDate  | date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.action}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter</td>
+        </tr>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
