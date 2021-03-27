@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { UserService } from '../../auth/_services/user.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -7,16 +9,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./personal-info.component.scss']
 })
 export class PersonalInfoComponent implements OnInit {
+  @Input() isLead: string;
+ 
   personalInfoForm: FormGroup;
 
+  APICONSTANT: any;
   typeOfCustomerList:any=[];
   leadSourceList:any=[];
 
-
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private userService: UserService,
+    private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
+    this.APICONSTANT = this.userService.getConfig();
     this.initPersonalForm();
+    this.getMasterData();
   }
 
   initPersonalForm() {
@@ -39,5 +46,28 @@ export class PersonalInfoComponent implements OnInit {
   }
   get p() {
     return this.personalInfoForm.controls;
+  }
+  getMasterData() {
+    let options = ['CUST_TYP','BUS_SRC'];
+    let param = {
+      multipleOptionType: options
+    }
+    this.userService.getAllMasterData(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['businessSource'] != null && masterData['businessSource'].length > 0
+        && masterData['customerType'] != null && masterData['customerType'].length > 0 ) {
+          this.typeOfCustomerList = masterData['customerType'];
+          this.leadSourceList=masterData['businessSource'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+    });
+  }
+  redirectToPropertyInfo(){
+    this.userService.salesFormNavigate('GO_TO_PROPERTY');
   }
 }

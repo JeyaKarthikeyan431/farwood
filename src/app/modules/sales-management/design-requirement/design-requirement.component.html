@@ -1,0 +1,85 @@
+<div class="form-highlighter">
+    <form [formGroup]="designReqForm">
+        <div class="row">
+            <mat-label>Is design already completed?</mat-label>
+            <mat-slide-toggle formControlName="isDesignCompleted"></mat-slide-toggle>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Architect Name</mat-label>
+                        <input matInput type="text" formControlName="architectName" placeholder="Architect Name"
+                            class="form-control" required />
+                        <mat-error *ngIf="d.architectName.hasError('required')">
+                            Architect Name is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact No</mat-label>
+                        <input matInput type="text" formControlName="contactNo" placeholder="Contact No"
+                            class="form-control" required />
+                        <mat-error *ngIf="d.contactNo.hasError('required')">
+                            Contact No is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Email ID</mat-label>
+                        <input class="form-control" matInput placeholder="Enter Email" autocomplete="off"
+                            formControlName="emailId" required>
+                        <mat-error *ngIf="d.emailId.hasError('email') && !d.emailId.hasError('required')">
+                            Please enter a valid email address
+                        </mat-error>
+                        <mat-error *ngIf="d.emailId.hasError('required')">
+                            Email is required
+                        </mat-error>
+                        <mat-error *ngIf="d.emailId.hasError('minLength')">
+                            Email should have at least 3 characters
+                        </mat-error>
+                        <mat-error *ngIf="d.emailId.hasError('maxLength')">
+                            Email should have maximum 320 characters
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Design</mat-label>
+                        <mat-select class="form-control" placeholder="What are you looking for" formControlName="design"
+                            required>
+                            <mat-option *ngFor="let design of designList" [value]="design.value">
+                                {{design.label}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="d.design.hasError('required')">Please choose design
+                        </mat-error>
+                    </mat-form-field>
+                    <input name="file" type="file" formControlName="designFile" >
+                </div>
+            </div>
+            <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+                <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                    (click)="redirectTo('GO_TO_BASIC')">
+                    Back
+                </button>
+            </div>
+            <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+                <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                    Save
+                </button>
+                <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
