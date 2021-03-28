@@ -10,10 +10,14 @@ import { UserService } from '../../auth/_services/user.service';
 })
 export class BasicRequirementComponent implements OnInit {
   basicReqForm: FormGroup;
+
+  APICONSTANT: any;
+
   constructor(private formBuilder: FormBuilder,private userService: UserService,
     private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
+    this.APICONSTANT = this.userService.getConfig();
     this.initBasicForm();
   }
 
@@ -30,8 +34,28 @@ export class BasicRequirementComponent implements OnInit {
   get b() {
     return this.basicReqForm.controls;
   }
-
   redirectTo(form){
     this.userService.salesFormNavigate(form);
+  }
+  savePersonal(form){
+    let param = {
+      status : "QLP",
+      basicReqInfo: this.basicReqForm.value
+    }
+    this.userService.createOrUpdateLead(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        this.userService.salesFormNavigate(form);
+      } else {
+        this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      if (error.status == 500) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else if (error.status == 204) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else {
+        this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
+      }
+    });
   }
 }

@@ -57,4 +57,34 @@ export class DesignRequirementComponent implements OnInit {
       this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
     });
   }
+  onChange(fileList: FileList): void {
+    let file = fileList[0];
+    let fileReader: FileReader = new FileReader();
+    let self = this;
+    fileReader.onloadend = function(x) {
+      self.designReqForm.controls['designFile'].setValue(fileReader.result);
+    }
+    fileReader.readAsText(file);
+  }
+  savePersonal(form,status){
+    let param = {
+      status : status,
+      designReqInfo: this.designReqForm.value
+    }
+    this.userService.createOrUpdateLead(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        this.userService.salesFormNavigate(form);
+      } else {
+        this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      if (error.status == 500) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else if (error.status == 204) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else {
+        this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
+      }
+    });
+  }
 }

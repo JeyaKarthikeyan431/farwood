@@ -43,7 +43,7 @@ export class PropertyInfoComponent implements OnInit {
     return this.propertyInfoForm.controls;
   }
   redirectTo(form) {
-    this.userService.salesFormNavigate(form);
+    this.savePersonal(form);
   }
 
   getMasterData() {
@@ -64,6 +64,27 @@ export class PropertyInfoComponent implements OnInit {
       }
     }, (error: any) => {
       this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+    });
+  }
+  savePersonal(form){
+    let param = {
+      status : "QLP",
+      propertyInfo: this.propertyInfoForm.value
+    }
+    this.userService.createOrUpdateLead(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        this.userService.salesFormNavigate(form);
+      } else {
+        this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      if (error.status == 500) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else if (error.status == 204) {
+        this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
+      } else {
+        this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
+      }
     });
   }
 }

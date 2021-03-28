@@ -75,7 +75,7 @@
                         <label for="file-upload" class="custom-file-upload">
                             Upload File <i class="fas fa-upload"></i>
                        </label>
-                       <input id="file-upload" type="file" formControlName="designFile"/>
+                       <input id="file-upload" type="file"/>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -85,11 +85,11 @@
                             (click)="redirectTo('GO_TO_BASIC')">
                             <i class="fas fa-angle-double-left"></i> Back
                         </button>
-                        <button type="submit"
+                        <button type="submit" (click)="savePersonal('GO_TO_DASHBOARD','QLP')"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
                             Save
                         </button>
-                        <button type="submit"
+                        <button type="submit" (click)="savePersonal('GO_TO_DASHBOARD','QLA')"
                             class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
                             Submit
                         </button>   

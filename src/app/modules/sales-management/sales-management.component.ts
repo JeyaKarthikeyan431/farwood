@@ -128,7 +128,7 @@ export class SalesManagementComponent implements OnInit {
   getLeadInfoById(row) {
     if (row.leadId != null && row.leadId != '') {
       this.userService.getLeadById(row.leadId).subscribe((res: any) => {
-        if (res.status == 200 && res.data != null) {
+        if (res.status == 204 && res.data != null) {
          this.userService.setLead(res.data);
         } else {
           this.toastrService.showError('No Leads Found', this.APICONSTANT.TITLE);
