@@ -73,6 +73,16 @@ export class SalesManagementComponent implements OnInit {
         this.form = 'UPLOAD';
         break;
       }
+      case 'GO_TO_SUMMARY': {
+        this.isleadFormVisible = true;
+        this.form = 'SUMMARY';
+        break;
+      }
+      case 'GO_TO_MOM': {
+        this.isleadFormVisible = true;
+        this.form = 'MOM';
+        break;
+      }
     }
   }
   applyFilter(filterValue: string) {
@@ -133,5 +143,11 @@ export class SalesManagementComponent implements OnInit {
     }, (error: any) => {
       this.toastrService.showError('Error While Getting Leads', this.APICONSTANT.TITLE);
     });
+  }
+  viewLead(row){
+    this.fnLeadFormVisible('GO_TO_SUMMARY');
+  }
+  goToMOM(row){
+    this.fnLeadFormVisible('GO_TO_MOM');
   }
 }

@@ -66,9 +66,9 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <div class="icon-holding">
-              <i class="fas fa-eye"></i>
+              <i class="fas fa-eye" (click)="viewLead(row)"></i>
               <i class="fas fa-pencil-alt" (click)="editLead(row)"></i>
-              <i class="fas fa-comment-alt"></i>
+              <i class="fas fa-comment-alt" (click)="goToMOM(row)"></i>
              </div>
           </mat-cell>
         </ng-container>
@@ -114,6 +114,12 @@
     </div>
     <div *ngIf="form=='UPLOAD'">
       <app-design-requirement></app-design-requirement>
+    </div>
+    <div *ngIf="form=='SUMMARY'">
+      <app-view-details></app-view-details>
+    </div>
+    <div *ngIf="form=='MOM'">
+      <app-mom-management></app-mom-management>
     </div>
   </ng-template>
 </div>

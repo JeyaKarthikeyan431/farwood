@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { UserService } from '../../auth/_services/user.service';
 
 interface leadMOM {
   client: string;
@@ -29,7 +30,7 @@ export class MomManagementComponent implements OnInit {
 
   isMomFormVisible: boolean = false;
 
-  constructor(public router: Router,) { }
+  constructor(public router: Router,private userService: UserService) { }
 
   ngOnInit(): void {
     this.isMomFormVisible = false;
@@ -46,8 +47,8 @@ export class MomManagementComponent implements OnInit {
       }
     }
   }
-  redirectToLeads(){
-    this.router.navigate(['./user/sales-management/leads']);
+  redirectTo(form){
+    this.userService.salesFormNavigate(form);
   }
 
 }

@@ -106,12 +106,12 @@ export class EmployeeProfileComponent implements OnInit {
   initPersonalInfoForm() {
     this.personalInfoForm = this.formBuilder.group({
       perEmpFirstName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
-      perEmpLastName: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(150)])],
+      perEmpLastName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
       perEmpDob: [null, Validators.compose([Validators.required])],
       perEmpGender: [null, Validators.compose([Validators.required])],
       perEmpFatherName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       perEmpMotherName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      perEmpMaritalStatus: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      perEmpMaritalStatus: [null, Validators.compose([Validators.required])],
       perEmpSpouceName: [null, Validators.compose([Validators.required])],
       perEmpChildrenName: [null, Validators.compose([Validators.required])],
       perEmpResidence: [null, Validators.compose([Validators.required])],
@@ -197,7 +197,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
   getMasterData() {
     let options = ['USER_DESIGNATION', 'USER_DEPT', 'MARITAL_STATUS', 'GENDER', 'NATIONALITY', 'COMMUTE_MODE',
-      , 'WRK_LOC', 'EMP_QUALIFICATION', 'QUESTION_TYPE', 'RELATIONSHIP', 'YEAR'];
+      , 'WRK_LOC', 'EMP_QUALIFICATION', 'QUESTION_TYPE', 'RELATIONSHIP', 'YEAR','OCCUPATION'];
     let param = {
       multipleOptionType: options
     }
@@ -225,6 +225,7 @@ export class EmployeeProfileComponent implements OnInit {
           this.medicalHistoryList = masterData['questionType'];
           this.yearList = masterData['year'];
           this.relationshipList = masterData['relationship'];
+          this.occupationList=masterData['occupation'];
         }
       } else {
         this.toastrService.showError('Error while getting Master data', 'Error');

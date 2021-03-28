@@ -30,7 +30,7 @@ export class UserService {
     return this.http.post(this.apiConstant.API_ENDPOINT + 'login/createUser', param);
   }
   updateUser(param) {
-    return this.http.put(this.apiConstant.API_ENDPOINT + 'login/updateUser', param);
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/form/saveEmployeeDetails', param);
   }
   showForm() {
     this.visibility.next(true);
