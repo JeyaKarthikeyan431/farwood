@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>What are you looking for?</mat-label>
-                            <mat-select class="form-control" placeholder="What are you looking for" formControlName="lookingFor"
+                            <mat-select class="form-control" placeholder="What are you looking for" formControlName="lookingFor" multiple
                                 required>
                                 <mat-option *ngFor="let looking of lookingForList" [value]="looking.value">
                                     {{looking.label}}

@@ -36,11 +36,8 @@
                         <div class="form-group">
                             <mat-form-field class="example-full-width">
                                 <mat-label>Referenced By</mat-label>
-                                <input matInput type="text" formControlName="referencedBy" placeholder="Referenced By"
-                                    class="form-control" required />
-                                <mat-error *ngIf="p.referencedBy.hasError('required')">
-                                    Referenced By is required
-                                </mat-error>
+                                <input matInput type="text" autocomplete="off" formControlName="referencedBy" placeholder="Referenced By"
+                                    class="form-control"/>
                             </mat-form-field>
                         </div>
                 </div>
@@ -50,7 +47,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>First Name</mat-label>
-                            <input matInput type="text" formControlName="firstName" placeholder="First Name" class="form-control"
+                            <input matInput type="text" autocomplete="off" formControlName="firstName" placeholder="First Name" class="form-control"
                                 required />
                             <mat-error *ngIf="p.firstName.hasError('required')">
                                 First Name is required
@@ -62,7 +59,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Last Name</mat-label>
-                            <input matInput type="text" formControlName="lastName" placeholder="Last Name" class="form-control"
+                            <input matInput type="text" autocomplete="off" formControlName="lastName" placeholder="Last Name" class="form-control"
                                 required />
                             <mat-error *ngIf="p.lastName.hasError('required')">
                                 Last Name is required
@@ -74,11 +71,20 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Project Name</mat-label>
-                            <input matInput type="text" formControlName="projectName" placeholder="Project Name"
+                            <input matInput type="text" autocomplete="off" formControlName="projectName" placeholder="Project Name"
                                 class="form-control" required />
                             <mat-error *ngIf="p.projectName.hasError('required')">
                                 Project Name is required
                             </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Builder Name</mat-label>
+                            <input matInput type="text" autocomplete="off" formControlName="builderName" placeholder="Builder Name"
+                                class="form-control" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -88,7 +94,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact No</mat-label>
-                            <input matInput type="text" formControlName="contactNo" placeholder="Contact Number"
+                            <input matInput type="text" autocomplete="off" formControlName="contactNo" placeholder="Contact Number"
                                 class="form-control" required />
                             <mat-error *ngIf="p.contactNo.hasError('required')">
                                 Contact Number is required
@@ -100,11 +106,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Alternative Contact Number</mat-label>
-                            <input matInput type="text" formControlName="alternativeContactNo"
-                                placeholder="Alternative Contact Number" class="form-control" required />
-                            <mat-error *ngIf="p.alternativeContactNo.hasError('required')">
-                                Alternative Contact Number is required
-                            </mat-error>
+                            <input matInput type="text" autocomplete="off" formControlName="alternativeContactNo"
+                                placeholder="Alternative Contact Number" class="form-control" />
                         </mat-form-field>
                     </div>
                 </div>
@@ -115,9 +118,6 @@
                             <input matInput placeholder="Personal Email" autocomplete="off" formControlName="personalEmailId"  class="form-control">
                             <mat-error *ngIf="p.personalEmailId.hasError('email') && !p.personalEmailId.hasError('required')">
                                 Please enter a valid email address
-                            </mat-error>
-                            <mat-error *ngIf="p.personalEmailId.hasError('required')">
-                                Personal Email is <strong>required</strong>
                             </mat-error>
                             <mat-error *ngIf="p.personalEmailId.hasError('minLength')">
                                 Email should have at least 3 characters
@@ -135,7 +135,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Flat/ Door No</mat-label>
-                            <input matInput type="text" formControlName="flat" placeholder="Flat/ Door No"
+                            <input matInput type="text" autocomplete="off" formControlName="flat" placeholder="Flat/ Door No"
                                 class="form-control" required />
                             <mat-error *ngIf="p.flat.hasError('required')">
                                 Flat/ Door No is required
@@ -147,7 +147,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Street Name</mat-label>
-                            <input matInput type="text" formControlName="streetName" placeholder="Street Name"
+                            <input matInput type="text" autocomplete="off" formControlName="streetName" placeholder="Street Name"
                                 class="form-control" required />
                             <mat-error *ngIf="p.streetName.hasError('required')">
                                 Street Name is required
@@ -159,7 +159,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>City</mat-label>
-                            <input matInput type="text" formControlName="city" placeholder="City"
+                            <input matInput type="text" autocomplete="off" formControlName="city" placeholder="City"
                                 class="form-control" required />
                             <mat-error *ngIf="p.city.hasError('required')">
                                 City is required
@@ -173,7 +173,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Pin Code</mat-label>
-                            <input matInput type="text" formControlName="pinCode" placeholder="Pin Code"
+                            <input matInput type="text" autocomplete="off" formControlName="pinCode" placeholder="Pin Code"
                                 class="form-control" required />
                             <mat-error *ngIf="p.pinCode.hasError('required')">
                                 Pin Code is required
@@ -185,7 +185,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Location</mat-label>
-                            <input matInput type="text" formControlName="location" placeholder="Location"
+                            <input matInput type="text" autocomplete="off" formControlName="location" placeholder="Location"
                                 class="form-control" required />
                             <mat-error *ngIf="p.location.hasError('required')">
                                 Location is required
@@ -197,11 +197,11 @@
             </div>
         </div>
         <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-            <button type="submit" *ngIf="isLead!='LEAD'" (click)="redirectToPropertyInfo()" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            <button type="submit" *ngIf="isLead!='LEAD'" (click)="redirectTo('GO_TO_PROPERTY')" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
               >
               Next <i class="fas fa-angle-double-right"></i>
             </button>
-            <button type="submit" *ngIf="isLead=='LEAD'" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            <button type="submit" *ngIf="isLead=='LEAD'" (click)="savePersonal()" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
               >
               Submit
             </button>

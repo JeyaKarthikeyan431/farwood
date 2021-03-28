@@ -13,11 +13,14 @@ export class DesignRequirementComponent implements OnInit {
 
   designList:any=[];
 
+  APICONSTANT: any;
   constructor(private formBuilder: FormBuilder,private userService: UserService,
     private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
+    this.APICONSTANT = this.userService.getConfig();
     this.initDesignReqForm();
+    this.getMasterData();
   }
 
   initDesignReqForm() {
@@ -35,5 +38,23 @@ export class DesignRequirementComponent implements OnInit {
   }
   redirectTo(form){
     this.userService.salesFormNavigate(form);
+  }
+  getMasterData() {
+    let options = ['SRC_DOC'];
+    let param = {
+      multipleOptionType: options
+    }
+    this.userService.getAllMasterData(param).subscribe((res: any) => {
+      if (res.status == 200) {
+        let masterData = res.data;
+        if (masterData['srcDoc'] != null && masterData['srcDoc'].length > 0) {
+          this.designList = masterData['srcDoc'];
+        }
+      } else {
+        this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
+    });
   }
 }

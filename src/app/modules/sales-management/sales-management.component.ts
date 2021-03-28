@@ -5,11 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { UserService } from '../auth/_services/user.service';
 interface Lead {
-  name: string;
-  location: string;
+  clientName: string;
+  city: string;
   contactNo: string;
-  email: string;
-  orderedDate: string,
+  effectiveDate: string,
   status: string,
   action: string
 }
@@ -23,18 +22,9 @@ export class SalesManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   APICONSTANT: any;
-  displayedColumns: string[] = ['name', 'location', 'contactNo', 'email', 'orderedDate', 'status', 'action'];
+  displayedColumns: string[] = ['clientName', 'city', 'contactNo', 'effectiveDate', 'status', 'action'];
   statusList: any = [];
   dataSource: MatTableDataSource<Lead>;
-  sample: Lead[] = [{
-    'name': 'mano',
-    'location': 'erode',
-    'contactNo': '9698006205',
-    'email': 'mano@gmail.com',
-    'orderedDate': '05/06/2021',
-    'status': 'Active',
-    'action': 'Edit'
-  }]
 
   isleadFormVisible: boolean = false;
   iscreateLeadFormVisible: boolean = false;
@@ -46,21 +36,22 @@ export class SalesManagementComponent implements OnInit {
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
     this.isleadFormVisible = false;
-    this.dataSource = new MatTableDataSource(this.sample);
     this.getMasterData();
     this.initObservable();
+    this.getAllLeads();
   }
   fnLeadFormVisible(option) {
     switch (option) {
       case 'GO_TO_DASHBOARD': {
         this.isleadFormVisible = false;
         this.form = 'PROFILE';
+        this.getAllLeads();
         break;
       }
       case 'GO_TO_CREATE_LEAD': {
         this.isleadFormVisible = true;
         this.iscreateLeadFormVisible = true;
-        this.form='LEAD';
+        this.form = 'LEAD';
         break;
       }
       case 'GO_TO_PROFILE': {
@@ -108,15 +99,45 @@ export class SalesManagementComponent implements OnInit {
       this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);
     });
   }
-  editLead(){
+  editLead(row) {
     this.fnLeadFormVisible('GO_TO_PROFILE');
+    this.getLeadInfoById(row);
   }
   initObservable() {
     this.userService.salesNavigation$.subscribe(form => {
-      if (form!=null && form!='') {
+      if (form != null && form != '') {
         this.fnLeadFormVisible(form);
       } else {
       }
     })
+  }
+  getAllLeads() {
+    this.userService.getAllLeads().subscribe((res: any) => {
+      if (res.status == 200 && res.data != null) {
+        let leads = res.data;
+        this.dataSource = new MatTableDataSource(leads);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      } else {
+        this.toastrService.showError('No Leads Found', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting Leads', this.APICONSTANT.TITLE);
+    });
+  }
+  getLeadInfoById(row) {
+    if (row.leadId != null && row.leadId != '') {
+      this.userService.getLeadById(row.leadId).subscribe((res: any) => {
+        if (res.status == 200 && res.data != null) {
+         this.userService.setLead(res.data);
+        } else {
+          this.toastrService.showError('No Leads Found', this.APICONSTANT.TITLE);
+        }
+      }, (error: any) => {
+        this.toastrService.showError('Error While Getting Leads', this.APICONSTANT.TITLE);
+      });
+    } else {
+      this.toastrService.showError('Parameter Missing For Get Lead', this.APICONSTANT.TITLE);
+    }
   }
 }

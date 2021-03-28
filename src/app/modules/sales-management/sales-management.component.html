@@ -25,6 +25,11 @@
             </mat-form-field>
           </div>
         </div>
+        <!-- <div class="col-lg-4">
+            <button type="submit" class="btn">
+            <i class="fas fa-plus"></i>Reset
+          </button>
+        </div> -->
         <div class="col-lg-4">
           <div class="pb-lg-0 pb-5 btn-bottom-holder text-right mt-5">
             <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
@@ -37,25 +42,21 @@
     </div>
     <div class="mat-elevation-z8">
       <mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="clientName">
           <mat-header-cell *matHeaderCellDef mat-sort-header> CLIENT NAME </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.clientName}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="location">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> LOCATION </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.location}} </mat-cell>
+        <ng-container matColumnDef="city">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> CITY </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.city}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="contactNo">
           <mat-header-cell *matHeaderCellDef mat-sort-header> CONTACT NO </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.contactNo}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL ID </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="orderedDate">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> O.DATE </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.orderedDate}} </mat-cell>
+        <ng-container matColumnDef="effectiveDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> E.DATE </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.effectiveDate | date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="status">
           <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
@@ -66,7 +67,7 @@
           <mat-cell *matCellDef="let row">
             <div class="icon-holding">
               <i class="fas fa-eye"></i>
-              <i class="fas fa-pencil-alt" (click)="editLead()"></i>
+              <i class="fas fa-pencil-alt" (click)="editLead(row)"></i>
               <i class="fas fa-comment-alt"></i>
              </div>
           </mat-cell>

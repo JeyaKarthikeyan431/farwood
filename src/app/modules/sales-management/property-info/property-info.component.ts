@@ -9,14 +9,14 @@ import { UserService } from '../../auth/_services/user.service';
   styleUrls: ['./property-info.component.scss']
 })
 export class PropertyInfoComponent implements OnInit {
-  propertyInfoForm:FormGroup;
+  propertyInfoForm: FormGroup;
 
-  lookingForList:any=[];
-  propertyList:any=[];
-  
+  lookingForList: any = [];
+  propertyList: any = [];
+
   APICONSTANT: any;
 
-  constructor(private formBuilder: FormBuilder,private userService: UserService,
+  constructor(private formBuilder: FormBuilder, private userService: UserService,
     private toastrService: CommonToastrService) { }
 
   ngOnInit(): void {
@@ -42,20 +42,22 @@ export class PropertyInfoComponent implements OnInit {
   get p() {
     return this.propertyInfoForm.controls;
   }
-  redirectTo(form){
+  redirectTo(form) {
     this.userService.salesFormNavigate(form);
   }
 
   getMasterData() {
-    let options = ['PROP_TYPE'];
+    let options = ['PROP_TYPE', 'SRC_LOK_FOR'];
     let param = {
       multipleOptionType: options
     }
     this.userService.getAllMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
         let masterData = res.data;
-        if (masterData['propertyType'] != null && masterData['propertyType'].length > 0) {
+        if (masterData['propertyType'] != null && masterData['propertyType'].length > 0
+          && masterData['srcLookingFor'] != null && masterData['srcLookingFor'].length > 0) {
           this.propertyList = masterData['propertyType'];
+          this.lookingForList = masterData['srcLookingFor'];
         }
       } else {
         this.toastrService.showError('Error while getting Master data', this.APICONSTANT.TITLE);

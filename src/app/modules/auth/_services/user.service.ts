@@ -10,7 +10,8 @@ export class UserService {
 
   visibility: BehaviorSubject<boolean>;
   userInfo: BehaviorSubject<any>;
-  salesNavigation$:BehaviorSubject<string>;
+  salesNavigation$: BehaviorSubject<string>;
+  leadInfo$: BehaviorSubject<any>;
 
   apiConstant: any;
 
@@ -18,7 +19,8 @@ export class UserService {
     this.apiConstant = this.configService.getConfig();
     this.visibility = new BehaviorSubject(false);
     this.userInfo = new BehaviorSubject('');
-    this.salesNavigation$=new BehaviorSubject('');
+    this.salesNavigation$ = new BehaviorSubject('');
+    this.leadInfo$= new BehaviorSubject('');
   }
   getConfig() {
     return this.apiConstant;
@@ -48,7 +50,20 @@ export class UserService {
   getMasterData(param) {
     return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/options/list', param);
   }
-  salesFormNavigate(form){
-this.salesNavigation$.next(form);
+  salesFormNavigate(form) {
+    this.salesNavigation$.next(form);
+  }
+  getAllLeads() {
+    return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getAllLeads');
+  }
+  createOrUpdateLead(param){
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/sales/createLead', param);
+  }
+  setLead(data){
+    this.leadInfo$.next(data);
+  }
+  getLeadById(leadId) {
+    let params = new HttpParams().set("leadId",leadId);
+    return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getLead',{params: params});
   }
 }
