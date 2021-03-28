@@ -432,8 +432,8 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                                <div class="pb-lg-0 pb-5 del-block">
-                                    <span (click)="removeFamily(i)">
+                                <div class="pb-lg-0 pb-5 del-block" *ngIf = "i != 0">
+                                    <span (click)="removeFamily(i)"> 
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </span>
                                 </div>
@@ -444,7 +444,7 @@
                 <div class="person-subform">
                     <div class="title-holder">
                         <p>Education Information</p>
-                        <div class="pb-lg-0 pb-5">
+                        <div class="pb-lg-0 pb-5" *ngIf ="personalInfoForm.get('education').valid" >
                             <span (click)="addEducation()">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Add Education
@@ -520,7 +520,7 @@
                                     </mat-form-field>
                                 </div>
                             </div> -->
-                            <div class="pb-lg-0 pb-5 del-block">
+                            <div class="pb-lg-0 pb-5 del-block" *ngIf = "i != 0">
                                 <span (click)="removeEducation(i)">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </span>
@@ -531,7 +531,7 @@
                 <div class="person-subform">
                     <div class="title-holder">
                         <p>Company Information</p>
-                        <div class="pb-lg-0 pb-5">
+                        <div class="pb-lg-0 pb-5" *ngIf="personalInfoForm.get('company').valid">
                             <span (click)="addCompany()">
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                 Add Company
@@ -623,7 +623,7 @@
                                     Releaving Letter
                                 </div>
                             </div> -->
-                            <div class="pb-lg-0 pb-5 del-block">
+                            <div class="pb-lg-0 pb-5 del-block" *ngIf = "i != 0">
                                 <span (click)="removeCompany(i)">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </span>

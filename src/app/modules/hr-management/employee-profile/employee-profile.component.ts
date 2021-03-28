@@ -160,7 +160,7 @@ export class EmployeeProfileComponent implements OnInit {
       institute: [null, Validators.compose([Validators.required])],
       yearOfPassedOut: [null, Validators.compose([Validators.required])],
       grade: [null, Validators.compose([Validators.required])],
-      certificate: [null, Validators.compose([Validators.required])]
+      certificate: [null]
     });
   }
   createCompany() {
@@ -169,9 +169,9 @@ export class EmployeeProfileComponent implements OnInit {
       fromYear: [null, Validators.compose([Validators.required])],
       toYear: [null, Validators.compose([Validators.required])],
       designation: [null, Validators.compose([Validators.required])],
-      reasonForLeaving: [null, Validators.compose([Validators.required])],
+      reasonForLeaving: [null],
       reference: [null, Validators.compose([Validators.required])],
-      releavingLetter: [null, Validators.compose([Validators.required])]
+      releavingLetter: [null]
     });
   }
   addFamily(): void {

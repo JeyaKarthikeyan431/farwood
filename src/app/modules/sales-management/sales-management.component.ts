@@ -79,7 +79,10 @@ export class SalesManagementComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
   filterBasedOnStatus(value) {
-    console.log(value);
+   let filterValue = value.source.selected.viewValue;
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
   getMasterData() {
     let options = ['LEAD_STATUS'];
