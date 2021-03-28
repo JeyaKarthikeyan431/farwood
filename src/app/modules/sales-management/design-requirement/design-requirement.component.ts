@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { AuthService } from '../../auth';
 import { UserService } from '../../auth/_services/user.service';
 
 @Component({
@@ -13,14 +14,16 @@ export class DesignRequirementComponent implements OnInit {
 
   designList:any=[];
 
+  leadId:any=null;
   APICONSTANT: any;
   constructor(private formBuilder: FormBuilder,private userService: UserService,
-    private toastrService: CommonToastrService) { }
+    private toastrService: CommonToastrService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
     this.initDesignReqForm();
     this.getMasterData();
+    this.getPropertyInfo();
   }
 
   initDesignReqForm() {
@@ -68,12 +71,14 @@ export class DesignRequirementComponent implements OnInit {
   }
   savePersonal(form,status){
     let param = {
+      leadId : this.leadId,
       status : status,
       designReqInfo: this.designReqForm.value
     }
     this.userService.createOrUpdateLead(param).subscribe((res: any) => {
       if (res.status == 200) {
         this.userService.salesFormNavigate(form);
+        sessionStorage.removeItem('leadId');
       } else {
         this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
       }
@@ -85,6 +90,26 @@ export class DesignRequirementComponent implements OnInit {
       } else {
         this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
       }
+    });
+  }
+  getPropertyInfo() {
+    let leadId = this.authService.decrypt(sessionStorage.getItem('leadId'));
+    if (leadId != null && leadId != '') {
+      this.leadId=leadId;
+      this.getLeadInfoById(leadId);
+    }else{
+      this.leadId=null;
+    }
+  }
+  getLeadInfoById(leadId) {
+    this.userService.getLeadById(leadId).subscribe((res: any) => {
+      if (res.status == 204 && res.data != null) {
+        this.designReqForm.patchValue(res.data['designReqInfo']);
+      } else {
+        this.toastrService.showError('No Lead Found', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
   }
 }

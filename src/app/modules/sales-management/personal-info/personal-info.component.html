@@ -197,11 +197,11 @@
             </div>
         </div>
         <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-            <button type="submit" *ngIf="isLead!='LEAD'" (click)="redirectTo('GO_TO_PROPERTY')" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            <button type="submit" *ngIf="isLead!='LEAD'" (click)="savePersonal('GO_TO_PROPERTY')"  class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
               >
               Next <i class="fas fa-angle-double-right"></i>
             </button>
-            <button type="submit" *ngIf="isLead=='LEAD'" (click)="savePersonal()" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            <button type="submit" *ngIf="isLead=='LEAD'" (click)="savePersonal('GO_TO_DASHBOARD')" class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
               >
               Submit
             </button>

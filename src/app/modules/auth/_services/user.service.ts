@@ -11,7 +11,6 @@ export class UserService {
   visibility: BehaviorSubject<boolean>;
   userInfo: BehaviorSubject<any>;
   salesNavigation$: BehaviorSubject<string>;
-  leadInfo$: BehaviorSubject<any>;
 
   apiConstant: any;
 
@@ -20,7 +19,6 @@ export class UserService {
     this.visibility = new BehaviorSubject(false);
     this.userInfo = new BehaviorSubject('');
     this.salesNavigation$ = new BehaviorSubject('');
-    this.leadInfo$= new BehaviorSubject('');
   }
   getConfig() {
     return this.apiConstant;
@@ -58,9 +56,6 @@ export class UserService {
   }
   createOrUpdateLead(param){
     return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/sales/createLead', param);
-  }
-  setLead(data){
-    this.leadInfo$.next(data);
   }
   getLeadById(leadId) {
     let params = new HttpParams().set("leadId",leadId);

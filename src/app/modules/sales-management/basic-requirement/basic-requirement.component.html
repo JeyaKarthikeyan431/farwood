@@ -8,7 +8,7 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Area of the property (SQ.FT)</mat-label>
                             <input matInput type="text" formControlName="areaOfProperty"
-                                placeholder="Area of the property (SQ.FT)" class="form-control" required />
+                                placeholder="Area of the property (SQ.FT)" class="form-control" autocomplete="off" required />
                             <mat-error *ngIf="b.areaOfProperty.hasError('required')">
                                 Area of the property (SQ.FT) is required
                             </mat-error>
@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>No of bedrooms?</mat-label>
-                            <input matInput type="text" formControlName="noOfBedrooms" placeholder="No of bedrooms?"
+                            <input matInput type="text" formControlName="noOfBedrooms" autocomplete="off" placeholder="No of bedrooms?"
                                 class="form-control" required />
                             <mat-error *ngIf="b.noOfBedrooms.hasError('required')">
                                 No of bedrooms? is required
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>No.of Kitchen?</mat-label>
-                            <input matInput type="text" formControlName="noOfKitchen" placeholder="No.of Kitchen?"
+                            <input matInput type="text" formControlName="noOfKitchen" autocomplete="off" placeholder="No.of Kitchen?"
                                 class="form-control" required />
                             <mat-error *ngIf="b.noOfKitchen.hasError('required')">
                                 No.of Kitchen? is required
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>No of Living Room?</mat-label>
-                            <input matInput type="text" formControlName="noOfLivingRoom" placeholder="No of Living Room?"
+                            <input matInput type="text" formControlName="noOfLivingRoom" autocomplete="off" placeholder="No of Living Room?"
                                 class="form-control" required />
                             <mat-error *ngIf="b.noOfLivingRoom.hasError('required')">
                                 No of Living Room? is required
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>No of common area?</mat-label>
-                            <input matInput type="text" formControlName="noCommonArea" placeholder="No of common area?"
+                            <input matInput type="text" formControlName="noCommonArea" autocomplete="off" placeholder="No of common area?"
                                 class="form-control" required />
                             <mat-error *ngIf="b.noCommonArea.hasError('required')">
                                 No of common area? is required
@@ -70,7 +70,7 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Expected completion date</mat-label>
                             <input matInput type="text" formControlName="completionDate"
-                                placeholder="Expected completion date" class="form-control" required />
+                                placeholder="Expected completion date" class="form-control" autocomplete="off" required />
                             <mat-error *ngIf="b.completionDate.hasError('required')">
                                 Expected completion date is required
                             </mat-error>

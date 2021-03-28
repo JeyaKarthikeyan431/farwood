@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Architect Name</mat-label>
-                            <input matInput type="text" formControlName="architectName" placeholder="Architect Name"
+                            <input matInput type="text" formControlName="architectName" autocomplete="off" placeholder="Architect Name"
                                 class="form-control" required />
                             <mat-error *ngIf="d.architectName.hasError('required')">
                                 Architect Name is required
@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact No</mat-label>
-                            <input matInput type="text" formControlName="contactNo" placeholder="Contact No"
+                            <input matInput type="text" formControlName="contactNo" autocomplete="off" placeholder="Contact No"
                                 class="form-control" required />
                             <mat-error *ngIf="d.contactNo.hasError('required')">
                                 Contact No is required

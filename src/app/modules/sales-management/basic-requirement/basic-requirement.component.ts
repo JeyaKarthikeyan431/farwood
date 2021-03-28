@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { AuthService } from '../../auth';
 import { UserService } from '../../auth/_services/user.service';
 
 @Component({
@@ -11,14 +12,16 @@ import { UserService } from '../../auth/_services/user.service';
 export class BasicRequirementComponent implements OnInit {
   basicReqForm: FormGroup;
 
+  leadId:any=null;
   APICONSTANT: any;
 
   constructor(private formBuilder: FormBuilder,private userService: UserService,
-    private toastrService: CommonToastrService) { }
+    private toastrService: CommonToastrService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
     this.initBasicForm();
+    this.getBasicInfo();
   }
 
   initBasicForm() {
@@ -39,6 +42,7 @@ export class BasicRequirementComponent implements OnInit {
   }
   savePersonal(form){
     let param = {
+      leadId : this.leadId,
       status : "QLP",
       basicReqInfo: this.basicReqForm.value
     }
@@ -56,6 +60,26 @@ export class BasicRequirementComponent implements OnInit {
       } else {
         this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
       }
+    });
+  }
+  getBasicInfo() {
+    let leadId = this.authService.decrypt(sessionStorage.getItem('leadId'));
+    if (leadId != null && leadId != '') {
+      this.leadId=leadId;
+      this.getLeadInfoById(leadId);
+    }else{
+      this.leadId=null;
+    }
+  }
+  getLeadInfoById(leadId) {
+    this.userService.getLeadById(leadId).subscribe((res: any) => {
+      if (res.status == 204 && res.data != null) {
+        this.basicReqForm.patchValue(res.data['basicReqInfo']);
+      } else {
+        this.toastrService.showError('No Lead Found', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
   }
 }

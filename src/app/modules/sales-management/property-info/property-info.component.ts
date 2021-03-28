@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { AuthService } from '../../auth';
 import { UserService } from '../../auth/_services/user.service';
 
 @Component({
@@ -14,36 +15,38 @@ export class PropertyInfoComponent implements OnInit {
   lookingForList: any = [];
   propertyList: any = [];
 
+  leadId:any=null;
   APICONSTANT: any;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private toastrService: CommonToastrService) { }
+    private toastrService: CommonToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
     this.initPropertyInfoForm();
     this.getMasterData();
+    this.getPropertyInfo();
   }
   initPropertyInfoForm() {
     this.propertyInfoForm = this.formBuilder.group({
       lookingFor: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       typeOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      propertyName: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      propertyName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       builderName: [null, Validators.compose([Validators.required])],
       buildingState: [null, Validators.compose([Validators.required])],
       expectedDate: [null],
-      flat: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
-      streetName: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
-      city: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
-      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
-      location: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
+      flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
     });
   }
   get p() {
     return this.propertyInfoForm.controls;
   }
   redirectTo(form) {
-    this.savePersonal(form);
+    this.userService.salesFormNavigate(form);
   }
 
   getMasterData() {
@@ -68,6 +71,7 @@ export class PropertyInfoComponent implements OnInit {
   }
   savePersonal(form){
     let param = {
+      leadId : this.leadId,
       status : "QLP",
       propertyInfo: this.propertyInfoForm.value
     }
@@ -78,6 +82,7 @@ export class PropertyInfoComponent implements OnInit {
         this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
       }
     }, (error: any) => {
+      this.userService.salesFormNavigate(form);
       if (error.status == 500) {
         this.toastrService.showError(error.message, this.APICONSTANT.TITLE);
       } else if (error.status == 204) {
@@ -85,6 +90,26 @@ export class PropertyInfoComponent implements OnInit {
       } else {
         this.toastrService.showError('Error While Creating Lead', this.APICONSTANT.TITLE);
       }
+    });
+  }
+  getPropertyInfo() {
+    let leadId = this.authService.decrypt(sessionStorage.getItem('leadId'));
+    if (leadId != null && leadId != '') {
+      this.leadId=leadId;
+      this.getLeadInfoById(leadId);
+    }else{
+      this.leadId=null;
+    }
+  }
+  getLeadInfoById(leadId) {
+    this.userService.getLeadById(leadId).subscribe((res: any) => {
+      if (res.status == 204 && res.data != null) {
+        this.propertyInfoForm.patchValue(res.data['propertyInfo']);
+      } else {
+        this.toastrService.showError('No Lead Found', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
   }
 }

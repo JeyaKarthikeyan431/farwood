@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
+import { AuthService } from '../auth';
 import { UserService } from '../auth/_services/user.service';
 interface Lead {
   clientName: string;
@@ -31,7 +32,7 @@ export class SalesManagementComponent implements OnInit {
   form: string;
 
   constructor(private userService: UserService,
-    private toastrService: CommonToastrService) { }
+    private toastrService: CommonToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
@@ -52,6 +53,7 @@ export class SalesManagementComponent implements OnInit {
         this.isleadFormVisible = true;
         this.iscreateLeadFormVisible = true;
         this.form = 'LEAD';
+        sessionStorage.removeItem('leadId');
         break;
       }
       case 'GO_TO_PROFILE': {
@@ -101,7 +103,11 @@ export class SalesManagementComponent implements OnInit {
   }
   editLead(row) {
     this.fnLeadFormVisible('GO_TO_PROFILE');
-    this.getLeadInfoById(row);
+    if (row.leadId != null && row.leadId != '') {
+    sessionStorage.setItem('leadId', this.authService.encrypt(row.leadId));
+    }else {
+      this.toastrService.showError('Parameter Missing For Get Lead', this.APICONSTANT.TITLE);
+    }
   }
   initObservable() {
     this.userService.salesNavigation$.subscribe(form => {
@@ -124,20 +130,5 @@ export class SalesManagementComponent implements OnInit {
     }, (error: any) => {
       this.toastrService.showError('Error While Getting Leads', this.APICONSTANT.TITLE);
     });
-  }
-  getLeadInfoById(row) {
-    if (row.leadId != null && row.leadId != '') {
-      this.userService.getLeadById(row.leadId).subscribe((res: any) => {
-        if (res.status == 204 && res.data != null) {
-         this.userService.setLead(res.data);
-        } else {
-          this.toastrService.showError('No Leads Found', this.APICONSTANT.TITLE);
-        }
-      }, (error: any) => {
-        this.toastrService.showError('Error While Getting Leads', this.APICONSTANT.TITLE);
-      });
-    } else {
-      this.toastrService.showError('Parameter Missing For Get Lead', this.APICONSTANT.TITLE);
-    }
   }
 }
