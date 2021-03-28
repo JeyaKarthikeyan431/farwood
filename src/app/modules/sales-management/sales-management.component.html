@@ -17,7 +17,7 @@
             <mat-form-field class="example-full-width">
               <mat-label>Status</mat-label>
               <mat-select class="form-control" placeholder="Status"
-                (selectionChange)="filterBasedOnStatus($event.value)">
+                (selectionChange)="filterBasedOnStatus($event)">
                 <mat-option *ngFor="let status of statusList" [value]="status.value">
                   {{status.label}}
                 </mat-option>
