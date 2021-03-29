@@ -9,7 +9,7 @@ import { Alphabet,CapitalizeFirstDirective, MaskDirective, NumberDirective } fro
 
 
 @NgModule({
-  declarations: [HrManagementComponent, EmployeeProfileComponent, NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective],
+  declarations: [HrManagementComponent, EmployeeProfileComponent, ],
   imports: [
     CommonModule,
     HrManagementRoutingModule,

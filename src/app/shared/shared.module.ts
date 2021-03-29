@@ -48,11 +48,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonToastrService } from './toater/common-toastr.service';
+import { NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective } from './custom-validation/custom.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -138,6 +139,10 @@ import { CommonToastrService } from './toater/common-toastr.service';
     MatTreeModule,
     MatButtonToggleModule,
     GeneralModule,
+    MaskDirective,
+    NumberDirective,
+    Alphabet,
+    CapitalizeFirstDirective
   ],
   providers: [
     MatIconRegistry,

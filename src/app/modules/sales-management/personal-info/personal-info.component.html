@@ -47,8 +47,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>First Name</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="firstName" placeholder="First Name" class="form-control"
-                                required />
+                            <input matInput type="text" autocomplete="off" formControlName="firstName" placeholder="Enter First Name" class="form-control"
+                                required maxlength="150" alphabet capitalizeFirst/>
                             <mat-error *ngIf="p.firstName.hasError('required')">
                                 First Name is required
                             </mat-error>
@@ -59,8 +59,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Last Name</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="lastName" placeholder="Last Name" class="form-control"
-                                required />
+                            <input matInput type="text" autocomplete="off" formControlName="lastName" placeholder="Enter Last Name" class="form-control"
+                                required maxlength="150" alphabet capitalizeFirst/>
                             <mat-error *ngIf="p.lastName.hasError('required')">
                                 Last Name is required
                             </mat-error>
@@ -71,8 +71,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Project Name</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="projectName" placeholder="Project Name"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="projectName" placeholder="Enter Project Name"
+                                class="form-control" required maxlength="150" alphabet capitalizeFirst/>
                             <mat-error *ngIf="p.projectName.hasError('required')">
                                 Project Name is required
                             </mat-error>
@@ -83,8 +83,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Builder Name</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="builderName" placeholder="Builder Name"
-                                class="form-control" />
+                            <input matInput type="text" autocomplete="off" formControlName="builderName" placeholder="Enter Builder Name"
+                                class="form-control" maxlength="150" alphabet capitalizeFirst/>
                         </mat-form-field>
                     </div>
                 </div>
@@ -94,8 +94,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact No</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="contactNo" placeholder="Contact Number"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="contactNo" placeholder="Enter Contact Number"
+                                class="form-control" required maxlength="15" numbersOnly/>
                             <mat-error *ngIf="p.contactNo.hasError('required')">
                                 Contact Number is required
                             </mat-error>
@@ -107,7 +107,7 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Alternative Contact Number</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="alternativeContactNo"
-                                placeholder="Alternative Contact Number" class="form-control" />
+                                placeholder="Enter Alternative Contact Number" class="form-control" maxlength="15" numbersOnly/>
                         </mat-form-field>
                     </div>
                 </div>
@@ -135,8 +135,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Flat/ Door No</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="flat" placeholder="Flat/ Door No"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="flat" placeholder="Enter Flat/ Door No"
+                                class="form-control" required capitalizeFirst/>
                             <mat-error *ngIf="p.flat.hasError('required')">
                                 Flat/ Door No is required
                             </mat-error>
@@ -147,8 +147,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Street Name</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="streetName" placeholder="Street Name"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="streetName" placeholder="Enter Street Name"
+                                class="form-control" required capitalizeFirst maxlength="50"/>
                             <mat-error *ngIf="p.streetName.hasError('required')">
                                 Street Name is required
                             </mat-error>
@@ -159,8 +159,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>City</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="city" placeholder="City"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="city" placeholder="Enter City"
+                                class="form-control" required capitalizeFirst maxlength="50"/>
                             <mat-error *ngIf="p.city.hasError('required')">
                                 City is required
                             </mat-error>
@@ -173,10 +173,15 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Pin Code</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="pinCode" placeholder="Pin Code"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="pinCode" placeholder="Enter Pin Code"
+                                class="form-control" required numbersOnly maxlength="6" minlength="6"/>
                             <mat-error *ngIf="p.pinCode.hasError('required')">
                                 Pin Code is required
+                            </mat-error>
+                            <mat-error *ngIf="p.pinCode.hasError(
+                                'minlength'
+                              )">
+                                Pin code should be 6 digit
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -185,8 +190,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Location</mat-label>
-                            <input matInput type="text" autocomplete="off" formControlName="location" placeholder="Location"
-                                class="form-control" required />
+                            <input matInput type="text" autocomplete="off" formControlName="location" placeholder="Enter Location"
+                                class="form-control" required capitalizeFirst/>
                             <mat-error *ngIf="p.location.hasError('required')">
                                 Location is required
                             </mat-error>
@@ -197,7 +202,7 @@
             </div>
         </div>
         <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-            <button type="submit" *ngIf="isLead!='LEAD'" (click)="savePersonal('GO_TO_PROPERTY')"  class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            <button type="submit" *ngIf="isLead!='LEAD'" [disabled]="personalInfoForm.invalid" (click)="savePersonal('GO_TO_PROPERTY')"  class="btn btn-primary font-pweight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
               >
               Next <i class="fas fa-angle-double-right"></i>
             </button>

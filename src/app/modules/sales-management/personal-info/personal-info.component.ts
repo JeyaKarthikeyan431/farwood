@@ -44,7 +44,7 @@ export class PersonalInfoComponent implements OnInit {
       flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(6)])],
       location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
     });
   }

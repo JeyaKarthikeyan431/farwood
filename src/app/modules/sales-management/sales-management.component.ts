@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { AuthService } from '../auth';
 import { UserService } from '../auth/_services/user.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 interface Lead {
   clientName: string;
   city: string;
@@ -30,9 +31,11 @@ export class SalesManagementComponent implements OnInit {
   isleadFormVisible: boolean = false;
   iscreateLeadFormVisible: boolean = false;
   form: string;
+  filterFormGroup: FormGroup
 
   constructor(private userService: UserService,
-    private toastrService: CommonToastrService, private authService: AuthService) { }
+    private toastrService: CommonToastrService, private authService: AuthService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
@@ -40,7 +43,9 @@ export class SalesManagementComponent implements OnInit {
     this.getMasterData();
     this.initObservable();
     this.getAllLeads();
+    this.initfiterForm();
   }
+
   fnLeadFormVisible(option) {
     switch (option) {
       case 'GO_TO_DASHBOARD': {
@@ -85,6 +90,13 @@ export class SalesManagementComponent implements OnInit {
       }
     }
   }
+initfiterForm(){
+
+  this.filterFormGroup = this.formBuilder.group({
+    filter: [''],
+    status: ['']
+  });
+}
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
@@ -150,5 +162,9 @@ export class SalesManagementComponent implements OnInit {
   }
   goToMOM(row){
     this.fnLeadFormVisible('GO_TO_MOM');
+  }
+  OnResetFilterForm(){
+    this.filterFormGroup.reset();
+    this.getAllLeads();
   }
 }

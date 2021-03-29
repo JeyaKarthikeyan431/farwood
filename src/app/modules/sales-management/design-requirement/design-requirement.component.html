@@ -5,18 +5,18 @@
             <div class="row">
                 <div class="col-lg-4">
                     <mat-label class="mr-5">Is design already completed?</mat-label>
-                    <mat-slide-toggle formControlName="isDesignCompleted"></mat-slide-toggle>
+                    <mat-slide-toggle formControlName="isDesignCompleted" (change)="onChangeslide($event)"></mat-slide-toggle>
                 </div>
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4"></div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="isEnableAllField">
                 <div class="col-lg-4">
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Architect Name</mat-label>
-                            <input matInput type="text" formControlName="architectName" autocomplete="off" placeholder="Architect Name"
-                                class="form-control" required />
+                            <input matInput type="text" formControlName="architectName" autocomplete="off" placeholder="Enter Architect Name"
+                                class="form-control" required capitalizeFirst/>
                             <mat-error *ngIf="d.architectName.hasError('required')">
                                 Architect Name is required
                             </mat-error>
@@ -27,8 +27,8 @@
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact No</mat-label>
-                            <input matInput type="text" formControlName="contactNo" autocomplete="off" placeholder="Contact No"
-                                class="form-control" required />
+                            <input matInput type="text" formControlName="contactNo" autocomplete="off" placeholder="Enter Contact No"
+                                class="form-control" maxlength="15" required numbersOnly />
                             <mat-error *ngIf="d.contactNo.hasError('required')">
                                 Contact No is required
                             </mat-error>
@@ -90,7 +90,7 @@
                             Save
                         </button>
                         <button type="submit" (click)="savePersonal('GO_TO_DASHBOARD','QLA')"
-                            class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
+                           [disabled]="designReqForm.invalid" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
                             Submit
                         </button>   
                     </div>

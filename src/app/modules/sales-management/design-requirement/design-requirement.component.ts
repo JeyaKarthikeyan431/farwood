@@ -16,6 +16,7 @@ export class DesignRequirementComponent implements OnInit {
 
   leadId:any=null;
   APICONSTANT: any;
+  isEnableAllField: boolean = false;
   constructor(private formBuilder: FormBuilder,private userService: UserService,
     private toastrService: CommonToastrService,private authService: AuthService) { }
 
@@ -28,12 +29,12 @@ export class DesignRequirementComponent implements OnInit {
 
   initDesignReqForm() {
     this.designReqForm = this.formBuilder.group({
-      architectName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      contactNo: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      emailId: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      architectName: [null],
+      contactNo: [null],
+      emailId: [null],
       design:[null, Validators.compose([Validators.required])],
       designFile: [null, Validators.compose([Validators.required])],
-      isDesignCompleted: [null, Validators.compose([Validators.required])],
+      isDesignCompleted: [null],
     });
   }
   get d() {
@@ -111,5 +112,26 @@ export class DesignRequirementComponent implements OnInit {
     }, (error: any) => {
       this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
+  }
+  onChangeslide(event){
+    if(event.checked){
+      this.isEnableAllField = true;
+      this.designReqForm.controls['architectName'].setValidators(Validators.required)
+      this.designReqForm.controls['contactNo'].setValidators(Validators.required)
+      this.designReqForm.controls['emailId'].setValidators(Validators.required)
+} 
+else{
+  this.isEnableAllField = false;
+  this.designReqForm.controls['architectName'].setValidators(null)
+  this.designReqForm.controls['contactNo'].setValidators(null)
+  this.designReqForm.controls['emailId'].setValidators(null)
+  this.designReqForm.controls['architectName'].setValue(null)
+  this.designReqForm.controls['contactNo'].setValue(null)
+  this.designReqForm.controls['emailId'].value(null)
+}
+this.designReqForm.controls['architectName'].updateValueAndValidity();
+this.designReqForm.controls['contactNo'].updateValueAndValidity();
+this.designReqForm.controls['emailId'].updateValueAndValidity()
+
   }
 }

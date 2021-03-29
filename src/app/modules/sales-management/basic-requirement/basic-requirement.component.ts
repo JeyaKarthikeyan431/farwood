@@ -14,6 +14,24 @@ export class BasicRequirementComponent implements OnInit {
 
   leadId:any=null;
   APICONSTANT: any;
+  maskConfig = {
+    mask: [
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+    ],
+    showMask: false,
+    guide: false,
+    placeholderChar: '_',
+    keepCharPositions: true,
+  };
 
   constructor(private formBuilder: FormBuilder,private userService: UserService,
     private toastrService: CommonToastrService,private authService: AuthService) { }
@@ -28,7 +46,7 @@ export class BasicRequirementComponent implements OnInit {
     this.basicReqForm = this.formBuilder.group({
       areaOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       noOfBedrooms: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      noOfKitchen: [null, Validators.compose([Validators.required, Validators.email, Validators.minLength(3), Validators.maxLength(320)])],
+      noOfKitchen: [null, Validators.compose([Validators.required,  Validators.minLength(1), Validators.maxLength(320)])],
       noOfLivingRoom: [null, Validators.compose([Validators.required])],
       noCommonArea: [null, Validators.compose([Validators.required])],
       completionDate: [null],

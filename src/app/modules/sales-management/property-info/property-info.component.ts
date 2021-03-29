@@ -18,6 +18,25 @@ export class PropertyInfoComponent implements OnInit {
   leadId:any=null;
   APICONSTANT: any;
 
+  maskConfig = {
+    mask: [
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      '/',
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+      new RegExp('\\d'),
+    ],
+    showMask: false,
+    guide: false,
+    placeholderChar: '_',
+    keepCharPositions: true,
+  };
+
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private toastrService: CommonToastrService, private authService: AuthService) { }
 
@@ -38,7 +57,7 @@ export class PropertyInfoComponent implements OnInit {
       flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      pinCode: [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(6)])],
       location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
     });
   }
@@ -112,4 +131,5 @@ export class PropertyInfoComponent implements OnInit {
       this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
   }
+  
 }
