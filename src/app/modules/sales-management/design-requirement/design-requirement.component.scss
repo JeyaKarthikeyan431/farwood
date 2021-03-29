@@ -9,13 +9,15 @@ input[type="file"] {
 .custom-file-upload {
     border: 1px solid #e1f0ff;
     display: inline-block;
-    padding: 7px 15px;
+    padding: 7px 20px;
     cursor: pointer;
     background-color: #3699ff;
     color: white;
     font-size: 14px;
     font-weight: 600;
+    width: max-content;
     border-radius: 5px;
+    margin: 25px 0 0 15px;
 
     i {
         color: white;

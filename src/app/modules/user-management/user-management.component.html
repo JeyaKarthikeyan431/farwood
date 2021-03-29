@@ -1,7 +1,7 @@
 <ng-template [ngIf]="!isUserFormVisible">
     <p class="title-main">USERS</p>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="form-group">
                 <div class="example-header">
                     <mat-form-field>
@@ -11,11 +11,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
                 <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
                     (click)="fnUserFormVisible('GO_TO_USER')">
-                    Create
+                    <i class="fas fa-plus"></i> Create
                 </button>
             </div>
         </div>
@@ -45,7 +45,11 @@
             </ng-container>
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
-                <mat-cell (click)="editUser(row)" *matCellDef="let row"> Edit </mat-cell>
+                <mat-cell (click)="editUser(row)" *matCellDef="let row">
+                    <div class="icon-holding">
+                        <i class="fas fa-pencil-alt"></i>
+                      </div>
+                </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -61,10 +65,10 @@
     </div>
 </ng-template>
 <ng-template [ngIf]="isUserFormVisible">
-    <div class="pb-lg-0 pb-5 btn-bottom-holder" *ngIf="form=='USER'">
+    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right" *ngIf="form=='USER'">
         <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
             (click)="fnUserFormVisible('GO_TO_DASHBOARD')">
-            Users
+            <i class="fas fa-user"></i> Users
         </button>
     </div>
     <app-create-user></app-create-user>
