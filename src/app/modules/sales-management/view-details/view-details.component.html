@@ -6,12 +6,15 @@
                     <img src="../../../../assets/media/users/300_20.jpg" alt="" class="img-rounder">
                 </div>
                 <div class="col-lg-4 text-center align-self-center">
-                    <h2>Mano Jagan</h2>
+                    <h2>{{leadInfo?.personalInfo?.leadName}}</h2>
                 </div>
                 <div class="col-lg-4 text-center align-self-center">
-                    <p>,,ECR</p>
-                    <p>Chennai</p>
-                    <p>216846431351654</p>
+                    <p>{{leadInfo?.personalInfo?.flat}}</p>
+                    <p>{{leadInfo?.personalInfo?.streetName}}</p>
+                    <p>{{leadInfo?.personalInfo?.city}}</p>
+                    <p>{{leadInfo?.personalInfo?.pinCode}}</p>
+                    <p>{{leadInfo?.personalInfo?.contactNo}}</p>
+                    <p>{{leadInfo?.personalInfo?.personalEmailId}}</p>
                 </div>
             </div>
             <hr>
@@ -25,13 +28,13 @@
                 <div class="col-lg-4 text-center align-self-center">
                     <div class="secondary-view">
                         <p>Lead By</p>
-                        <span>John</span>
+                        <span>Mano</span>
                     </div>
                 </div>
                 <div class="col-lg-4 text-center align-self-center">
                     <div class="secondary-view">
                         <p>Status</p>
-                        <span>Design</span>
+                        <span>{{leadInfo?.status}}</span>
                     </div>
                 </div>
             </div>
@@ -42,51 +45,69 @@
             <p class="title-main">Personal Information</p>
             <div class="row">
                 <div class="col-lg-4">
+                    <mat-label>Type Of Customer?</mat-label>
+                    <p>{{leadInfo?.personalInfo?.typeOfCustomer}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Lead Source</mat-label>
+                    <p>{{leadInfo?.personalInfo?.leadSource}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Refernce by</mat-label>
+                    <p>{{leadInfo?.personalInfo?.referencedBy}}</p>
                 </div>
             </div>
             <p class="title-main">Property Information</p>
             <div class="row">
                 <div class="col-lg-4">
-                </div>
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
+                    <mat-label>What are you looking for?</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.lookingFor}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Whats the type of Property?</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.typeOfProperty}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Perperty Name</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.propertyName}}</p>
+                </div>
+                <div class="col-lg-4">
+                    <mat-label>Builder Name</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.builderName}}</p>
                 </div>
             </div>
             <p class="title-main">Property Address</p>
             <div class="row">
                 <div class="col-lg-4">
+                    <mat-label>Flat No</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.flat}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Street Name</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.streetName}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>City</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.city}}</p>
+                </div>
+                <div class="col-lg-4">
+                    <mat-label>Pin Code</mat-label>
+                    <p>{{leadInfo?.propertyInfo?.pinCode}}</p>
                 </div>
             </div>
             <p class="title-main">Design</p>
             <div class="row">
                 <div class="col-lg-4">
+                    <mat-label>Architect Name</mat-label>
+                    <p>{{leadInfo?.designReqForm?.architectName}}</p>
                 </div>
                 <div class="col-lg-4">
+                    <mat-label>Contact No</mat-label>
+                    <p>{{leadInfo?.designReqForm?.contactNo}}</p>
                 </div>
                 <div class="col-lg-4">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-4">
-                </div>
-                <div class="col-lg-4">
+                    <mat-label>Email ID</mat-label>
+                    <p>{{leadInfo?.designReqForm?.emailId}}</p>
                 </div>
             </div>
             <div class="row">
