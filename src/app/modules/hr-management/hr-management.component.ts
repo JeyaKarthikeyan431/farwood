@@ -34,6 +34,7 @@ export class HrManagementComponent implements OnInit {
   ngOnInit(): void {
     this.APICONSTANT=this.userService.getConfig();
     this.getUsers();
+    this.initObservable();
   }
 
   fnProfileFormVisible(option) {
@@ -74,5 +75,14 @@ export class HrManagementComponent implements OnInit {
     filterValue = filterValue.trim(); 
     filterValue = filterValue.toLowerCase(); 
     this.dataSource.filter = filterValue;
+  }
+  initObservable() {
+    this.userService.visibility.subscribe(val => {
+      if (val) {
+        this.fnProfileFormVisible('GO_TO_USER');
+      } else {
+        this.fnProfileFormVisible('GO_TO_DASHBOARD');
+      }
+    })
   }
 }

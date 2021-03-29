@@ -75,7 +75,7 @@
                         <label for="file-upload" class="custom-file-upload">
                             Upload File <i class="fas fa-upload"></i>
                        </label>
-                       <input id="file-upload" type="file"/>
+                       <input id="file-upload" (change)="onChange($event.target.files)" type="file"/>
                     </div>
                 </div>
                 <div class="col-lg-8">

@@ -103,7 +103,7 @@ export class PropertyInfoComponent implements OnInit {
   }
   getLeadInfoById(leadId) {
     this.userService.getLeadById(leadId).subscribe((res: any) => {
-      if (res.status == 204 && res.data != null) {
+      if (res.status == 200 && res.data != null) {
         this.propertyInfoForm.patchValue(res.data['propertyInfo']);
       } else {
         this.toastrService.showError('No Lead Found', this.APICONSTANT.TITLE);

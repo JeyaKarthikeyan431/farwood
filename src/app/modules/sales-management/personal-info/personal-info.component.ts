@@ -105,7 +105,7 @@ export class PersonalInfoComponent implements OnInit {
   }
   getLeadInfoById(leadId) {
     this.userService.getLeadById(leadId).subscribe((res: any) => {
-      if (res.status == 204 && res.data != null) {
+      if (res.status == 200 && res.data != null) {
         this.personalInfoForm.patchValue(res.data['personalInfo']);
       } else {
         this.toastrService.showError('No Lead Found', this.APICONSTANT.TITLE);
