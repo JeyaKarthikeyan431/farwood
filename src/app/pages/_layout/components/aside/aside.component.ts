@@ -1,6 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth';
+import { UserService } from 'src/app/modules/auth/_services/user.service';
+import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { LayoutService } from '../../../../_metronic/core';
 
 @Component({
@@ -20,12 +23,16 @@ export class AsideComponent implements OnInit {
   brandClasses: string;
   asideMenuScroll = 1;
   asideSelfMinimizeToggle = false;
+  menuList:any=[];
+  APICONSTANT: any;
 
   constructor(private layout: LayoutService, private loc: Location,
-    private router: Router) { }
+    private router: Router,private authService: AuthService,
+     private toastrService : CommonToastrService,private userService: UserService) { }
 
   ngOnInit(): void {
     // load view settings
+    this.APICONSTANT = this.userService.getConfig();
     this.disableAsideSelfDisplay =
       this.layout.getProp('aside.self.display') === false;
     this.brandSkin = this.layout.getProp('brand.self.theme');
@@ -42,6 +49,7 @@ export class AsideComponent implements OnInit {
     // this.asideMenuCSSClasses = `${this.asideMenuCSSClasses} ${this.asideMenuScroll === 1 ? 'scroll my-4 ps ps--active-y' : ''}`;
     // Routing
     this.location = this.loc;
+    this.loadMenu();
   }
 
   private getLogo() {
@@ -51,7 +59,17 @@ export class AsideComponent implements OnInit {
       return './assets/media/logos/logo-light.png';
     }
   }
-  goToCreateUser(){
-    this.router.navigate(['user/user-management/create-user']);
+  redirectTo(subMenu){
+   let subMenuConfig= this.APICONSTANT.MENU;
+   let url=subMenuConfig[subMenu.subMenuId];
+   this.router.navigate([url]);
+  }
+  loadMenu() {
+    let user = JSON.parse(this.authService.decrypt(sessionStorage.getItem('user')));
+    if (user != null && user != '') {
+        this.menuList=user['menus'];
+    }else{
+      this.toastrService.showSuccess('No Access Provided For this User','Success');
+    }
   }
 }

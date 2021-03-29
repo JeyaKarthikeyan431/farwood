@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.hasError = false;
     this.authService.login(loginParam).subscribe((res: any) => {
       if (res.status == 200) {
-        this.toastrService.showSuccess('Successfully logged in','Success');
+        this.toastrService.showSuccess('logged in Successfully','Success');
         this.setUserInfo(res.data);
         this.redirectTo(res.data);
       } else {

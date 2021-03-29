@@ -1,4 +1,7 @@
 {
  "API_ENDPOINT":"http://183.82.249.177:9015/api/",
- "TITLE":"Farwood.in"
+ "TITLE":"Farwood.in",
+ "MENU": {
+    "SM_USER_MANAGEMENT_CREATE_USER": "user/user-management/create-user"
+}
 }
