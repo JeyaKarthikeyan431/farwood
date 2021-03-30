@@ -286,7 +286,7 @@
                             <mat-form-field>
                                 <mat-label>Emergency Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpEmergencyContactNo"
-                                    placeholder="Enter Emergency Contact Number" class="form-control" required maxlength="15"/>
+                                    placeholder="Enter Emergency Contact Number" class="form-control" required maxlength="15" numbersOnly/>
                                 <mat-error *ngIf="p.perEmpEmergencyContactNo.hasError('required')">
                                     Emergency Contact Number required
                                 </mat-error>
@@ -379,7 +379,7 @@
                                             <mat-label>Family Member Name</mat-label>
                                             <input matInput type="text" autocomplete="off" formControlName="name" placeholder="Enter Name"
                                                 class="form-control" required maxlength="150"  matTooltip="{{f(i)['name'].value}}" 
-                                                [matTooltipPosition]="'above'" capitalizeFirst/>
+                                                [matTooltipPosition]="'above'" capitalizeFirst alphabet/>
                                                 <mat-error *ngIf="f(i)['name'].hasError('required')">Family Member Name
                                                      required
                                                 </mat-error>
@@ -408,7 +408,7 @@
                                         <mat-form-field>
                                             <mat-label>Age</mat-label>
                                             <input matInput type="text" autocomplete="off" formControlName="age" placeholder="Enter Age"
-                                                class="form-control" required maxlength="3"numbersOnly/>
+                                                class="form-control" required maxlength="3" numbersOnly/>
                                                 <mat-error *ngIf="f(i)['age'].hasError('required')">Age
                                                     required
                                                </mat-error>
