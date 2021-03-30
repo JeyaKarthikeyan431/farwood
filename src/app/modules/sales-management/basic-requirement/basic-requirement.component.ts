@@ -44,9 +44,9 @@ export class BasicRequirementComponent implements OnInit {
 
   initBasicForm() {
     this.basicReqForm = this.formBuilder.group({
-      areaOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      noOfBedrooms: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      noOfKitchen: [null, Validators.compose([Validators.required,  Validators.minLength(1), Validators.maxLength(320)])],
+      areaOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(8)])],
+      noOfBedrooms: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(6)])],
+      noOfKitchen: [null, Validators.compose([Validators.required,  Validators.minLength(1), Validators.maxLength(6)])],
       noOfLivingRoom: [null, Validators.compose([Validators.required])],
       noCommonArea: [null, Validators.compose([Validators.required])],
       completionDate: [null],

@@ -31,7 +31,7 @@ export class DesignRequirementComponent implements OnInit {
     this.designReqForm = this.formBuilder.group({
       architectName: [null],
       contactNo: [null],
-      emailId: [null],
+      emailId: [''],
       design:[null, Validators.compose([Validators.required])],
       designFile: [null, Validators.compose([Validators.required])],
       isDesignCompleted: [null],
@@ -127,7 +127,7 @@ else{
   this.designReqForm.controls['emailId'].setValidators(null)
   this.designReqForm.controls['architectName'].setValue(null)
   this.designReqForm.controls['contactNo'].setValue(null)
-  this.designReqForm.controls['emailId'].value(null)
+  this.designReqForm.controls['emailId'].value('')
 }
 this.designReqForm.controls['architectName'].updateValueAndValidity();
 this.designReqForm.controls['contactNo'].updateValueAndValidity();

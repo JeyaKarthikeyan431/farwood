@@ -48,12 +48,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonToastrService } from './toater/common-toastr.service';
-import { NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective } from './custom-validation/custom.directive';
+import { NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective, AlphabetNumeric } from './custom-validation/custom.directive';
 
 
 
 @NgModule({
-  declarations: [NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective],
+  declarations: [NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective, AlphabetNumeric],
   imports: [
     CommonModule,
     FormsModule,
@@ -142,7 +142,8 @@ import { NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective } fr
     MaskDirective,
     NumberDirective,
     Alphabet,
-    CapitalizeFirstDirective
+    CapitalizeFirstDirective,
+    AlphabetNumeric
   ],
   providers: [
     MatIconRegistry,

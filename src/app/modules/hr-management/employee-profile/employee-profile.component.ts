@@ -268,6 +268,11 @@ export class EmployeeProfileComponent implements OnInit {
     });
   }
 onMakeDicimal(event, control){
+  // if(event.target.value.length > 10){
+  //   this.salaryInfoForm.controls[control].setErrors({
+  //     invalid:true
+  //   })
+  // }
   if (event.target.value != '') {
     let value = event.target.value;
     let removeComma = value.toString().replace(/,/g, '');

@@ -50,15 +50,15 @@ export class PropertyInfoComponent implements OnInit {
     this.propertyInfoForm = this.formBuilder.group({
       lookingFor: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       typeOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      propertyName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      propertyName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
       builderName: [null, Validators.compose([Validators.required])],
       buildingState: [null, Validators.compose([Validators.required])],
       expectedDate: [null],
-      flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(10)])],
       streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(25)])],
       pinCode: [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(6)])],
-      location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(25)])],
     });
   }
   get p() {

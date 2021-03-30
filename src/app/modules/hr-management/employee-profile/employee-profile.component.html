@@ -643,7 +643,7 @@
                         <mat-form-field>
                             <mat-label>CTC Per Month</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="ctcPerMonth" placeholder="Enter CTC Per Month"
-                                class="form-control" (change)="onMakeDicimal($event, 'ctcPerMonth')" />
+                                class="form-control" (change)="onMakeDicimal($event, 'ctcPerMonth')" maxlength="15"/>
                             <mat-error *ngIf="s.ctcPerMonth.hasError('required')">
                                 CTC Per Month required
                             </mat-error>
@@ -655,7 +655,7 @@
                         <mat-form-field>
                             <mat-label>CTC Per Annum</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="ctcPerAnnum" placeholder="Enter CTC Per Annum"
-                                class="form-control"  (change)="onMakeDicimal($event, 'ctcPerAnnum')"/>
+                                class="form-control"  (change)="onMakeDicimal($event, 'ctcPerAnnum')" maxlength="15"/>
                             <mat-error *ngIf="s.ctcPerAnnum.hasError('required')">
                                 CTC Per Annum required
                             </mat-error>
@@ -669,7 +669,7 @@
                         <mat-form-field>
                             <mat-label>Basic</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="basic" placeholder="Enter Basic" class="form-control"
-                            (change)="onMakeDicimal($event, 'basic')" />
+                            (change)="onMakeDicimal($event, 'basic')" maxlength="15"/>
                             <mat-error *ngIf="s.basic.hasError('required')">
                                 Basic required
                             </mat-error>
@@ -681,7 +681,7 @@
                         <mat-form-field>
                             <mat-label>HRA</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="hra" placeholder="Enter HRA" class="form-control"
-                            (change)="onMakeDicimal($event, 'hra')" />
+                            (change)="onMakeDicimal($event, 'hra')" maxlength="15"/>
                             <mat-error *ngIf="s.hra.hasError('required')">
                                 HRA required
                             </mat-error>
@@ -695,7 +695,7 @@
                         <mat-form-field>
                             <mat-label>Conveyance</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="conveyance" placeholder="Enter Conveyance"
-                                class="form-control" (change)="onMakeDicimal($event, 'conveyance')"/>
+                                class="form-control" (change)="onMakeDicimal($event, 'conveyance')" maxlength="15"/>
                             <mat-error *ngIf="s.conveyance.hasError('required')">
                                 Conveyance required
                             </mat-error>
@@ -707,7 +707,7 @@
                         <mat-form-field>
                             <mat-label>Mobile Reimbursement</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="mobileReimbursement"
-                                placeholder="Enter Mobile Reimbursement" class="form-control" (change)="onMakeDicimal($event, 'mobileReimbursement')" />
+                                placeholder="Enter Mobile Reimbursement" class="form-control" maxlength="15" (change)="onMakeDicimal($event, 'mobileReimbursement')" />
                             <mat-error *ngIf="s.mobileReimbursement.hasError('required')">
                                 Mobile Reimbursement required
                             </mat-error>
@@ -721,7 +721,7 @@
                         <mat-form-field>
                             <mat-label>Special Allowance</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="specialAllowance"
-                                placeholder="Enter Special Allowance" class="form-control" (change)="onMakeDicimal($event, 'specialAllowance')" />
+                                placeholder="Enter Special Allowance" class="form-control" maxlength="15" (change)="onMakeDicimal($event, 'specialAllowance')" />
                             <mat-error *ngIf="s.specialAllowance.hasError('required')">
                                 Special Allowance required
                             </mat-error>
@@ -733,7 +733,7 @@
                         <mat-form-field>
                             <mat-label>Gross</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="gross" placeholder="Enter Gross" class="form-control"
-                            (change)="onMakeDicimal($event, 'gross')" />
+                            (change)="onMakeDicimal($event, 'gross')" maxlength="15"/>
                             <mat-error *ngIf="s.gross.hasError('required')">
                                 Gross required
                             </mat-error>
@@ -747,7 +747,7 @@
                         <mat-form-field>
                             <mat-label>Employer EPF</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="employerEPF" placeholder="Enter Employer EPF"
-                                class="form-control" (change)="onMakeDicimal($event, 'employerEPF')" />
+                                class="form-control" (change)="onMakeDicimal($event, 'employerEPF')" maxlength="15"/>
                             <mat-error *ngIf="s.employerEPF.hasError('required')">
                                 Employer EPF required
                             </mat-error>
@@ -759,9 +759,12 @@
                         <mat-form-field>
                             <mat-label>Employer ESIC</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="employerESIC" placeholder="Enter Employer ESIC"
-                                class="form-control" (change)="onMakeDicimal($event, 'employerESIC')" />
+                                class="form-control" (change)="onMakeDicimal($event, 'employerESIC')" maxlength="15"/>
                             <mat-error *ngIf="s.employerESIC.hasError('required')">
                                 Employer ESIC required
+                            </mat-error>
+                            <mat-error *ngIf="s.employerESIC.hasError('invalid') || s.employerESIC.hasError('maxLength')">
+                                Employer ESIC should be within 10 digits
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -773,7 +776,7 @@
                         <mat-form-field>
                             <mat-label>Variable Pay</mat-label>
                             <input matInput type="text" autocomplete="off" formControlName="variablePay" placeholder="Enter Variable Pay"
-                                class="form-control" (change)="onMakeDicimal($event, 'variablePay')" />
+                                class="form-control" (change)="onMakeDicimal($event, 'variablePay')" maxlength="15"/>
                             <mat-error *ngIf="s.variablePay.hasError('required')">
                                 Variable Pay required
                             </mat-error>

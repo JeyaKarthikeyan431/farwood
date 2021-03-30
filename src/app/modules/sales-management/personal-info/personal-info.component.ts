@@ -36,16 +36,16 @@ export class PersonalInfoComponent implements OnInit {
       referencedBy: [null],
       firstName: [null, Validators.compose([Validators.required])],
       lastName: [null, Validators.compose([Validators.required])],
-      projectName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      projectName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(200)])],
       builderName: [null],
       contactNo: [null, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(10)])],
       alternativeContactNo: [null],
       personalEmailId: [null],
-      flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(10)])],
       streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      city: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(25)])],
       pinCode: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(6)])],
-      location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      location: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(25)])],
     });
   }
   get p() {
