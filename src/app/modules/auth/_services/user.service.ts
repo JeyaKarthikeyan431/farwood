@@ -11,6 +11,7 @@ export class UserService {
   visibility: BehaviorSubject<boolean>;
   userInfo: BehaviorSubject<any>;
   salesNavigation$: BehaviorSubject<string>;
+  momNavigation$:BehaviorSubject<string>;
 
   apiConstant: any;
 
@@ -19,6 +20,7 @@ export class UserService {
     this.visibility = new BehaviorSubject(false);
     this.userInfo = new BehaviorSubject('');
     this.salesNavigation$ = new BehaviorSubject('');
+    this.momNavigation$ = new BehaviorSubject('');
   }
   getConfig() {
     return this.apiConstant;
@@ -60,5 +62,19 @@ export class UserService {
   getLeadById(leadId) {
     let params = new HttpParams().set("leadId",leadId);
     return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getLead',{params: params});
+  }
+  createOrUpdateMom(param){
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/sales/createMOM', param);
+  }
+  getAllMom(leadId) {
+    let params = new HttpParams().set("leadId",leadId);
+    return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getAllMOM',{params: params});
+  }
+  momFormNavigation(form) {
+    this.momNavigation$.next(form);
+  }
+  getMomByMomId(leadId) {
+    let params = new HttpParams().set("momId",leadId);
+    return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getMOM',{params: params});
   }
 }

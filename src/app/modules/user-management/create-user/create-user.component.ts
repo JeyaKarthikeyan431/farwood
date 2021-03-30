@@ -107,10 +107,7 @@ export class CreateUserComponent implements OnInit {
     }
     this.userService.getMasterData(param).subscribe((res: any) => {
       if (res.status == 200) {
-        let masterData = res.data;
-        if (masterData['userDesignation'] != null && masterData['userDesignation'].length > 0) {
-          this.roleList = masterData['userDesignation'];
-        }
+          this.roleList = res.data;
       } else {
         this.toastrService.showError(res.message, this.APICONSTANT.TITLE);
       }
