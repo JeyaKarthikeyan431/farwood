@@ -42,12 +42,12 @@ export class CreateMomComponent implements OnInit {
   }
   initMomInfoForm() {
     this.momInfoForm = this.formBuilder.group({
-      organiser: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      salesPerson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      architect: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      designer: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      client: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
-      coordinator: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
+      organiser: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      salesPerson: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      architect: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      designer: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      client: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
+      coordinator: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
     });
   }
   get m() {
