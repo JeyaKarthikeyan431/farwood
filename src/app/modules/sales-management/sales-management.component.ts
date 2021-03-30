@@ -161,6 +161,7 @@ initfiterForm(){
     this.fnLeadFormVisible('GO_TO_SUMMARY');
   }
   goToMOM(row){
+    sessionStorage.setItem('leadId', this.authService.encrypt(row.leadId));
     this.fnLeadFormVisible('GO_TO_MOM');
   }
   OnResetFilterForm(){
