@@ -35,10 +35,10 @@
         <mat-error *ngIf="l.email.hasError('required')">
           Email is <strong>required</strong>
         </mat-error>
-        <mat-error *ngIf="l.email.hasError('minLength')">
+        <mat-error *ngIf="l.email.hasError('minlength')">
           Email should have at least 3 characters
         </mat-error>
-        <mat-error *ngIf="l.email.hasError('maxLength')">
+        <mat-error *ngIf="l.email.hasError('maxlength')">
           Email should have maximum 320 characters
         </mat-error>
       </mat-form-field>

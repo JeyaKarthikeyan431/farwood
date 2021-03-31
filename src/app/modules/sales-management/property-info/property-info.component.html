@@ -64,12 +64,11 @@
                     <div class="mt-4">
                         <mat-label>Is this building in a condition to be completed?</mat-label>
                         <mat-radio-group aria-label="Select an option" formControlName="buildingState">
-                            <mat-radio-button value="Y">Yes</mat-radio-button>
-                            <mat-radio-button value="N">No</mat-radio-button>
+                            <mat-radio-button *ngFor="let option of ynOption" [value]="option.value" (change)="isConditionCompleted(option)">{{option.label}}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4" *ngIf="p.buildingState?.value !== 'Y'">
                     <div class="form-group">
                         <mat-form-field class="example-full-width">
                             <mat-label>Expected date to complete this building?</mat-label>
