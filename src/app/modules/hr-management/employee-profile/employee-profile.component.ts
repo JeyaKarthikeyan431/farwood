@@ -120,7 +120,7 @@ export class EmployeeProfileComponent implements OnInit {
       perEmpNationality: [null, Validators.compose([Validators.required])],
       perEmpEmergencyContactNo: [null, Validators.compose([Validators.required])],
       perEmpPhysicallyChallenged: [null, Validators.compose([Validators.required])],
-      perEmpPersonalContactNo: [null],
+      perEmpPersonalContactNo: [null, Validators.compose([ Validators.minLength(6), Validators.maxLength(15)])],
       perEmpPersonalEmail: [null],
       perEmpModeOfTransport: [null, Validators.compose([Validators.required])],
       perEmpMedicalHistory: [null],

@@ -78,10 +78,10 @@
                                 <mat-error *ngIf="o.offEmpOfficialEmail.hasError('required')">
                                     Official Email is required
                                 </mat-error>
-                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('minLength')">
+                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('minlength')">
                                     Email should have at least 3 characters
                                 </mat-error>
-                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('maxLength')">
+                                <mat-error *ngIf="o.offEmpOfficialEmail.hasError('maxlength')">
                                     Email should have maximum 320 characters
                                 </mat-error>
                             </mat-form-field>
@@ -92,9 +92,12 @@
                             <mat-form-field>
                                 <mat-label>Official Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="offEmpOffContactNo"
-                                    placeholder="Enter Official Contact Number" class="form-control" required maxlength="15"/>
+                                    placeholder="Enter Official Contact Number" class="form-control" required minlength="6" maxlength="15"/>
                                 <mat-error *ngIf="o.offEmpOffContactNo.hasError('required')">
                                     Official Contact Number is required
+                                </mat-error>
+                                <mat-error *ngIf="p.offEmpOffContactNo.hasError('minlength')">
+                                    Official Contact Number should be minimum 6 digit
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -218,9 +221,12 @@
                             <mat-form-field>
                                 <mat-label>Personal Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpPersonalContactNo"
-                                    placeholder="Enter Personal Contact Number" class="form-control" maxlength="15"/>
+                                    placeholder="Enter Personal Contact Number" class="form-control" minlength="6" maxlength="15"/>
                                 <mat-error *ngIf="p.perEmpPersonalContactNo.hasError('required')">
                                     Personal Contact Number is required
+                                </mat-error>
+                                <mat-error *ngIf="p.perEmpPersonalContactNo.hasError('minlength')">
+                                    Personal Contact Number should be minimum 6 digit
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -238,10 +244,10 @@
                                 <mat-error *ngIf="p.perEmpPersonalEmail.hasError('required')">
                                     Personal Email is required
                                 </mat-error>
-                                <mat-error *ngIf="p.perEmpPersonalEmail.hasError('minLength')">
+                                <mat-error *ngIf="p.perEmpPersonalEmail.hasError('minlength')">
                                     Email should have at least 3 characters
                                 </mat-error>
-                                <mat-error *ngIf="p.perEmpPersonalEmail.hasError('maxLength')">
+                                <mat-error *ngIf="p.perEmpPersonalEmail.hasError('maxlength')">
                                     Email should have maximum 320 characters
                                 </mat-error>
                             </mat-form-field>
@@ -286,9 +292,12 @@
                             <mat-form-field>
                                 <mat-label>Emergency Contact Number</mat-label>
                                 <input matInput type="text" autocomplete="off" formControlName="perEmpEmergencyContactNo"
-                                    placeholder="Enter Emergency Contact Number" class="form-control" required maxlength="15" numbersOnly/>
+                                    placeholder="Enter Emergency Contact Number" class="form-control" minlength="6" required maxlength="15" numbersOnly/>
                                 <mat-error *ngIf="p.perEmpEmergencyContactNo.hasError('required')">
                                     Emergency Contact Number required
+                                </mat-error>
+                                <mat-error *ngIf="p.perEmpEmergencyContactNo.hasError('minlength')">
+                                    Emergency Contact Number should be minimum 6 digit
                                 </mat-error>
                             </mat-form-field>
                         </div>
