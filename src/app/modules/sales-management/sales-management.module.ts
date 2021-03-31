@@ -11,10 +11,13 @@ import { MomManagementComponent } from './mom-management/mom-management.componen
 import { CreateMomComponent } from './create-mom/create-mom.component';
 import { ViewDetailsComponent } from './view-details/view-details.component';
 import { DesignRequirementComponent } from './design-requirement/design-requirement.component';
-
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @NgModule({
   declarations: [SalesManagementComponent, PersonalInfoComponent, BasicRequirementComponent, PropertyInfoComponent, MomManagementComponent, CreateMomComponent, ViewDetailsComponent, DesignRequirementComponent],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }],
   imports: [
     CommonModule,
     SalesManagementRoutingModule,

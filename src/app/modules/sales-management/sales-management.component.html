@@ -101,25 +101,36 @@
       <app-personal-info [isLead]="'LEAD'"></app-personal-info>
     </div>
   </ng-template>
-  <ng-template [ngIf]="isleadFormVisible">
-    <div *ngIf="form=='PROFILE'">
-      <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-        <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-          (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
-          <i class="fas fa-clone"></i> Leads
-        </button>
-      </div>
-      <app-personal-info [isLead]="'Q-LEAD'"></app-personal-info>
-    </div>
-    <div *ngIf="form=='PROPERTY'">
-      <app-property-info></app-property-info>
-    </div>
-    <div *ngIf="form=='BASIC'">
-      <app-basic-requirement></app-basic-requirement>
-    </div>
-    <div *ngIf="form=='UPLOAD'">
-      <app-design-requirement></app-design-requirement>
-    </div>
+  <ng-template [ngIf]="isleadFormVisible && form!='LEAD'">
+    <mat-horizontal-stepper #stepper (selectionChange)="onStepCommonChange($event)">
+      <mat-step >
+        <div *ngIf="form=='PROFILE'">
+          <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+              (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
+              <i class="fas fa-clone"></i> Leads
+            </button>
+          </div>
+          <app-personal-info [isLead]="'Q-LEAD'"></app-personal-info>
+        </div>
+      </mat-step>
+      <mat-step >
+        <div *ngIf="form=='PROPERTY'">
+          <app-property-info></app-property-info>
+        </div>
+      </mat-step>
+      <mat-step >
+        <div >
+          <app-basic-requirement></app-basic-requirement>
+        </div>
+      </mat-step>
+      <mat-step >
+        <div *ngIf="form=='UPLOAD'">
+          <app-design-requirement></app-design-requirement>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+   
     <div *ngIf="form=='SUMMARY'">
       <app-view-details></app-view-details>
     </div>
