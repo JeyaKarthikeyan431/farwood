@@ -15,6 +15,8 @@ export class PropertyInfoComponent implements OnInit {
   lookingForList: any = [];
   propertyList: any = [];
 
+   ynOption: any;
+
   leadId:any=null;
   APICONSTANT: any;
 
@@ -44,6 +46,7 @@ export class PropertyInfoComponent implements OnInit {
     this.APICONSTANT = this.userService.getConfig();
     this.initPropertyInfoForm();
     this.getMasterData();
+    this.getyesNoOpion()
     this.getPropertyInfo();
   }
   initPropertyInfoForm() {
@@ -52,7 +55,7 @@ export class PropertyInfoComponent implements OnInit {
       typeOfProperty: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
       propertyName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(150)])],
       builderName: [null, Validators.compose([Validators.required])],
-      buildingState: [null, Validators.compose([Validators.required])],
+      buildingState: ['', Validators.compose([Validators.required])],
       expectedDate: [null],
       flat: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(10)])],
       streetName: [null, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(50)])],
@@ -67,6 +70,7 @@ export class PropertyInfoComponent implements OnInit {
   redirectTo(form) {
     this.userService.salesFormNavigate(form);
   }
+
 
   getMasterData() {
     let options = ['PROP_TYPE', 'SRC_LOK_FOR'];
@@ -131,5 +135,22 @@ export class PropertyInfoComponent implements OnInit {
       this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
     });
   }
-  
+
+  getyesNoOpion(){
+    this.ynOption = [
+      {
+        label: 'Yes',
+        value: 'Y'
+      },
+      {
+        label: 'No',
+        value: 'N'
+      }
+    ]
+  }
+  isConditionCompleted(event){
+    if(event.value === 'Y'){
+
+    }
+  }
 }
