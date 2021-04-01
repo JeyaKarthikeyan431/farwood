@@ -3,6 +3,6 @@
  "TITLE":"Farwood.in",
  "MENU": {
     "SM_USER_MANAGEMENT_CREATE_USER": "user/user-management/create-user",
-    "SM_SALES_Leads":"user/sales-management/leads"
+    "SM_SALES_LEADS":"user/sales-management/leads"
 }
 }

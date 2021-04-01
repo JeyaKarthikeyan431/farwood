@@ -28,9 +28,9 @@
               </mat-form-field>
             </div>
           </div>
-          <div class="col-lg-3 align-self-center text-center">
-            <button type="submit" class="btn" (click)="OnResetFilterForm()">
-              <i class="fas fa-plus"></i>Reset
+          <div class="col-lg-3 align-self-center text-left">
+            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-7 py-2" (click)="OnResetFilterForm()">
+              Reset
             </button>
           </div>
           <div class="col-lg-3">
@@ -102,8 +102,9 @@
     </div>
   </ng-template>
   <ng-template [ngIf]="isleadFormVisible && form!='LEAD'">
-    <mat-horizontal-stepper #stepper (selectionChange)="onStepCommonChange($event)">
-      <mat-step >
+    <mat-horizontal-stepper labelPosition="bottom" #stepper (selectionChange)="onStepCommonChange($event)">
+      <mat-step>
+        <ng-template matStepLabel>Personal Information</ng-template>
         <div *ngIf="form=='PROFILE'">
           <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
             <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
@@ -115,16 +116,19 @@
         </div>
       </mat-step>
       <mat-step >
+        <ng-template matStepLabel>Property Information</ng-template>
         <div *ngIf="form=='PROPERTY'">
           <app-property-info></app-property-info>
         </div>
       </mat-step>
       <mat-step >
+        <ng-template matStepLabel>Basic Information</ng-template>
         <div >
           <app-basic-requirement></app-basic-requirement>
         </div>
       </mat-step>
       <mat-step >
+        <ng-template matStepLabel>Design Information</ng-template>
         <div *ngIf="form=='UPLOAD'">
           <app-design-requirement></app-design-requirement>
         </div>

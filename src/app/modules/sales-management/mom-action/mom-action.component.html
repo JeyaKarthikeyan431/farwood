@@ -1,0 +1,38 @@
+<h2>MOM Action</h2>
+<form [formGroup]="momActionInfoForm">
+<div class="row">
+<div class="col-lg-4">
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Action By</mat-label>
+            <input matInput type="text" autocomplete="off" formControlName="actionBy" placeholder="Action By"
+                class="form-control" required capitalizeFirst alphabet maxlength="50"/>
+            <mat-error *ngIf="a.actionBy.hasError('required')">
+                Action By is required
+            </mat-error>
+        </mat-form-field>
+    </div>
+</div>
+<div class="col-lg-4">
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Action Date</mat-label>
+            <input matInput [matDatepicker]="actionDatePicker" autocomplete="off" class="form-control"
+                formControlName="actionDatePicker">
+            <mat-datepicker-toggle matSuffix [for]="actionDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #actionDatePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+</div>
+<div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+    <button type="submit" (click)="cancelAction()" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+       >
+        Cancel
+    </button>
+    <button type="submit" (click)="addAction()" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+       >
+        Submit
+    </button>
+</div>
+</form>

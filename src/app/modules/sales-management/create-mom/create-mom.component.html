@@ -84,16 +84,16 @@
                >
                 Submit
             </button>
+            <button type="submit" (click)="addAction()" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+               >
+                Add Action
+            </button>
         </div>
     </form>
 </div>
 <p class="title-main pt-5">Meeting Points</p>
 <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="mid">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> MID </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.mid}} </mat-cell>
-        </ng-container>
         <ng-container matColumnDef="requirement">
             <mat-header-cell *matHeaderCellDef mat-sort-header> REQUIREMENT </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.requirement}} </mat-cell>
@@ -102,9 +102,9 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION BY </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.actionBy}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="dueDate">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> DUE DATE </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.dueDate  | date: 'dd/MM/yyyy'}} </mat-cell>
+        <ng-container matColumnDef="createdDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION DATE </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.createdDate  | date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>

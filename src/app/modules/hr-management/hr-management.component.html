@@ -53,10 +53,10 @@
     </div>
 </ng-template>
 <ng-template [ngIf]="isProfileFormVisible" >
-    <div class="pb-lg-0 pb-5 btn-bottom-holder" *ngIf="form=='USER'">
+    <div class="pb-lg-0 pb-5 btn-bottom-holder text-right" *ngIf="form=='USER'">
         <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
             (click)="fnProfileFormVisible('GO_TO_DASHBOARD')">
-            Users
+            <i class="fas fa-user"></i> Users
         </button>
     </div>
     <app-employee-profile></app-employee-profile>
