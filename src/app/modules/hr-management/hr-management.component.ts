@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { UserService } from '../auth/_services/user.service';
+import { AuthService } from '../auth';
 interface User {
   userName: string;
   departmentDesc:string;
@@ -29,7 +30,8 @@ export class HrManagementComponent implements OnInit {
   form: string;
   APICONSTANT:any;
   
-  constructor(public userService: UserService, private toastrService : CommonToastrService,) { }
+  constructor(public userService: UserService, private toastrService : CommonToastrService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.APICONSTANT=this.userService.getConfig();
@@ -68,6 +70,8 @@ export class HrManagementComponent implements OnInit {
     });
   }
   editUser(row){
+    sessionStorage.removeItem('employeeId');
+    sessionStorage.setItem('employeeId', this.authService.encrypt(row.userId.toString()));
     this.fnProfileFormVisible('GO_TO_USER');
     this.userService.getUserInfo(row);
   }

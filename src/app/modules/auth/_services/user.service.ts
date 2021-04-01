@@ -77,6 +77,10 @@ export class UserService {
     let params = new HttpParams().set("momId",leadId);
     return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getMOM',{params: params});
   }
+  getEmployeeByEmpID(employeeId) {
+    let params = new HttpParams().set("employeeId",employeeId);
+    return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/form/getEmployeeDetails',{params: params});
+  }
   loadAllMomActionByMomId(momId){
     let params = new HttpParams().set("momId",momId);
     return this.http.get(this.apiConstant.API_ENDPOINT + 'portal/sales/getAllAction',{params: params});

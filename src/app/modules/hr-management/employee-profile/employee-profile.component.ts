@@ -3,6 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MaskDirective, NumberDirective } from 'src/app/shared/custom-validation/custom.directive';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { UserService } from '../../auth/_services/user.service';
+import { AuthService } from '../../auth';
+import { newArray } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-employee-profile',
@@ -57,7 +59,8 @@ export class EmployeeProfileComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
     private toastrService: CommonToastrService,
-    private userService: UserService,) { 
+    private userService: UserService,
+    private authService: AuthService) { 
 
     }
 
@@ -67,6 +70,7 @@ export class EmployeeProfileComponent implements OnInit {
     this.initSalaryInfoForm();
     this.getMasterData();
     this.APICONSTANT = this.userService.getConfig();
+    this.getEmployeeInfo();
   }
   get o() {
     return this.officialInfoForm.controls;
@@ -286,5 +290,25 @@ onMakeDicimal(event, control){
     }
 }
 
+}
+getEmployeeInfo() {
+  let employeeId = this.authService.decrypt(sessionStorage.getItem('employeeId'));
+  this.userService.getEmployeeByEmpID(employeeId).subscribe((res: any) => {
+    if (res.status == 200 && res.data != null) {
+      console.log(res.data)
+      this.officialInfoForm.patchValue(res.data['officialInfo']);
+      this.salaryInfoForm.patchValue(res.data['salaryInfo']);
+      this.personalInfoForm.patchValue(res.data['personalInfo']);
+      // res.data['personalInfo']['family'].forEach((element , index)=> { 
+      //   ((this.personalInfoForm.get('family') as FormArray).at(index) as FormGroup).get('family').patchValue(element)
+      // });
+     
+     
+    } else {
+      this.toastrService.showError('Error While Getting Employee details', this.APICONSTANT.TITLE);
+    }
+  }, (error: any) => {
+    this.toastrService.showError('Error While Getting Employee details', this.APICONSTANT.TITLE);
+  });
 }
 }
