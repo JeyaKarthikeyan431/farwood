@@ -13,7 +13,7 @@ interface Lead {
   city: string;
   contactNo: string;
   effectiveDate: string,
-  status: string,
+  statusDesc: string,
   action: string
 }
 @Component({
@@ -27,7 +27,7 @@ export class SalesManagementComponent implements OnInit {
   @ViewChild('stepper') stepper: MatStepper;
 
   APICONSTANT: any;
-  displayedColumns: string[] = ['clientName', 'city', 'contactNo', 'effectiveDate', 'status', 'action'];
+  displayedColumns: string[] = ['clientName', 'city', 'contactNo', 'effectiveDate', 'statusDesc', 'action'];
   statusList: any = [];
   dataSource: MatTableDataSource<Lead>;
 

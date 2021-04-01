@@ -60,9 +60,14 @@ export class AsideComponent implements OnInit {
     }
   }
   redirectTo(subMenu){
-   let subMenuConfig= this.APICONSTANT.MENU;
-   let url=subMenuConfig[subMenu.subMenuId];
-   this.router.navigate([url]);
+    let subMenuConfig= this.APICONSTANT.MENU;
+    if(subMenu=='DASHBOARD'){
+      let url=subMenuConfig[subMenu];
+      this.router.navigate([url]);
+    }else{
+      let url=subMenuConfig[subMenu.subMenuId];
+      this.router.navigate([url]);
+    }
   }
   loadMenu() {
     let user = JSON.parse(this.authService.decrypt(sessionStorage.getItem('user')));

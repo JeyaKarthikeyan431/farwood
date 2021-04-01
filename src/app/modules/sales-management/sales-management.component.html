@@ -63,9 +63,9 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> E.DATE </mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.effectiveDate | date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="status">
+        <ng-container matColumnDef="statusDesc">
           <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
-          <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.status}} </mat-cell>
+          <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.statusDesc}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
