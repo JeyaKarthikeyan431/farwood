@@ -49,7 +49,7 @@ export class SalesManagementComponent implements OnInit {
     this.initfiterForm();
   }
 
-  fnLeadFormVisible(option,isStep) {
+  fnLeadFormVisible(option,isStep?) {
     switch (option) {
       case 'GO_TO_DASHBOARD': {
         this.isleadFormVisible = false;

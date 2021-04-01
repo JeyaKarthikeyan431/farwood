@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service';
 import { AuthService } from '../../auth';
 import { UserService } from '../../auth/_services/user.service';
+import { MomActionComponent } from '../mom-action/mom-action.component';
 interface MOM {
-  mid: string;
   requirement: string;
   actionBy: string;
-  dueDate: string;
+  createdDate: string;
   action: string,
 }
 
@@ -23,16 +24,17 @@ export class CreateMomComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  momInfoForm:FormGroup;
+  momInfoForm: FormGroup;
 
-  leadId:any=null;
-  momId:any=null;
-  displayedColumns: string[] = ['mid', 'requirement', 'actionBy', 'dueDate', 'action'];
+  leadId: any = null;
+  momId: any = null;
+  displayedColumns: string[] = ['requirement', 'actionBy', 'createdDate', 'action'];
   dataSource: MatTableDataSource<MOM>;
   APICONSTANT: any;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private toastrService: CommonToastrService, private authService: AuthService) { }
+    private toastrService: CommonToastrService, private authService: AuthService,
+    private dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.APICONSTANT = this.userService.getConfig();
@@ -56,15 +58,15 @@ export class CreateMomComponent implements OnInit {
   getMomInfo() {
     let leadId = this.authService.decrypt(sessionStorage.getItem('leadId'));
     if (leadId != null && leadId != '') {
-      this.leadId=leadId;
-    }else{
-      this.leadId=null;
+      this.leadId = leadId;
+    } else {
+      this.leadId = null;
     }
   }
   saveMom(form) {
     let param = this.momInfoForm.value;
-    param['leadId']=this.leadId?this.leadId:null;
-    param['momId']=this.momId?this.momId:null;
+    param['leadId'] = this.leadId ? this.leadId : null;
+    param['momId'] = this.momId ? this.momId : null;
     this.userService.createOrUpdateMom(param).subscribe((res: any) => {
       if (res.status == 200) {
         this.userService.momFormNavigation(form);
@@ -83,13 +85,17 @@ export class CreateMomComponent implements OnInit {
       }
     });
   }
-  getMomByMomId(){
+  getMomByMomId() {
     let momId = this.authService.decrypt(sessionStorage.getItem('momId'));
-    if (momId != null && momId != '') {
-      this.momId=momId;
-      this.getMomInfoById(momId);
-    }else{
-      this.momId=null;
+    let momFlow=this.authService.decrypt(sessionStorage.getItem('mom-flow'));
+    if (momId != null && momId != '' ) {
+      this.momId = momId;
+      this.loadAllMomActionByMomId();
+      if(momFlow=='UPDATE'){
+        this.getMomInfoById(momId);
+      }
+    } else {
+      this.momId = null;
     }
   }
   getMomInfoById(momId) {
@@ -101,6 +107,33 @@ export class CreateMomComponent implements OnInit {
       }
     }, (error: any) => {
       this.toastrService.showError('Error While Getting Lead', this.APICONSTANT.TITLE);
+    });
+  }
+  addAction() {
+  let dialogRef=  this.dialog.open(MomActionComponent, {
+      data: { momId: this.momId },
+      width: '600px',
+      height: '600px'
+    })
+    
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.loadAllMomActionByMomId();
+      }
+  });
+  }
+  loadAllMomActionByMomId(){
+    this.userService.loadAllMomActionByMomId(this.momId).subscribe((res: any) => {
+      if (res.status == 200 && res.data != null) {
+        let leads = res.data;
+        this.dataSource = new MatTableDataSource(leads);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      } else {
+        this.toastrService.showError('No MOM Action Found', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
+      this.toastrService.showError('Error While Getting MOM Actions', this.APICONSTANT.TITLE);
     });
   }
 }

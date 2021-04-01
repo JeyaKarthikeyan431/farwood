@@ -47,10 +47,16 @@ export class MomManagementComponent implements OnInit {
     switch (option) {
       case 'GO_TO_DASHBOARD': {
         this.isMomFormVisible = false;
+        this.removeSession();
         this.getAllMOM();
         break;
       }
       case 'GO_TO_MOM': {
+        this.isMomFormVisible = true;
+        this.removeSession();
+        break;
+      }
+      case 'GO_TO_MOM_UPDATE': {
         this.isMomFormVisible = true;
         break;
       }
@@ -92,6 +98,11 @@ export class MomManagementComponent implements OnInit {
   }
   editMom(row){
     sessionStorage.setItem('momId', this.authService.encrypt(row.momId));
-    this.fnMomFormVisible('GO_TO_MOM');
+    sessionStorage.setItem('mom-flow', this.authService.encrypt('UPDATE'));
+    this.fnMomFormVisible('GO_TO_MOM_UPDATE');
+  }
+  removeSession(){
+    sessionStorage.removeItem('momId');
+    sessionStorage.removeItem('mom-flow');
   }
 }

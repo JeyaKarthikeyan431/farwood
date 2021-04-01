@@ -30,7 +30,7 @@
       </ng-container>
       <ng-container matColumnDef="createdDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header> M.DATE </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row.createdDate}} </mat-cell>
+        <mat-cell *matCellDef="let row"> {{row.createdDate | date: 'dd/MM/yyyy'}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
