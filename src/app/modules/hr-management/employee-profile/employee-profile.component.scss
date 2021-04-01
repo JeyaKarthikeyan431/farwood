@@ -142,7 +142,10 @@
 
     .check-box-same {
         position: absolute;
-        top: 0;
+        top: -10px;
         left: 20%;
     }
+}
+::ng-deep.mat-form-field-underline {
+    background-color: black!important;
 }

@@ -38,3 +38,9 @@ th {
     table-layout: fixed;
   }
 }
+::ng-deep.mat-horizontal-stepper-header-container{
+    width: 80%;
+    margin: auto;
+    background-color: #e1f0ff;
+    border-radius: 20px;
+}
