@@ -96,7 +96,7 @@
                                 <mat-error *ngIf="o.offEmpOffContactNo.hasError('required')">
                                     Official Contact Number is required
                                 </mat-error>
-                                <mat-error *ngIf="p.offEmpOffContactNo.hasError('minlength')">
+                                <mat-error *ngIf="o.offEmpOffContactNo.hasError('minlength')">
                                     Official Contact Number should be minimum 6 digit
                                 </mat-error>
                             </mat-form-field>
@@ -254,7 +254,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row sameas-check">
+                <div class="row sameas-check pt-5">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <mat-form-field>
