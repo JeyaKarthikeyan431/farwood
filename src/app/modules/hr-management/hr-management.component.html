@@ -28,12 +28,12 @@
                 <mat-cell *matCellDef="let row"> {{row.emailId}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="createdDate">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> DATE OF JOINING </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.createdDate | date: 'dd/MM/yyyy'}} </mat-cell>
+                <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> DATE OF JOINING </mat-header-cell>
+                <mat-cell class="justify-content-center" *matCellDef="let row"> {{row.createdDate | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="action">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
-                <mat-cell (click)="editUser(row)" *matCellDef="let row"> 
+                <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> ACTION </mat-header-cell>
+                <mat-cell class="justify-content-center" (click)="editUser(row)" *matCellDef="let row"> 
                     <div class="icon-holding">
                         <i class="fas fa-pencil-alt"></i>
                        </div>    

@@ -29,11 +29,11 @@
         <mat-cell *matCellDef="let row"> {{row.architect}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="createdDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> M.DATE </mat-header-cell>
+        <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> M.DATE </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.createdDate | date: 'dd/MM/yyyy'}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
+        <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.action}}
           <div class="icon-holding">
             <i class="fas fa-eye"></i>

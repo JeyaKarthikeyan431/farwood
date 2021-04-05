@@ -64,11 +64,11 @@
           <mat-cell *matCellDef="let row"> {{row.effectiveDate | date: 'dd/MM/yyyy'}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="statusDesc">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
+          <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
           <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.statusDesc}} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
+          <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <div class="icon-holding">
               <i class="fas fa-eye" (click)="viewLead(row)"></i>
