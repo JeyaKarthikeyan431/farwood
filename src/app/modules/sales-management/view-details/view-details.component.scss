@@ -1,39 +1,79 @@
-.top-view-holder{
+.top-view-holder {
     background-image: url('../../../../assets/media/logos/bg-6.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     padding: 30px 0;
-    .img-rounder{
+
+    .img-rounder {
         width: 150px;
         height: 150px;
         border-radius: 100px;
     }
-    h2{
+
+    h2 {
         color: white;
         font-size: 35px;
     }
-    p{
+
+    p {
         color: white;
         text-align: right;
     }
-    .secondary-view{
-        p{
+
+    .secondary-view {
+        p {
             text-align: center;
             font-weight: 700;
         }
-        span{
+
+        span {
             color: white;
         }
     }
-    hr{
+
+    hr {
         border-top: 1px solid white;
     }
 }
 
 ::ng-deep.mat-form-field-underline {
-    background-color: black!important;
+    background-color: black !important;
 }
-mat-select.form-control{
-    border:none!important;
+
+mat-select.form-control {
+    border: none !important;
+}
+
+.full-view{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid #043458;
+    
+.left-mom,
+.right-mom {
+    h3 {
+        border-bottom: 3px solid #043458;
+        padding-bottom: 5px;
+        color: #043458;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .inside-left {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            margin-left: 25px;
+        }
+    }
+}
+
+.ver-line {
+    border-left: 2px solid #b5b5c3;
+    margin: 20px;
+}
 }
