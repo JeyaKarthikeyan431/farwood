@@ -4,44 +4,45 @@
     <div class="container">
       <div class="row">
         <form [formGroup]="filterFormGroup" class="w-100">
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="form-group">
-              <div class="example-header">
-                <mat-form-field>
-                  <input class="form-control" formControlName="filter" matInput
-                    (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <div class="example-header">
+                  <mat-form-field>
+                    <input class="form-control" formControlName="filter" matInput
+                      (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Status</mat-label>
+                  <mat-select class="form-control" placeholder="Status" formControlName="status"
+                    (selectionChange)="filterBasedOnStatus($event)">
+                    <mat-option *ngFor="let status of statusList" [value]="status.value">
+                      {{status.label}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
             </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <mat-label>Status</mat-label>
-                <mat-select class="form-control" placeholder="Status" formControlName="status"
-                  (selectionChange)="filterBasedOnStatus($event)">
-                  <mat-option *ngFor="let status of statusList" [value]="status.value">
-                    {{status.label}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-3 align-self-center text-left">
-            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-7 py-2" (click)="OnResetFilterForm()">
-              Reset
-            </button>
-          </div>
-          <div class="col-lg-3">
-            <div class="pb-lg-0 pb-5 btn-bottom-holder text-right mt-5">
-              <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-                (click)="fnLeadFormVisible('GO_TO_CREATE_LEAD')">
-                <i class="fas fa-plus"></i>Create Lead
+            <div class="col-lg-3 align-self-center text-left">
+              <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-7 py-2"
+                (click)="OnResetFilterForm()">
+                Reset
               </button>
             </div>
+            <div class="col-lg-3">
+              <div class="pb-lg-0 pb-5 btn-bottom-holder text-right mt-5">
+                <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                  (click)="fnLeadFormVisible('GO_TO_CREATE_LEAD')">
+                  <i class="fas fa-plus"></i>Create Lead
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
         </form>
       </div>
     </div>
@@ -65,7 +66,8 @@
         </ng-container>
         <ng-container matColumnDef="statusDesc">
           <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> STATUS </mat-header-cell>
-          <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.statusDesc}} </mat-cell>
+          <mat-cell *matCellDef="let row" class="status-look"> <i class="fas fa-circle"></i> {{row.statusDesc}}
+          </mat-cell>
         </ng-container>
         <ng-container matColumnDef="action">
           <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
@@ -101,40 +103,42 @@
       <app-personal-info [isLead]="'LEAD'"></app-personal-info>
     </div>
   </ng-template>
-  <ng-template [ngIf]="isleadFormVisible && form!='LEAD'">
-    <mat-horizontal-stepper labelPosition="bottom" #stepper (selectionChange)="onStepCommonChange($event)">
-      <mat-step>
-        <ng-template matStepLabel>Personal Information</ng-template>
-        <div *ngIf="form=='PROFILE'">
-          <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
-            <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-              (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
-              <i class="fas fa-clone"></i> Leads
-            </button>
+  <ng-template [ngIf]="isleadFormVisible">
+    <div *ngIf="(form!='LEAD' && form!='SUMMARY' && form!='MOM')">
+      <mat-horizontal-stepper labelPosition="bottom" #stepper (selectionChange)="onStepCommonChange($event)">
+        <mat-step>
+          <ng-template matStepLabel>Personal Information</ng-template>
+          <div *ngIf="form=='PROFILE'">
+            <div class="pb-lg-0 pb-5 btn-bottom-holder text-right">
+              <button type="submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+                (click)="fnLeadFormVisible('GO_TO_DASHBOARD')">
+                <i class="fas fa-clone"></i> Leads
+              </button>
+            </div>
+            <app-personal-info [isLead]="'Q-LEAD'"></app-personal-info>
           </div>
-          <app-personal-info [isLead]="'Q-LEAD'"></app-personal-info>
-        </div>
-      </mat-step>
-      <mat-step >
-        <ng-template matStepLabel>Property Information</ng-template>
-        <div *ngIf="form=='PROPERTY'">
-          <app-property-info></app-property-info>
-        </div>
-      </mat-step>
-      <mat-step >
-        <ng-template matStepLabel>Basic Information</ng-template>
-        <div >
-          <app-basic-requirement></app-basic-requirement>
-        </div>
-      </mat-step>
-      <mat-step >
-        <ng-template matStepLabel>Design Information</ng-template>
-        <div *ngIf="form=='UPLOAD'">
-          <app-design-requirement></app-design-requirement>
-        </div>
-      </mat-step>
-    </mat-horizontal-stepper>
-   
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Property Information</ng-template>
+          <div *ngIf="form=='PROPERTY'">
+            <app-property-info></app-property-info>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Basic Information</ng-template>
+          <div>
+            <app-basic-requirement></app-basic-requirement>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Design Information</ng-template>
+          <div *ngIf="form=='UPLOAD'">
+            <app-design-requirement></app-design-requirement>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+
     <div *ngIf="form=='SUMMARY'">
       <app-view-details></app-view-details>
     </div>

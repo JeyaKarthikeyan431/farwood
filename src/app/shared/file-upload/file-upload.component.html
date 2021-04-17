@@ -1,0 +1,63 @@
+<div class="row">
+    <form [formGroup]="docUploadForm">
+        <div class="multiple-block" formArrayName="docsFormArray"
+            *ngFor="let employeeDoc of docUploadForm.get('docsFormArray')['controls']; let i = index;">
+            <div [formGroupName]="i">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Module</mat-label>
+                            <mat-select placeholder="Module" class="form-control"
+                                (selectionChange)="getUploadCategory($event.value)" formControlName="docModule"
+                                required>
+                                <mat-option *ngFor="let module of moduleList" [value]="module.value">
+                                    {{module.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Document Category</mat-label>
+                            <mat-select placeholder="Document Category" class="form-control"
+                                (selectionChange)="getDocTypes($event.value)" formControlName="docCategory" required>
+                                <mat-option *ngFor="let docCategory of docCategoryList" [value]="docCategory.value">
+                                    {{docCategory.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Document</mat-label>
+                            <mat-select placeholder="Document" class="form-control" formControlName="docName" required>
+                                <mat-option *ngFor="let docment of docList" [value]="docment.value">
+                                    {{docment.label}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <p>File Upload</p>
+                    <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file" multiple />
+                </div>
+                <div class="pb-lg-0 pb-5">
+                    <span (click)="addDocs()">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Add Document
+                    </span>
+                </div>
+                <div class="pb-lg-0 pb-5 del-block" *ngIf="i != 0">
+                    <span (click)="removeDocs(i)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

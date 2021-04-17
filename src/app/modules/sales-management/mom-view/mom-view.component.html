@@ -1,0 +1,41 @@
+<div class="full-view">
+    <div class="left-mom">
+        <h3>MOM Info</h3>
+        <div class="inside-left">
+            <p>MoM # : </p>
+            <span> Value </span>
+        </div>
+        <div class="inside-left">
+            <p>Date : </p>
+            <span> {{momInfo?.createdDate  | date: 'dd/MM/yyyy'}} </span>
+        </div>
+        <div class="inside-left">
+            <p>Meeting : </p>
+            <span> Value </span>
+        </div>
+        <div class="inside-left">
+            <p>Organiser : </p>
+            <span> {{momInfo?.organiser}} </span>
+        </div>
+    </div>
+    <div class="ver-line"></div>
+    <div class="right-mom">
+        <h3>Attendees Info</h3>
+        <div class="inside-left">
+            <p>Sales person : </p>
+            <span> {{momInfo?.salesPerson}} </span>
+        </div>
+        <div class="inside-left">
+            <p>Designer : </p>
+            <span> {{momInfo?.designer}} </span>
+        </div>
+        <div class="inside-left">
+            <p>Architect : </p>
+            <span> {{momInfo?.architect}} </span>
+        </div>
+        <div class="inside-left">
+            <p>Coordinator : </p>
+            <span> {{momInfo?.coordinator}} </span>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,8 @@ import { CommonToastrService } from 'src/app/shared/toater/common-toastr.service
 import { UserService } from '../../auth/_services/user.service';
 import { AuthService } from '../../auth';
 import { newArray } from '@angular/compiler/src/util';
+import { MatDialog } from '@angular/material/dialog';
+import { FileUploadComponent } from 'src/app/shared/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-employee-profile',
@@ -16,6 +18,7 @@ export class EmployeeProfileComponent implements OnInit {
   public officialInfoForm: FormGroup;
   public personalInfoForm: FormGroup;
   public salaryInfoForm: FormGroup;
+ 
 
   public family: FormArray;
   public education: FormArray;
@@ -34,6 +37,7 @@ export class EmployeeProfileComponent implements OnInit {
   public qualificationList: any = [];
   public yearList: any = [];
   public workLocationList: any = [];
+  
 
   APICONSTANT: any;
   maskConfig = {
@@ -60,9 +64,10 @@ export class EmployeeProfileComponent implements OnInit {
   constructor(public formBuilder: FormBuilder,
     private toastrService: CommonToastrService,
     private userService: UserService,
-    private authService: AuthService) { 
+    private authService: AuthService,
+    private dialog: MatDialog) {
 
-    }
+  }
 
   ngOnInit(): void {
     this.initofficialInfoForm();
@@ -124,7 +129,7 @@ export class EmployeeProfileComponent implements OnInit {
       perEmpNationality: [null, Validators.compose([Validators.required])],
       perEmpEmergencyContactNo: [null, Validators.compose([Validators.required])],
       perEmpPhysicallyChallenged: [null, Validators.compose([Validators.required])],
-      perEmpPersonalContactNo: [null, Validators.compose([ Validators.minLength(6), Validators.maxLength(15)])],
+      perEmpPersonalContactNo: [null, Validators.compose([Validators.minLength(6), Validators.maxLength(15)])],
       perEmpPersonalEmail: [null],
       perEmpModeOfTransport: [null, Validators.compose([Validators.required])],
       perEmpMedicalHistory: [null],
@@ -134,6 +139,7 @@ export class EmployeeProfileComponent implements OnInit {
       company: this.formBuilder.array([this.createCompany()])
     });
   }
+
   initSalaryInfoForm() {
     this.salaryInfoForm = this.formBuilder.group({
       ctcPerMonth: [null],
@@ -201,7 +207,7 @@ export class EmployeeProfileComponent implements OnInit {
   }
   getMasterData() {
     let options = ['USER_DESIGNATION', 'USER_DEPT', 'MARITAL_STATUS', 'GENDER', 'NATIONALITY', 'COMMUTE_MODE',
-      , 'WRK_LOC', 'EMP_QUALIFICATION', 'QUESTION_TYPE', 'RELATIONSHIP', 'YEAR','OCCUPATION'];
+      , 'WRK_LOC', 'EMP_QUALIFICATION', 'QUESTION_TYPE', 'RELATIONSHIP', 'YEAR', 'OCCUPATION'];
     let param = {
       multipleOptionType: options
     }
@@ -229,7 +235,7 @@ export class EmployeeProfileComponent implements OnInit {
           this.medicalHistoryList = masterData['questionType'];
           this.yearList = masterData['year'];
           this.relationshipList = masterData['relationship'];
-          this.occupationList=masterData['occupation'];
+          this.occupationList = masterData['occupation'];
         }
       } else {
         this.toastrService.showError('Error while getting Master data', 'Error');
@@ -271,44 +277,56 @@ export class EmployeeProfileComponent implements OnInit {
       }
     });
   }
-onMakeDicimal(event, control){
-  // if(event.target.value.length > 10){
-  //   this.salaryInfoForm.controls[control].setErrors({
-  //     invalid:true
-  //   })
-  // }
-  if (event.target.value != '') {
-    let value = event.target.value;
-    let removeComma = value.toString().replace(/,/g, '');
+  onMakeDicimal(event, control) {
+    // if(event.target.value.length > 10){
+    //   this.salaryInfoForm.controls[control].setErrors({
+    //     invalid:true
+    //   })
+    // }
+    if (event.target.value != '') {
+      let value = event.target.value;
+      let removeComma = value.toString().replace(/,/g, '');
       let withoutDecimal = removeComma.split('.');
       if (/^\d+$/.test(withoutDecimal[0])) {
         let decimalValue = withoutDecimal[0] + '.00';
         let commaSepNum = decimalValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      this.salaryInfoForm.controls[control].setValue(
-        commaSepNum
-      );
+        this.salaryInfoForm.controls[control].setValue(
+          commaSepNum
+        );
+      }
     }
-}
 
-}
-getEmployeeInfo() {
-  let employeeId = this.authService.decrypt(sessionStorage.getItem('employeeId'));
-  this.userService.getEmployeeByEmpID(employeeId).subscribe((res: any) => {
-    if (res.status == 200 && res.data != null) {
-      console.log(res.data)
-      this.officialInfoForm.patchValue(res.data['officialInfo']);
-      this.salaryInfoForm.patchValue(res.data['salaryInfo']);
-      this.personalInfoForm.patchValue(res.data['personalInfo']);
-      // res.data['personalInfo']['family'].forEach((element , index)=> { 
-      //   ((this.personalInfoForm.get('family') as FormArray).at(index) as FormGroup).get('family').patchValue(element)
-      // });
-     
-     
-    } else {
+  }
+  getEmployeeInfo() {
+    let employeeId = this.authService.decrypt(sessionStorage.getItem('employeeId'));
+    this.userService.getEmployeeByEmpID(employeeId).subscribe((res: any) => {
+      if (res.status == 200 && res.data != null) {
+        console.log(res.data)
+        this.officialInfoForm.patchValue(res.data['officialInfo']);
+        this.salaryInfoForm.patchValue(res.data['salaryInfo']);
+        this.personalInfoForm.patchValue(res.data['personalInfo']);
+        // res.data['personalInfo']['family'].forEach((element , index)=> { 
+        //   ((this.personalInfoForm.get('family') as FormArray).at(index) as FormGroup).get('family').patchValue(element)
+        // });
+
+
+      } else {
+        this.toastrService.showError('Error While Getting Employee details', this.APICONSTANT.TITLE);
+      }
+    }, (error: any) => {
       this.toastrService.showError('Error While Getting Employee details', this.APICONSTANT.TITLE);
-    }
-  }, (error: any) => {
-    this.toastrService.showError('Error While Getting Employee details', this.APICONSTANT.TITLE);
-  });
-}
+    });
+  }
+  openFileUpload(){
+    const dialogRef = this.dialog.open(FileUploadComponent, {
+      panelClass: 'file-model',
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+       
+      } else {
+        
+      }
+    });
+  }
 }

@@ -49,11 +49,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonToastrService } from './toater/common-toastr.service';
 import { NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective, AlphabetNumeric } from './custom-validation/custom.directive';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 
 @NgModule({
-  declarations: [NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective, AlphabetNumeric],
+  declarations: [NumberDirective, Alphabet, MaskDirective, CapitalizeFirstDirective, AlphabetNumeric, FileUploadComponent],
   imports: [
     CommonModule,
     FormsModule,

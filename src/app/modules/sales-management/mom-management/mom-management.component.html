@@ -36,7 +36,7 @@
         <mat-header-cell class="justify-content-center" *matHeaderCellDef mat-sort-header> ACTIONS </mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.action}}
           <div class="icon-holding">
-            <i class="fas fa-eye"></i>
+            <i class="fas fa-eye" (click)="viewMom(row)" ></i>
             <i class="fas fa-pencil-alt" (click)="editMom(row)"></i>
             <!-- <i class="fas fa-comment-alt"></i> -->
           </div>
@@ -62,5 +62,10 @@
       <i class="fas fa-angle-double-left"></i>Back
     </button>
   </div>
-  <app-create-mom></app-create-mom>
+  <div *ngIf="form=='CREATE_MOM'">
+    <app-create-mom></app-create-mom>
+  </div>
+  <div *ngIf="form=='VIEW_MOM'">
+    <app-mom-view></app-mom-view>
+  </div>
 </ng-template>

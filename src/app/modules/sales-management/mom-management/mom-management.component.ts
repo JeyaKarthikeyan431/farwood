@@ -29,6 +29,7 @@ export class MomManagementComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['client','organiser','salesPerson','architect','createdDate','action'];
+  form: string;
 
   APICONSTANT: any;
   isMomFormVisible: boolean = false;
@@ -53,10 +54,17 @@ export class MomManagementComponent implements OnInit {
       }
       case 'GO_TO_MOM': {
         this.isMomFormVisible = true;
+        this.form='CREATE_MOM';
         this.removeSession();
         break;
       }
       case 'GO_TO_MOM_UPDATE': {
+        this.form='CREATE_MOM';
+        this.isMomFormVisible = true;
+        break;
+      }
+      case 'GO_TO_MOM_VIEW': {
+        this.form='VIEW_MOM';
         this.isMomFormVisible = true;
         break;
       }
@@ -100,6 +108,11 @@ export class MomManagementComponent implements OnInit {
     sessionStorage.setItem('momId', this.authService.encrypt(row.momId));
     sessionStorage.setItem('mom-flow', this.authService.encrypt('UPDATE'));
     this.fnMomFormVisible('GO_TO_MOM_UPDATE');
+  }
+  viewMom(row){
+    sessionStorage.setItem('momId', this.authService.encrypt(row.momId));
+    sessionStorage.setItem('mom-flow', this.authService.encrypt('VIEW'));
+    this.fnMomFormVisible('GO_TO_MOM_VIEW');
   }
   removeSession(){
     sessionStorage.removeItem('momId');

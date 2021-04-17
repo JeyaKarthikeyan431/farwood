@@ -88,4 +88,7 @@ export class UserService {
   createOrUpdateMomAction(param){
     return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/sales/createAction', param);
   }
+  uploadEmployeeDocs(docs){
+    return this.http.post(this.apiConstant.API_ENDPOINT + 'portal/documentupload/uploadDocFiles', docs);
+  }
 }

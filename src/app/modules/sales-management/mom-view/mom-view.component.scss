@@ -1,0 +1,32 @@
+.full-view{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px solid #043458;
+    
+.left-mom,
+.right-mom {
+    h3 {
+        border-bottom: 3px solid #043458;
+        padding-bottom: 5px;
+        color: #043458;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    .inside-left {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            margin-left: 25px;
+        }
+    }
+}
+
+.ver-line {
+    border-left: 2px solid #b5b5c3;
+    margin: 20px;
+}
+}
